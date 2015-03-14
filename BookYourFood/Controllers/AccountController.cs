@@ -126,8 +126,7 @@ namespace BookYourFood.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
-                var addRoleResult = await _userManager.AddToRoleAsync(user.Id, "User");
-                if (result.Succeeded && addRoleResult.Succeeded)
+                if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
@@ -140,7 +139,6 @@ namespace BookYourFood.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
-                AddErrors(addRoleResult);
             }
 
             // If we got this far, something failed, redisplay form

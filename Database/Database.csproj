@@ -54,15 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByfDbContext.cs" />
-    <Compile Include="Migrations\201503140012397_firstMigration.cs" />
-    <Compile Include="Migrations\201503140012397_firstMigration.Designer.cs">
-      <DependentUpon>201503140012397_firstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503140033279_secondMigration.cs" />
-    <Compile Include="Migrations\201503140033279_secondMigration.Designer.cs">
-      <DependentUpon>201503140033279_secondMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -82,14 +73,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201503140012397_firstMigration.resx">
-      <DependentUpon>201503140012397_firstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503140033279_secondMigration.resx">
-      <DependentUpon>201503140033279_secondMigration.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
