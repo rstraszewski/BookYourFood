@@ -17,11 +17,11 @@ namespace BookYourFood.Controllers
     public class PersonViewModel
     {
         public string Name { get; set; }
-        public string Surname { get; set; }
+        public string TmpConflict { get; set; }
 
         public string Full
         {
-            get { return Name + " " + Surname; }
+            get { return Name + " " + TmpConflict; }
         }
     }
 
