@@ -9,6 +9,7 @@ using Owin;
 using BookYourFood.Models;
 using Identity.Model;
 using Microsoft.Owin.Security.DataProtection;
+using Microsoft.Owin.Security.Facebook;
 
 namespace BookYourFood
 {
@@ -57,11 +58,17 @@ namespace BookYourFood
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
-
-            app.UseFacebookAuthentication(
+            var facebookAuthenticationOptions = new FacebookAuthenticationOptions()
+            {
+                AppId = "436221759874203",
+                AppSecret = "e578a3a4a16a560155a76035b3168624"
+            };
+            facebookAuthenticationOptions.Scope.Add("email");
+            app.UseFacebookAuthentication(facebookAuthenticationOptions);
+            /*app.UseFacebookAuthentication(
                appId: "436221759874203",
                appSecret: "e578a3a4a16a560155a76035b3168624");
-
+            */
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
             //    ClientId = "",

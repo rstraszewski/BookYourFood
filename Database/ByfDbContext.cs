@@ -18,7 +18,7 @@ namespace Database
         public ByfDbContext()
             : base(System.Environment.MachineName)
         {
-
+            System.Data.Entity.Database.SetInitializer(new ByfDbInitializer());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
