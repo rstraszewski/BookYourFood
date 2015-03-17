@@ -27,6 +27,23 @@ namespace Utility
                 JsonRequestBehavior = behavior
             };
         }
+
+        public static JsonResult JsonOperationResult(this Controller controller, MessageResult message, JsonRequestBehavior behavior = JsonRequestBehavior.AllowGet)
+        {
+            var result =
+                new
+                {
+                    message = new { content = message.Message, type = message.MessageType.GetDescription() }
+                };
+
+            return new JsonResult()
+            {
+                Data = result,
+                ContentType = null,
+                ContentEncoding = null,
+                JsonRequestBehavior = behavior
+            };
+        }
     }
 
     

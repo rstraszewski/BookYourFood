@@ -10,22 +10,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace Utility
 {
-	public static class ObjectExtensions
-	{
-		public static string ToJson(this object obj)
-		{
-			var js = JsonSerializer.Create(new JsonSerializerSettings());
-			var jw = new StringWriter();
-			js.Serialize(jw, obj);
-			return jw.ToString();
-		}
-		public static string ToJsonCamelCas(this object obj)
-		{
-			var jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-			return JsonConvert.SerializeObject(obj, Formatting.Indented, jsonSerializerSettings);
-		}
-
-	}
 
 	public static class ViewModel
 	{
@@ -82,7 +66,7 @@ namespace Utility
 					scripts.Append(RenderScripts());
 				}
 
-				if (_model == null || ContainerName == null)
+				if (ContainerName == null)
 				{
 					return MvcHtmlString.Empty;
 				}

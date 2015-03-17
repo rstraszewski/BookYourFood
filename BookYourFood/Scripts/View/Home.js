@@ -16,9 +16,8 @@ $(function () {
 
 			var modelToBind = {
 				onclick: function() {
-				    $.post("/Home/Create");
-				},
-                tomek: "Tomasz Grochmal"
+				    $.postOperationResult("/Home/Create");
+				}
 			};
 
 			this._model = $.extend(modelToBind, this._model);

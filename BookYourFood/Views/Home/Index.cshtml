@@ -3,50 +3,79 @@
     ViewBag.Title = "Home Page";
 }
 
-    <div class="k-content jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="da-slider">
+
+    <div class="da-slide">
+        <h2>Some headline</h2>
+        <p>Some description</p>
+        <a href="#" class="da-link">Read more</a>
+        <div class="da-img">
+            <img src="/Content/images/1.png" alt="image01"/>
+        </div>
     </div>
 
+    <div class="da-slide">
+        <!-- ... -->
+    </div>
+
+    <!-- ... -->
+
+    <nav class="da-arrows">
+        <span class="da-arrows-prev"></span>
+        <span class="da-arrows-next"></span>
+    </nav>
+
+</div>
+
+<script>
+    $(function() {
+        $('.da-slider').cslider({
+            current: 0,
+            // index of current slide
+
+            bgincrement: 50,
+            // increment the background position 
+            // (parallax effect) when sliding
+
+            autoplay: false,
+            // slideshow on / off
+
+            interval: 4000
+            // time between transitions
+
+        });
+    });
+</script>
+
 <div class="row container">
-		@if (User.IsInRole("Administrator"))
-		{
-			<text>
-				Administrator
-			</text>
-		}
-		@if (User.IsInRole("User"))
-		{
-			<text>
-				User
-			</text>
-		}
-		<h2>Getting started</h2>
-		<p>
-			ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-			enables a clean separation of concerns and gives you full control over markup
-			for enjoyable, agile development.
-		</p>
-		<p>
-			<a class="k-button k-primary" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a>
-		</p>
-	</div>
-	<div class="col-md-4">
-		<h2>Get more libraries</h2>
-		<p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-		<p><button class="btn btn-default" data-bind="click: onclick">Learn more &raquo;</button>
-		</p>
-	</div>
-	<div class="col-md-4">
-		<h2>Web Hosting</h2>
-		<p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-		<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a>
-		</p>
-	</div>
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p>
+            <a class="k-button k-primary" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p>
+            <button class="btn btn-default" data-bind="click: onclick">Learn more &raquo;</button>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p>
+            <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a>
+        </p>
+    </div>
 </div>
 
 @(Html.CreateJsViewModel()
-	.Container(".container")
-	.ViewModelName("Home")
-	.Render())
+    .Container(".container")
+    .ViewModelName("Home")
+    .Render())

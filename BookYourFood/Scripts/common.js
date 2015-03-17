@@ -64,14 +64,14 @@ $.ajaxOperationResult = function (options) {
 }
 
 function notificationOnShow(e) {
-    if (!$("." + e.sender._guid)[1]) {
+    /*if (!$("." + e.sender._guid)[1]) {
         var element = e.element.parent(),
             eWidth = element.width(),
             wWidth = $(window).width();
 
         var newLeft = Math.floor(wWidth / 2 - eWidth / 2);
         e.element.parent().css({ left: newLeft });
-    }
+    }*/
 }
 
 

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using BookYourFood.Models;
 using Kendo.Mvc;
 using Reservaton.Service;
+using Utility;
 
 namespace BookYourFood.Controllers
 {
@@ -25,13 +26,18 @@ namespace BookYourFood.Controllers
             {
                 Email = "rstraszewski2gmail.com"
             };
+            this.FlashMessage(MessageResult.Create("Some test message"));
             return View(mail);
         }
 
         public ActionResult Create()
         {
-            var status = _reservationService.ReserveTableForNow();
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            //var status = _reservationService.ReserveTableForNow();
+            var sth = new
+            {
+                sadasd = "asd"
+            };
+            return this.JsonOperationResult(sth, MessageResult.Create("Some test message"));
         }
 
         public ActionResult About()
