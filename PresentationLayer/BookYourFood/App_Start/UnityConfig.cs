@@ -7,7 +7,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
 using Reservaton.Service;
 
 namespace BookYourFood.App_Start
@@ -52,7 +51,6 @@ namespace BookYourFood.App_Start
                     new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
                     new InjectionConstructor(typeof(ByfDbContext)));
-
 
             container.RegisterType<IReservationService, ReservationService>();
         }
