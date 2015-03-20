@@ -868,11 +868,11 @@
       <Project>{05233FD8-1832-4B94-A0DE-C2D390B82ED1}</Project>
       <Name>Reservaton.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\UtilityMvc\UtilityMvc.csproj">
+    <ProjectReference Include="..\..\Utilities\UtilityMvc\UtilityMvc.csproj">
       <Project>{5c700888-d53c-404f-9522-f0c1ddfcb321}</Project>
       <Name>UtilityMvc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Utility\Utility.csproj">
+    <ProjectReference Include="..\..\Utilities\Utility\Utility.csproj">
       <Project>{318E94AD-076C-47EA-BCFB-20B2F383A8F1}</Project>
       <Name>Utility</Name>
     </ProjectReference>

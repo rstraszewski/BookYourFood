@@ -73,7 +73,7 @@
       <Project>{EA5028CB-D8B1-4057-9262-013DA796179C}</Project>
       <Name>ReservationDomain.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Utility\Utility.csproj">
+    <ProjectReference Include="..\..\..\Utilities\Utility\Utility.csproj">
       <Project>{318E94AD-076C-47EA-BCFB-20B2F383A8F1}</Project>
       <Name>Utility</Name>
     </ProjectReference>
