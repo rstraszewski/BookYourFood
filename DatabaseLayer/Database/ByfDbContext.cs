@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Identity.Model;
+using Microsoft.AspNet.Identity.EntityFramework;
 using ReservationDomain.Model;
 
 namespace Database
@@ -20,7 +16,7 @@ namespace Database
         public DbSet<HashTag> HashTags { get; set; }
 
         public ByfDbContext()
-            : base(System.Environment.MachineName)
+            : base(Environment.MachineName)
         {
             System.Data.Entity.Database.SetInitializer(new ByfDbInitializer());
         }
