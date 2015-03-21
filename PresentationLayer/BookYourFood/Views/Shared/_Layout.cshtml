@@ -23,10 +23,10 @@
 </head>
 <body>
     @(Html.Kendo().Notification()
-    .Name("notification")
-    .Stacking(NotificationStackingSettings.Up)
-    .Events(e => e.Show("notificationOnShow"))
-    .Button(true)
+      .Name("notification")
+      .Stacking(NotificationStackingSettings.Up)
+      .Events(e => e.Show("notificationOnShow"))
+      .Button(true)
     )
 
     @{
@@ -34,7 +34,7 @@
         if (msg != null)
         {
             <script>
-                $(function() {
+                $(function () {
                     var notificationWidget = $("#notification").data("kendoNotification");
                     notificationWidget.show("@msg.Message", "@msg.MessageType.GetDescription()");
                 });
@@ -50,7 +50,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("BookYourFood", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -72,6 +72,6 @@
 
 
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", false)
 </body>
 </html>

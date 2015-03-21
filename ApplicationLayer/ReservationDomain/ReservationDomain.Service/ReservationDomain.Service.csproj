@@ -7,8 +7,8 @@
     <ProjectGuid>{05233FD8-1832-4B94-A0DE-C2D390B82ED1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ReservatonDomain.Service</RootNamespace>
-    <AssemblyName>ReservatonDomain.Service</AssemblyName>
+    <RootNamespace>Reservaton.Service</RootNamespace>
+    <AssemblyName>Reservaton.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -57,23 +57,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Entity\Common.Service.csproj">
+    <ProjectReference Include="..\..\CommonDomain\Common.Service\Common.Service.csproj">
       <Project>{C86CD015-F610-49E3-9936-BC308363E4A2}</Project>
       <Name>Common.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Model\Common.Model.csproj">
+    <ProjectReference Include="..\..\CommonDomain\Common.Model\Common.Model.csproj">
       <Project>{0B7F82F8-EF67-4277-93FE-36756F8D53A7}</Project>
       <Name>Common.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Database\Database.csproj">
+    <ProjectReference Include="..\..\..\DatabaseLayer\Database\Database.csproj">
       <Project>{6A71A44F-E6F6-476C-BC34-221B59872AF0}</Project>
       <Name>Database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Reservation.Model\ReservationDomain.Model.csproj">
+    <ProjectReference Include="..\ReservationDomain.Model\ReservationDomain.Model.csproj">
       <Project>{EA5028CB-D8B1-4057-9262-013DA796179C}</Project>
       <Name>ReservationDomain.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utility\Utility.csproj">
+    <ProjectReference Include="..\..\..\Utilities\Utility\Utility.csproj">
       <Project>{318E94AD-076C-47EA-BCFB-20B2F383A8F1}</Project>
       <Name>Utility</Name>
     </ProjectReference>

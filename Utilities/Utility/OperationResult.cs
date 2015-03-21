@@ -65,4 +65,36 @@ namespace Utility
             return temp;
         }
     }
+    public class OperationResult<T>
+    {
+        private OperationResult(T result)
+        {
+            Success = true;
+            Errors = new List<string>();
+            Result = result;
+        }
+
+        public bool Success { get; set; }
+        public T Result { get; set; }
+
+        public List<string> Errors { get; private set; }
+
+        public void AddError(string error)
+        {
+            Success = false;
+            Errors.Add(error);
+        }
+
+        public static OperationResult<T> SuccessResult(T result)
+        {
+            return new OperationResult<T>(result);
+        }
+
+        public static OperationResult<T> ErrorResult(string error, T result)
+        {
+            var temp = new OperationResult<T>(result);
+            temp.AddError(error);
+            return temp;
+        }
+    }
 }

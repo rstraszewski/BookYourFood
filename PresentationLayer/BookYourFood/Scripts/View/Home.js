@@ -1,31 +1,29 @@
 ﻿var BYF = BYF || {};
-var ViewModel = function (options) {
-	return options;
-}
+var ViewModel = function(options) {
+    return options;
+};
+$(function() {
+    BYF.Home = new ViewModel({
+        init: function(model, container) {
+            this._model = model;
+            this._container = container;
+            this.rebindModel();
+        },
 
-$(function () {
-	BYF.Home = new ViewModel({
-		init: function (model, container) {
-			this._model = model;
-			this._container = container;
-			this.rebindModel();
-		},
+        rebindModel: function() {
+            kendo.unbind(this._container);
 
-		rebindModel: function() {
-			kendo.unbind(this._container);
+            var modelToBind = {
+                onclick: function() {
+                    $.postOperationResult("/Home/Create");
+                }
+            };
 
-			var modelToBind = {
-				onclick: function() {
-				    $.postOperationResult("/Home/Create");
-				}
-			};
+            this._model = $.extend(modelToBind, this._model);
+            this.modelObservable = new kendo.data.ObservableObject(this._model);
+            kendo.bind(this._container, this.modelObservable);
+        },
 
-			this._model = $.extend(modelToBind, this._model);
-			this.modelObservable = new kendo.data.ObservableObject(this._model);
-			kendo.bind(this._container, this.modelObservable);
-		},
-
-		modelObservable: {}
-	});
+        modelObservable: {}
+    });
 });
-

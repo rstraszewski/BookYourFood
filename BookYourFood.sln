@@ -23,9 +23,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Service", "Applicati
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReservationDomain", "ReservationDomain", "{3F2235CF-026D-4A61-8CA0-26F07C0E045C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationDomain.Model", "ApplicationLayer\ReservationDomain\Reservation.Model\ReservationDomain.Model.csproj", "{EA5028CB-D8B1-4057-9262-013DA796179C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationDomain.Model", "ApplicationLayer\ReservationDomain\ReservationDomain.Model\ReservationDomain.Model.csproj", "{EA5028CB-D8B1-4057-9262-013DA796179C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservaton.Service", "ApplicationLayer\ReservationDomain\Reservaton.Service\Reservaton.Service.csproj", "{05233FD8-1832-4B94-A0DE-C2D390B82ED1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationDomain.Service", "ApplicationLayer\ReservationDomain\ReservationDomain.Service\ReservationDomain.Service.csproj", "{05233FD8-1832-4B94-A0DE-C2D390B82ED1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PresentationLayer", "PresentationLayer", "{3652F3F5-F06C-4230-8428-C3BA72E89C9D}"
 EndProject

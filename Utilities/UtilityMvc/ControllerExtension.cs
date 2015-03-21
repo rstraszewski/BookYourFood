@@ -1,5 +1,4 @@
 using System.Web.Mvc;
-using Utility;
 
 namespace Utility
 {
@@ -10,16 +9,17 @@ namespace Utility
             controller.TempData["Message"] = msg;
         }
 
-        public static JsonResult JsonOperationResult(this Controller controller, object data, MessageResult message, JsonRequestBehavior behavior = JsonRequestBehavior.AllowGet)
+        public static JsonResult JsonOperationResult(this Controller controller, object data, MessageResult message,
+            JsonRequestBehavior behavior = JsonRequestBehavior.AllowGet)
         {
             var result =
                 new
                 {
                     result = data,
-                    message = new { content = message.Message, type = message.MessageType.GetDescription() }
+                    message = new {content = message.Message, type = message.MessageType.GetDescription()}
                 };
 
-            return new JsonResult()
+            return new JsonResult
             {
                 Data = result,
                 ContentType = null,
@@ -28,15 +28,16 @@ namespace Utility
             };
         }
 
-        public static JsonResult JsonOperationResult(this Controller controller, MessageResult message, JsonRequestBehavior behavior = JsonRequestBehavior.AllowGet)
+        public static JsonResult JsonOperationResult(this Controller controller, MessageResult message,
+            JsonRequestBehavior behavior = JsonRequestBehavior.AllowGet)
         {
             var result =
                 new
                 {
-                    message = new { content = message.Message, type = message.MessageType.GetDescription() }
+                    message = new {content = message.Message, type = message.MessageType.GetDescription()}
                 };
 
-            return new JsonResult()
+            return new JsonResult
             {
                 Data = result,
                 ContentType = null,
@@ -45,6 +46,4 @@ namespace Utility
             };
         }
     }
-
-    
 }
