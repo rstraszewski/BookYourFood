@@ -53,7 +53,7 @@ namespace Utility
             Errors.Add(error);
         }
 
-        public static OperationResult SuccessResult()
+        public static OperationResult CreateResult()
         {
             return new OperationResult();
         }
@@ -85,7 +85,7 @@ namespace Utility
             Errors.Add(error);
         }
 
-        public static OperationResult<T> SuccessResult(T result)
+        public static OperationResult<T> CreateResult(T result)
         {
             return new OperationResult<T>(result);
         }

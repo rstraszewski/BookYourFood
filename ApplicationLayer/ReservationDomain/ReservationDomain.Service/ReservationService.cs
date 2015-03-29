@@ -17,10 +17,30 @@ namespace Reservaton.Service
         {
         }
 
-        public OperationResult<long> ReserveTable(DateTime reservationTime, int duration, Table table)
+        public OperationResult<Reservation> ReserveTable(DateTime reservationTime, int duration, long tableId)
         {
-            throw new NotImplementedException();
-            //TODO: create reservation using data provided by controller (User, Time, 
+            var table = ByfDbContext.Tables.Find(tableId);
+            var reservation = new Reservation(reservationTime, duration, table);
+            var result = CanTableBeReserved(reservation);
+            if(result.Success)
+            {
+                ByfDbContext.Reservations.Add(reservation);
+                ByfDbContext.SaveChanges();
+            }
+
+            return result;
+        }
+
+        private OperationResult<Reservation> CanTableBeReserved(Reservation reservation)
+        {
+            var result = OperationResult<Reservation>.CreateResult(reservation);
+
+            if(reservation.ReservationTime < DateTime.Now)
+            {
+                result.AddError("Reservation time must be later than now");
+            }
+
+            return result;
         }
 
         public OperationResult ReserveMeal(long reservationId, Meal meal)

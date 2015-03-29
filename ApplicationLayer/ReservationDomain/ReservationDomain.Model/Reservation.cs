@@ -20,10 +20,18 @@ namespace ReservationDomain.Model
 
         //Needed by EntityFramework
         protected Reservation() { }
+        public Reservation(DateTime reservationTime, int duration, Table table)
+        {
+            ReservationTime = reservationTime;
+            Duration = duration;
+            Table = table;
+        }
     }
 
     public class Table : Entity
     {
-        
+        public long TableNumber { get; set; }
+        public int SeatsNumber { get; set; }
+
     }
 }
