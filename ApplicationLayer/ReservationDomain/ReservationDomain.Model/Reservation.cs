@@ -26,6 +26,11 @@ namespace ReservationDomain.Model
             Duration = duration;
             Table = table;
         }
+
+        public void AssignMeal(Meal meal)
+        {
+            Meals.Add(meal);
+        }
     }
 
     public class Table : Entity

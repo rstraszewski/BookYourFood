@@ -43,12 +43,19 @@ namespace Reservaton.Service
             return result;
         }
 
-        public OperationResult ReserveMeal(long reservationId, Meal meal)
+        public OperationResult<Reservation> ReserveMeal(long reservationId, List<long> mealId)
         {
-            throw new NotImplementedException();
+            var reservation = ByfDbContext.Reservations.Find(reservationId);
+            foreach (var id in mealId)
+            {
+                var meal = ByfDbContext.Meals.Find(id);
+                reservation.AssignMeal(meal);
+                ByfDbContext.SaveChanges();
+            }
+            return OperationResult<Reservation>.CreateResult(reservation);
         }
 
-        public OperationResult Finalize(long reservationId, long userId)
+        public OperationResult Finalize(long reservationId)
         {
             throw new NotImplementedException();
         }
