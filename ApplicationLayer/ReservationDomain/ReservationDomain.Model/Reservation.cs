@@ -15,6 +15,7 @@ namespace ReservationDomain.Model
         public Table Table { get; set; }
         public long? UserId { get; set; }
         public string UserSurname { get; set; }
+        public bool IsFinalized { get; set; }
         public List<Meal> Meals { get; set; }
         public List<Drink> Drinks { get; set; }
 
@@ -31,12 +32,10 @@ namespace ReservationDomain.Model
         {
             Meals.Add(meal);
         }
-    }
 
-    public class Table : Entity
-    {
-        public long TableNumber { get; set; }
-        public int SeatsNumber { get; set; }
-
+        public void FinalizeReservation()
+        {
+            IsFinalized = true;
+        }
     }
 }

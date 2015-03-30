@@ -15,6 +15,7 @@ namespace Database
         public DbSet<Drink> Drinks { get; set; }
         public DbSet<HashTag> HashTags { get; set; }
         public DbSet<Table> Tables { get; set; }
+        public DbSet<Question> Questions { get; set; }
 
         public ByfDbContext()
             : base(Environment.MachineName)

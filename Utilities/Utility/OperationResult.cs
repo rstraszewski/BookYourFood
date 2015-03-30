@@ -39,21 +39,27 @@ namespace Utility
     {
         private OperationResult()
         {
-            Success = true;
             Errors = new List<string>();
         }
 
-        public bool Success { get; set; }
+        public bool IsSuccessful
+        {
+            get { return Errors.Count == 0; }
+        }
 
         public List<string> Errors { get; private set; }
 
         public void AddError(string error)
         {
-            Success = false;
             Errors.Add(error);
         }
 
         public static OperationResult CreateResult()
+        {
+            return new OperationResult();
+        }
+
+        public static OperationResult Success()
         {
             return new OperationResult();
         }
@@ -69,25 +75,32 @@ namespace Utility
     {
         private OperationResult(T result)
         {
-            Success = true;
             Errors = new List<string>();
             Result = result;
         }
 
-        public bool Success { get; set; }
+        public bool IsSuccessful
+        {
+            get { return Errors.Count == 0; }
+        }
+
         public T Result { get; set; }
 
         public List<string> Errors { get; private set; }
 
         public void AddError(string error)
         {
-            Success = false;
             Errors.Add(error);
         }
 
         public static OperationResult<T> CreateResult(T result)
         {
             return new OperationResult<T>(result);
+        }
+
+        public static OperationResult<T> Success(T result)
+        {
+            return CreateResult(result);
         }
 
         public static OperationResult<T> ErrorResult(string error, T result)

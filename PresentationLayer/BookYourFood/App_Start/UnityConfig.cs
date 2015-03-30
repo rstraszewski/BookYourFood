@@ -44,6 +44,9 @@ namespace BookYourFood.App_Start
 
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterTypes(
+                AllClasses.FromLoadedAssemblies(),
+                WithMappings.FromMatchingInterface);
             container.RegisterType<ByfDbContext>();
             container.RegisterType<ApplicationSignInManager>();
             container.RegisterType<ApplicationUserManager>();
@@ -52,7 +55,8 @@ namespace BookYourFood.App_Start
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
                     new InjectionConstructor(typeof(ByfDbContext)));
 
-            container.RegisterType<IReservationService, ReservationService>();
+            //container.RegisterType<IReservationService, ReservationService>();
+            //container.RegisterType<IQuestionnaireSevice, QuestionnaireSevice>();
         }
     }
 }

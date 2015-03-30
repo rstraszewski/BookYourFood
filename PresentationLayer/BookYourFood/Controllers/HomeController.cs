@@ -32,7 +32,7 @@ namespace BookYourFood.Controllers
 
         public ActionResult Create()
         {
-            //var status = _reservationService.ReserveTableForNow();
+            var result = _reservationService.ReserveTable(DateTime.Now.AddDays(2), 2, 1);
             var sth = new
             {
                 sadasd = "asd"

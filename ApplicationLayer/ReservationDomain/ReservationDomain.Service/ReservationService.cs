@@ -21,9 +21,10 @@ namespace Reservaton.Service
         {
             var table = ByfDbContext.Tables.Find(tableId);
             var reservation = new Reservation(reservationTime, duration, table);
-            var result = CanTableBeReserved(reservation);
-            if(result.Success)
+            var result = CanReservationBeCreated(reservation);
+            if(result.IsSuccessful)
             {
+                reservation.Table.Reserve();
                 ByfDbContext.Reservations.Add(reservation);
                 ByfDbContext.SaveChanges();
             }
@@ -31,7 +32,7 @@ namespace Reservaton.Service
             return result;
         }
 
-        private OperationResult<Reservation> CanTableBeReserved(Reservation reservation)
+        private OperationResult<Reservation> CanReservationBeCreated(Reservation reservation)
         {
             var result = OperationResult<Reservation>.CreateResult(reservation);
 
@@ -39,12 +40,22 @@ namespace Reservaton.Service
             {
                 result.AddError("Reservation time must be later than now");
             }
+            if (reservation.Table == null)
+            {
+                result.AddError("Table was not found");
+            }
+            else if (reservation.Table.IsReserved)
+            {
+                result.AddError("Table is already reserved");
+            }
 
             return result;
         }
 
         public OperationResult<Reservation> ReserveMeal(long reservationId, List<long> mealId)
         {
+            //TODO: Think about using contains
+            //var meals = ByfDbContext.Meals.Where(meal => mealId.Contains(meal.Id));
             var reservation = ByfDbContext.Reservations.Find(reservationId);
             foreach (var id in mealId)
             {

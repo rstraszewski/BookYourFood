@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IReservationService.cs" />
+    <Compile Include="QuestionnaireSevice.cs" />
     <Compile Include="ReservationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
