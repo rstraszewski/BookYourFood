@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common.Service;
 using Database;
 using ReservationDomain.Model;
@@ -54,12 +52,11 @@ namespace Reservaton.Service
 
         public OperationResult<Reservation> ReserveMeal(long reservationId, List<long> mealId)
         {
-            //TODO: Think about using contains
-            //var meals = ByfDbContext.Meals.Where(meal => mealId.Contains(meal.Id));
+            var meals = (from meal in ByfDbContext.Meals where mealId.Contains(meal.Id) select meal).ToList();
+//            ByfDbContext.Meals.Where(meal => mealId.Contains(meal.Id)).ToList();
             var reservation = ByfDbContext.Reservations.Find(reservationId);
-            foreach (var id in mealId)
+            foreach (var meal in meals)
             {
-                var meal = ByfDbContext.Meals.Find(id);
                 reservation.AssignMeal(meal);
                 ByfDbContext.SaveChanges();
             }
