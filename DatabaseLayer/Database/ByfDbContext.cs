@@ -21,6 +21,7 @@ namespace Database
             : base(Environment.MachineName)
         {
             System.Data.Entity.Database.SetInitializer(new ByfDbInitializer());
+
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -43,7 +44,7 @@ namespace Database
             modelBuilder.Entity<Ingredient>()
                 .HasMany(entity => entity.HashTags)
                 .WithMany();
-
         }
+
     }
 }

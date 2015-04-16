@@ -14,6 +14,8 @@ namespace ReservationDomain.Model
     {
         Wine,
         Beer,
-        Soda
+        Soda,
+        Juice,
+        Other
     }
 }
