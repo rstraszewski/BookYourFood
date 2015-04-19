@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "DatabaseLayer\D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationLayer", "ApplicationLayer", "{4514D3EE-39D4-4A08-9D73-C5F18F7CCC18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Model", "ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\Identity.Model.csproj", "{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserDomain.Model", "ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\ApplicationUserDomain.Model.csproj", "{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{51803CCD-D6D2-45DF-A0FF-B36951B73A8B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationUserDomain", "ApplicationUserDomain", "{51803CCD-D6D2-45DF-A0FF-B36951B73A8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9F0436CE-8946-4A72-AE4B-402A46B47DED}"
 EndProject
@@ -34,6 +34,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilites", "Utilites", "{7D25F9F8-3195-4AC1-8CB3-AABF503CEAB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityMvc", "Utilities\UtilityMvc\UtilityMvc.csproj", "{5C700888-D53C-404F-9522-F0C1DDFCB321}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserDomain.Service", "ApplicationLayer\ApplicationUserDomain\ApplicationUserDomain.Service\ApplicationUserDomain.Service.csproj", "{2F4DA88C-9071-4B07-A77D-B44ED3260480}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{5C700888-D53C-404F-9522-F0C1DDFCB321}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C700888-D53C-404F-9522-F0C1DDFCB321}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C700888-D53C-404F-9522-F0C1DDFCB321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F4DA88C-9071-4B07-A77D-B44ED3260480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F4DA88C-9071-4B07-A77D-B44ED3260480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F4DA88C-9071-4B07-A77D-B44ED3260480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F4DA88C-9071-4B07-A77D-B44ED3260480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,5 +100,6 @@ Global
 		{EA5028CB-D8B1-4057-9262-013DA796179C} = {3F2235CF-026D-4A61-8CA0-26F07C0E045C}
 		{05233FD8-1832-4B94-A0DE-C2D390B82ED1} = {3F2235CF-026D-4A61-8CA0-26F07C0E045C}
 		{5C700888-D53C-404F-9522-F0C1DDFCB321} = {7D25F9F8-3195-4AC1-8CB3-AABF503CEAB7}
+		{2F4DA88C-9071-4B07-A77D-B44ED3260480} = {51803CCD-D6D2-45DF-A0FF-B36951B73A8B}
 	EndGlobalSection
 EndGlobal

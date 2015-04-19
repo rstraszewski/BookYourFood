@@ -29,8 +29,9 @@
       .Button(true)
     )
 
-    @{
+@{
         var msg = ViewData["Message"] as MessageResult;
+        var msgs = ViewData["Messages"] as List<MessageResult>;
         if (msg != null)
         {
             <script>
@@ -39,6 +40,18 @@
                     notificationWidget.show("@msg.Message", "@msg.MessageType.GetDescription()");
                 });
             </script>
+        }
+        if (msgs != null)
+        {
+            foreach (var elem in msgs)
+            {
+                <script>
+                    $(function () {
+                        var notificationWidget = $("#notification").data("kendoNotification");
+                        notificationWidget.show("@elem.Message", "@elem.MessageType.GetDescription()");
+                    });
+                </script>
+            }
         }
     }
 

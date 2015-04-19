@@ -28,11 +28,11 @@ namespace Utility
     {
         [Description("success")]
         Success,
-        [Description("success")]
+        [Description("info")]
         Info,
-        [Description("success")]
+        [Description("error")]
         Error,
-        [Description("success")]
+        [Description("warning")]
         Warning
     }
     public class OperationResult

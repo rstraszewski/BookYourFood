@@ -11,6 +11,7 @@ namespace Identity.Model
 {
     public class ApplicationUser : IdentityUser, IUser<string>
     {
+        public List<UserAnswer> UserAnswers { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
