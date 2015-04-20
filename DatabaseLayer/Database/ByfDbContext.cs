@@ -28,6 +28,8 @@ namespace Database
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
+            modelBuilder.Entity<HashTag>();
+
             modelBuilder.Entity<Meal>()
                 .HasMany(entity => entity.HashTags)
                 .WithMany();
@@ -44,6 +46,9 @@ namespace Database
                 .HasMany(entity => entity.HashTags)
                 .WithMany();
 
+            modelBuilder.Entity<Answer>()
+                .HasMany(entity => entity.HashTags)
+                .WithMany();
         }
     }
 }

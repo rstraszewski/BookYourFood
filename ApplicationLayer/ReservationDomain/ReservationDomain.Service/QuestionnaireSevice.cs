@@ -13,6 +13,11 @@ namespace Reservaton.Service
         {
         }
 
+        public int GetNumberOfQuestions()
+        {
+            return ByfDbContext.Questions.Count();
+        }
+
         public List<Question> GetQuestions()
         {
             return ByfDbContext.Questions.ToList();
@@ -21,6 +26,7 @@ namespace Reservaton.Service
 
     public interface IQuestionnaireSevice
     {
+        int GetNumberOfQuestions();
         List<Question> GetQuestions();
     }
 }

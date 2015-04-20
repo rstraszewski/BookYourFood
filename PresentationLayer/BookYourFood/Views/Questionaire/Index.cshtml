@@ -1,0 +1,27 @@
+﻿@model List<ReservationDomain.Model.Question>
+
+@{
+    ViewBag.Title = "Questionaire";
+}
+
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+    <h3>Tell us, who you are!</h3>
+</div>
+@using (Html.BeginForm("Index", "Questionaire"))
+{
+    for (var i = 0; i < Model.Count; i++)
+    {
+        var q = Model[i];
+        <div class="panel panel-primary">
+            <div class="panel-heading">@q.Value</div>
+            <ul class="list-group">
+                @foreach (var item in q.Answers)
+                {
+                    <li class="list-group-item">@Html.RadioButton("answerIds[" + i + "]", item.Id) @item.Value</li>
+                }
+            </ul>
+        </div>
+    }
+    <input type="submit" class="btn btn-lg btn-primary" value="Send!"/>
+}
