@@ -7,7 +7,8 @@ namespace ReservationDomain.Model
     {
         public string Name { get; set; }
         public DrinkType DrinkType { get; set; }
-        public List<HashTag> HashTags { get; set; }
+        public virtual List<HashTag> HashTags { get; set; }
+        public decimal Price { get; set; }
     }
 
     public enum DrinkType

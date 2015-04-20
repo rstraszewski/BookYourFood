@@ -43,9 +43,11 @@
   <ItemGroup>
     <Compile Include="Answer.cs" />
     <Compile Include="Drink.cs" />
+    <Compile Include="DrinkForReservation.cs" />
     <Compile Include="HashTag.cs" />
     <Compile Include="Ingredient.cs" />
     <Compile Include="Meal.cs" />
+    <Compile Include="MealForReservation.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="Reservation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

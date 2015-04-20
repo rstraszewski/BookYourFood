@@ -20,7 +20,7 @@ namespace Reservaton.Service
             var table = ByfDbContext.Tables.Find(tableId);
             var reservation = new Reservation(reservationTime, duration, table);
             var result = CanReservationBeCreated(reservation);
-            if(result.IsSuccessful)
+            if (result.IsSuccessful)
             {
                 reservation.Table.Reserve();
                 ByfDbContext.Reservations.Add(reservation);
@@ -30,11 +30,42 @@ namespace Reservaton.Service
             return result;
         }
 
+        public OperationResult<Reservation> ReserveMeal(long reservationId, List<MealForReservation> mealIds)
+        {
+            //TODO: Think about MealForReservation - Needed mealId and number of meals, now creates new meal after assigning;/
+            //var meals = ByfDbContext.Meals.Where(meal => mealIds.Contains(meal.Id));
+            mealIds.ForEach(elem => ByfDbContext.Meals.Attach(elem.Meal));
+            var reservation = ByfDbContext.Reservations.Find(reservationId);
+            reservation.AssignMeals(mealIds);
+
+            ByfDbContext.SaveChanges();
+            return OperationResult<Reservation>.CreateResult(reservation);
+        }
+
+        public OperationResult Finalize(long reservationId)
+        {
+            var reservation = ByfDbContext.Reservations.Find(reservationId);
+            reservation.FinalizeReservation();
+
+            ByfDbContext.SaveChanges();
+            return OperationResult.Success();
+        }
+
+        public OperationResult Finalize(long reservationId, string surname)
+        {
+            var reservation = ByfDbContext.Reservations.Find(reservationId);
+            reservation.AssignPerson(surname);
+            reservation.FinalizeReservation();
+
+            ByfDbContext.SaveChanges();
+            return OperationResult.Success();
+        }
+
         private OperationResult<Reservation> CanReservationBeCreated(Reservation reservation)
         {
             var result = OperationResult<Reservation>.CreateResult(reservation);
 
-            if(reservation.ReservationTime < DateTime.Now)
+            if (reservation.ReservationTime < DateTime.Now)
             {
                 result.AddError("Reservation time must be later than now");
             }
@@ -48,29 +79,6 @@ namespace Reservaton.Service
             }
 
             return result;
-        }
-
-        public OperationResult<Reservation> ReserveMeal(long reservationId, List<long> mealId)
-        {
-            var meals = (from meal in ByfDbContext.Meals where mealId.Contains(meal.Id) select meal).ToList();
-//            ByfDbContext.Meals.Where(meal => mealId.Contains(meal.Id)).ToList();
-            var reservation = ByfDbContext.Reservations.Find(reservationId);
-            foreach (var meal in meals)
-            {
-                reservation.AssignMeal(meal);
-                ByfDbContext.SaveChanges();
-            }
-            return OperationResult<Reservation>.CreateResult(reservation);
-        }
-
-        public OperationResult Finalize(long reservationId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public OperationResult Finalize(long reservationId, string surname)
-        {
-            throw new NotImplementedException();
         }
     }
 }

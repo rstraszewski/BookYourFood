@@ -37,7 +37,7 @@ namespace Utility
     }
     public class OperationResult
     {
-        private OperationResult()
+        protected OperationResult()
         {
             Errors = new List<string>();
         }
@@ -47,7 +47,7 @@ namespace Utility
             get { return Errors.Count == 0; }
         }
 
-        public List<string> Errors { get; private set; }
+        public List<string> Errors { get; protected set; }
 
         public void AddError(string error)
         {
@@ -70,8 +70,15 @@ namespace Utility
             temp.AddError(error);
             return temp;
         }
+
+        public MessageResult ToMessageResult()
+        {
+            return IsSuccessful 
+                ? MessageResult.Create("Operation completed successfully") 
+                : MessageResult.Create(Errors.Last(), MessageType.Error);
+        }
     }
-    public class OperationResult<T>
+    public class OperationResult<T> : OperationResult
     {
         private OperationResult(T result)
         {
@@ -79,19 +86,7 @@ namespace Utility
             Result = result;
         }
 
-        public bool IsSuccessful
-        {
-            get { return Errors.Count == 0; }
-        }
-
         public T Result { get; set; }
-
-        public List<string> Errors { get; private set; }
-
-        public void AddError(string error)
-        {
-            Errors.Add(error);
-        }
 
         public static OperationResult<T> CreateResult(T result)
         {
