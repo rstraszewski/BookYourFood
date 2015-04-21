@@ -2,6 +2,36 @@
     return options;
 };
 
+/*$(document).ajaxSuccess(function (event, xhr, settings, data) {
+    debugger;
+    var notificationWidget = $("#notification").data("kendoNotification");
+    notificationWidget.show(data.message.content, data.message.type);
+    data = data.result;
+});*/
+
+$.ajaxSetup({
+    dataFilter: function (origdata, type) {
+        debugger;
+        //the type is determined by the type you indicated in the ajax call
+        //if not json, we return the data unharmed
+        
+        //data filter receives the raw response. since we have determined it's json
+        //we parse it using jQuery's parseJSON to check the contents
+        var data = $.parseJSON(origdata);
+        var notificationWidget = $("#notification").data("kendoNotification");
+        if (data.message) {
+            notificationWidget.show(data.message.content, data.message.type);
+        }
+        if (data.messages) {
+            data.messages.forEach(function(elem) {
+                notificationWidget.show(elem.content, elem.type);
+            });
+        }
+
+        return JSON.stringify(data.result);
+    }
+});
+
 $.postOperationResult = function (path, param, success) {
     if ($.isFunction(param)) {
         $.post(path, function (data) {

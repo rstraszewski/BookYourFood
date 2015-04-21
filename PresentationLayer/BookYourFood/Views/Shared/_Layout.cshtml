@@ -15,6 +15,7 @@
     <link href="@Url.Content("~/Content/kendo/2014.3.1411/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2014.3.1411/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2014.3.1411/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/kendo/2014.3.1411/jquery.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2014.3.1411/jszip.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2014.3.1411/kendo.all.min.js")"></script>
@@ -29,8 +30,9 @@
       .Button(true)
     )
 
-    @{
+@{
         var msg = ViewData["Message"] as MessageResult;
+        var msgs = ViewData["Messages"] as List<MessageResult>;
         if (msg != null)
         {
             <script>
@@ -39,6 +41,18 @@
                     notificationWidget.show("@msg.Message", "@msg.MessageType.GetDescription()");
                 });
             </script>
+        }
+        if (msgs != null)
+        {
+            foreach (var elem in msgs)
+            {
+                <script>
+                    $(function () {
+                        var notificationWidget = $("#notification").data("kendoNotification");
+                        notificationWidget.show("@elem.Message", "@elem.MessageType.GetDescription()");
+                    });
+                </script>
+            }
         }
     }
 

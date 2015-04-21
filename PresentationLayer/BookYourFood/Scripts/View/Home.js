@@ -15,7 +15,9 @@ $(function() {
 
             var modelToBind = {
                 onclick: function() {
-                    $.postOperationResult("/Home/Create");
+                    $.post("/Home/Create").success(function(a,b,c) {
+                        debugger;
+                    });
                 }
             };
 

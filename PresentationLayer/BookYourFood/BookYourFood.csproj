@@ -854,7 +854,7 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\Identity.Model.csproj">
+    <ProjectReference Include="..\..\ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\ApplicationUserDomain.Model.csproj">
       <Project>{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}</Project>
       <Name>Identity.Model</Name>
     </ProjectReference>

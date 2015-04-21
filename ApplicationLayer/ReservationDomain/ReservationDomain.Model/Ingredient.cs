@@ -21,6 +21,7 @@ namespace ReservationDomain.Model
     public enum IngredientType
     {
         Meat,
-        Spice
+        Spice,
+        Other
     }
 }
