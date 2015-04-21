@@ -80,5 +80,28 @@ namespace Reservaton.Service
 
             return result;
         }
+
+        public OperationResult<Reservation> ReserveMeal(long reservationId, List<long> mealId)
+        {
+            var meals = (from meal in ByfDbContext.Meals where mealId.Contains(meal.Id) select meal).ToList();
+//            ByfDbContext.Meals.Where(meal => mealId.Contains(meal.Id)).ToList();
+            var reservation = ByfDbContext.Reservations.Find(reservationId);
+            foreach (var meal in meals)
+            {
+                reservation.AssignMeal(meal);
+                ByfDbContext.SaveChanges();
+            }
+            return OperationResult<Reservation>.CreateResult(reservation);
+        }
+
+        public OperationResult Finalize(long reservationId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public OperationResult Finalize(long reservationId, string surname)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

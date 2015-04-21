@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
+using ReservationDomain.Model;
 using Reservaton.Service;
 
 namespace BookYourFood.Controllers
@@ -44,5 +42,6 @@ namespace BookYourFood.Controllers
 
             return View(p);
         }
+
     }
 }
