@@ -1,0 +1,68 @@
+﻿@model IList<ReservationDomain.Model.Meal>
+
+@{
+    ViewBag.Title = "Suggested Menu";
+}
+
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+@using (Html.BeginForm("Index", "Menu"))
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">Main Course</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h4>@Html.CheckBox("mealsIds[" + i + "]", new { value = Model[i].Id, @checked = true }) @Model[i].Name : @Model[i].Description</h4>
+                    Price: @Model[i].Price
+                    @Html.Kendo().NumericTextBox().Name("mealsNum[" + i + "]")
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Second Course</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h4>@Model[i].Name: @Model[i].Description</h4>
+                    Price: @Model[i].Price $
+                    @Html.Kendo().NumericTextBox().Name("mealsNum[" + i + "]")
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Drinks</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h4>@Model[i].Name: @Model[i].Description</h4>
+                    Price: @Model[i].Price $
+                    @Html.Kendo().NumericTextBox().Name("mealsNum[" + i + "]")
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Desserts</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h4>@Model[i].Name: @Model[i].Description</h4>
+                    Price: @Model[i].Price $
+                    @Html.Kendo().NumericTextBox().Name("mealsNum[" + i + "]")
+                </li>
+            }
+        </ul>
+    </div>
+
+    <input type="submit" class="btn btn-lg btn-primary" value="Send!" />
+}
+

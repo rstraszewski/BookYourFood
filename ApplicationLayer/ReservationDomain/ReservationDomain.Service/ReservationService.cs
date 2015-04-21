@@ -53,6 +53,7 @@ namespace Reservaton.Service
         public OperationResult<Reservation> ReserveMeal(long reservationId, List<long> mealId)
         {
             var meals = (from meal in ByfDbContext.Meals where mealId.Contains(meal.Id) select meal).ToList();
+        //    var meals2 = ByfDbContext.Meals.Find(mealId);
 //            ByfDbContext.Meals.Where(meal => mealId.Contains(meal.Id)).ToList();
             var reservation = ByfDbContext.Reservations.Find(reservationId);
             foreach (var meal in meals)

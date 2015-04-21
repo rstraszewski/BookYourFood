@@ -6,7 +6,7 @@ using ReservationDomain.Model;
 
 namespace Reservaton.Service
 {
-    public class QuestionnaireSevice : ApplicationService, IQuestionnaireSevice
+    public class QuestionnaireSevice : ApplicationService, IMealSevice
     {
         public QuestionnaireSevice(ByfDbContext byfDbContext)
             : base(byfDbContext)
@@ -19,7 +19,7 @@ namespace Reservaton.Service
         }
     }
 
-    public interface IQuestionnaireSevice
+    public interface IMealSevice
     {
         List<Question> GetQuestions();
     }

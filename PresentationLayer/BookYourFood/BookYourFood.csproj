@@ -206,6 +206,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -840,6 +841,7 @@
     <Content Include="Scripts\kendo\2014.3.1411\kendo.window.min.js.map" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapMenuHelperModel.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
+    <Content Include="Views\Menu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
