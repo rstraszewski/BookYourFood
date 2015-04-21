@@ -16,14 +16,16 @@
             @for (var i = 0; i < Model.Count; i++)
             {
                 <li class="list-group-item">
-                    <h4>@Html.CheckBox("mealsIds[" + i + "]", new { value = Model[i].Id, @checked = true }) @Model[i].Name : @Model[i].Description</h4>
+                    <h4>@Model[i].Name : @Model[i].Description</h4>
+                    <input hidden value="@Model[i].Id" name='meals[@i].Id'/>
                     Price: @Model[i].Price
-                    @Html.Kendo().NumericTextBox().Name("mealsNum[" + i + "]")
+                    @Html.Kendo().NumericTextBox().Name("meals[" + i + "].Number").Decimals(0).Min(0).Step(1).Value(0)
                 </li>
             }
         </ul>
     </div>
-    <div class="panel panel-primary">
+    
+   @* <div class="panel panel-primary">
         <div class="panel-heading">Second Course</div>
         <ul class="list-group">
             @for (var i = 0; i < Model.Count; i++)
@@ -61,7 +63,7 @@
                 </li>
             }
         </ul>
-    </div>
+    </div>*@
 
     <input type="submit" class="btn btn-lg btn-primary" value="Send!" />
 }

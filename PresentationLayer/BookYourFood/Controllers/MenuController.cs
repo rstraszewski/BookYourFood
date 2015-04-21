@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
+using BookYourFood.Models;
 using ReservationDomain.Model;
 using Reservaton.Service;
 using Utility;
@@ -20,7 +18,7 @@ namespace BookYourFood.Controllers
             _mealService = mealService;
             _reservationService = reservationService;
         }
-        
+
         // GET: Questionaire
         public ActionResult Index()
         {
@@ -31,17 +29,21 @@ namespace BookYourFood.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(List<long> mealsNum, List<long> mealsIds)
+        public ActionResult Index(List<MealForReservationViewModel> meals)
         {
-            var meals = _mealService.GetMeals();
+            var mealsEntities = _mealService.GetMeals(meals.Where(m => m.Number > 0).Select(m => m.Id).ToList());
 
-            if (mealsIds == null)
+            if (meals == null)
             {
                 this.FlashMessage(MessageResult.Create("You didn't choose any meal!", MessageType.Info));
-                return View(meals);
+                return View();
             }
 
-            var reservation = _reservationService.ReserveMeal(1L,mealsIds);
+            var mealsToReserve = mealsEntities
+                .Select(m => new MealForReservation {Meal = m, NumberOfMeals = meals.First(me => m.Id == me.Id).Number})
+                .ToList();
+
+            var reservation = _reservationService.ReserveMeal(1L, mealsToReserve);
 
             if (reservation.IsSuccessful)
             {
@@ -50,7 +52,10 @@ namespace BookYourFood.Controllers
             }
 
             this.FlashMessage(MessageResult.Create(reservation.Errors.Last(), MessageType.Error));
+
             return View(meals);
         }
+
+        
     }
 }

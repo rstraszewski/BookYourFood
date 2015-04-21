@@ -47,7 +47,7 @@ namespace BookYourFood.App_Start
             container.RegisterTypes(
                 AllClasses.FromLoadedAssemblies(),
                 WithMappings.FromMatchingInterface);
-            container.RegisterType<ByfDbContext>();
+            container.RegisterType<ByfDbContext>(new PerRequestLifetimeManager());
             container.RegisterType<ApplicationSignInManager>();
             container.RegisterType<ApplicationUserManager>();
             container.RegisterType<IAuthenticationManager>(

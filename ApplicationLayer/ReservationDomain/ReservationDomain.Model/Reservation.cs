@@ -33,7 +33,7 @@ namespace ReservationDomain.Model
             Meals.Add(meal);
         }
 
-        public void AssignMeals(IEnumerable<MealForReservation> meals)
+        public void OrderMeals(IEnumerable<MealForReservation> meals)
         {
             Meals.AddRange(meals);
         }

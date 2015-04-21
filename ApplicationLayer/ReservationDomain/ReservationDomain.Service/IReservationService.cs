@@ -8,7 +8,7 @@ namespace Reservaton.Service
     public interface IReservationService
     {
         OperationResult<Reservation> ReserveTable(DateTime reservationTime, int duration, long tableId);
-        OperationResult<Reservation> ReserveMeal(long reservationId, List<MealForReservation> mealIds);
+        OperationResult<Reservation> ReserveMeal(long reservationId, List<MealForReservation> reservedMeals);
         OperationResult Finalize(long reservationId);
         OperationResult Finalize(long reservationId, string surname);
     }
