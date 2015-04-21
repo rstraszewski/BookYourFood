@@ -206,6 +206,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QuestionaireController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Global.asax.cs">
@@ -841,6 +842,7 @@
     <Content Include="Scripts\kendo\2014.3.1411\kendo.window.min.js.map" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapMenuHelperModel.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
+    <Content Include="Views\Questionaire\Index.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -856,7 +858,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\ApplicationUserDomain.Model.csproj">
       <Project>{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}</Project>
-      <Name>Identity.Model</Name>
+      <Name>ApplicationUserDomain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ApplicationLayer\ApplicationUserDomain\ApplicationUserDomain.Service\ApplicationUserDomain.Service.csproj">
+      <Project>{2F4DA88C-9071-4B07-A77D-B44ED3260480}</Project>
+      <Name>ApplicationUserDomain.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ApplicationLayer\CommonDomain\Common.Model\Common.Model.csproj">
       <Project>{0B7F82F8-EF67-4277-93FE-36756F8D53A7}</Project>
@@ -876,7 +882,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\ApplicationLayer\ReservationDomain\ReservationDomain.Service\ReservationDomain.Service.csproj">
       <Project>{05233FD8-1832-4B94-A0DE-C2D390B82ED1}</Project>
-      <Name>Reservaton.Service</Name>
+      <Name>ReservationDomain.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Utilities\UtilityMvc\UtilityMvc.csproj">
       <Project>{5c700888-d53c-404f-9522-f0c1ddfcb321}</Project>
