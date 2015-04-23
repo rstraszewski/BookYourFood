@@ -39,6 +39,15 @@ namespace Reservaton.Service
             return OperationResult<Reservation>.CreateResult(reservation);
         }
 
+        public OperationResult<Reservation> ReserveDrink(long reservationId, List<DrinkForReservation> reservedDrinks)
+        {
+            var reservation = ByfDbContext.Reservations.Find(reservationId);
+            reservation.OrderDrinks(reservedDrinks);
+
+            ByfDbContext.SaveChanges();
+            return OperationResult<Reservation>.CreateResult(reservation);
+        }
+
         public OperationResult Finalize(long reservationId)
         {
             var reservation = ByfDbContext.Reservations.Find(reservationId);

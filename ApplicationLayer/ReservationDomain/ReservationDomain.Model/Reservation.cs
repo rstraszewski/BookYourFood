@@ -60,5 +60,10 @@ namespace ReservationDomain.Model
 
             return mealCost + drinkCost;
         }
+
+        public void OrderDrinks(List<DrinkForReservation> drinks)
+        {
+            Drinks.AddRange(drinks);
+        }
     }
 }

@@ -2,6 +2,7 @@
 /// <reference path="../kendo/2014.3.1411/kendo.all-vsdoc.js" />
 var ViewModel = function() {
     var that = this;
+
     this.init = function(model, container) {
         this._model = model;
         this._container = container;

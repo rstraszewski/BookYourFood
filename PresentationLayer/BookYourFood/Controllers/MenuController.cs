@@ -10,13 +10,16 @@ namespace BookYourFood.Controllers
 {
     public class MenuController : Controller
     {
-        private readonly IMealService _mealService;
-        private readonly IReservationService _reservationService;
+        private readonly IMealService mealService;
+        private readonly IReservationService reservationService;
+        private readonly IDrinkService drinkService;
 
-        public MenuController(IMealService mealService, IReservationService reservationService)
+
+        public MenuController(IMealService mealService, IReservationService reservationService, IDrinkService drinkService)
         {
-            _mealService = mealService;
-            _reservationService = reservationService;
+            this.mealService = mealService;
+            this.reservationService = reservationService;
+            this.drinkService = drinkService;
         }
 
         // GET: Questionaire
@@ -24,18 +27,29 @@ namespace BookYourFood.Controllers
         {
             this.FlashMessage(MessageResult.Create(
                 "You need to complete questionaire, so we can predict your desires!", MessageType.Info));
-            var meals = _mealService.GetMeals();
-            return View(meals);
+            var meals = mealService.GetMeals();
+            var drinks = drinkService.GetDrinks();
+
+            var result = new ReserveFoodViewModel {Drinks = drinks, Meals = meals};
+            return View(result);
         }
 
         [HttpPost]
-        public ActionResult Index(List<MealForReservationViewModel> meals)
+        public ActionResult Index(List<MealForReservationViewModel> meals, List<DrinkForReservationViewModel> drinks)
         {
-            var mealsEntities = _mealService.GetMeals(meals.Where(m => m.Number > 0).Select(m => m.Id).ToList());
+            var mealsEntities = mealService.GetMeals(meals.Where(m => m.Number > 0).Select(m => m.Id).ToList());
+            var drinkEntities = drinkService.GetDrinks(drinks.Where(m => m.Number > 0).Select(m => m.Id).ToList());
 
-            if (meals == null)
+
+            if (mealsEntities == null || mealsEntities.Count == 0)
             {
                 this.FlashMessage(MessageResult.Create("You didn't choose any meal!", MessageType.Info));
+                return View();
+            }
+
+            if (drinkEntities == null || drinkEntities.Count == 0)
+            {
+                this.FlashMessage(MessageResult.Create("You didn't choose any drink!", MessageType.Info));
                 return View();
             }
 
@@ -43,15 +57,21 @@ namespace BookYourFood.Controllers
                 .Select(m => new MealForReservation {Meal = m, NumberOfMeals = meals.First(me => m.Id == me.Id).Number})
                 .ToList();
 
-            var reservation = _reservationService.ReserveMeal(1L, mealsToReserve);
+            var drinksToReserve = drinkEntities
+                .Select(m => new DrinkForReservation { Drink = m, NumberOfDrinks = drinks.First(me => m.Id == me.Id).Number })
+                .ToList();
 
-            if (reservation.IsSuccessful)
+            var reservationMeal = reservationService.ReserveMeal(1L, mealsToReserve);
+            var reservationDrink = reservationService.ReserveDrink(1L, drinksToReserve);
+
+            if (reservationMeal.IsSuccessful && reservationDrink.IsSuccessful)
             {
                 this.FlashMessage(MessageResult.Create("Reservation completes successfuly!"));
                 return RedirectToAction("Index", "Home");
             }
 
-            this.FlashMessage(MessageResult.Create(reservation.Errors.Last(), MessageType.Error));
+            this.FlashMessage(MessageResult.Create(reservationMeal.Errors.Last(), MessageType.Error));
+            this.FlashMessage(MessageResult.Create(reservationDrink.Errors.Last(), MessageType.Error));
 
             return View(meals);
         }

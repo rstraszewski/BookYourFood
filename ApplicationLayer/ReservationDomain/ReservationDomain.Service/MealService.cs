@@ -38,4 +38,6 @@ namespace Reservaton.Service
 
         List<Meal> GetMeals(List<long> mealIds);
     }
+
+    
 }
