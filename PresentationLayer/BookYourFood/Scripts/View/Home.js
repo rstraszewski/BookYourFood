@@ -1,31 +1,30 @@
-﻿var BYF = BYF || {};
-var ViewModel = function(options) {
-    return options;
+﻿/// <reference path="Home.js" />
+/// <reference path="../kendo/2014.3.1411/kendo.all-vsdoc.js" />
+var ViewModel = function() {
+    var that = this;
+    this.init = function(model, container) {
+        this._model = model;
+        this._container = container;
+        this.rebindModel();
+    };
+
+    this.getModel = function() {
+        return that.modelObservable;
+    };
+
+    this.rebindModel = function() {
+        kendo.unbind(this._container);
+        this._model = $.extend(that.modelToBind, this._model);
+        this.modelObservable = new kendo.data.ObservableObject(this._model);
+        kendo.bind(this._container, this.modelObservable);
+    };
+
+    this.modelToBind = {
+        onclick: function() {
+            alert("asdas");
+        }
+    };
 };
-$(function() {
-    BYF.Home = new ViewModel({
-        init: function(model, container) {
-            this._model = model;
-            this._container = container;
-            this.rebindModel();
-        },
 
-        rebindModel: function() {
-            kendo.unbind(this._container);
-
-            var modelToBind = {
-                onclick: function() {
-                    $.post("/Home/Create").success(function(a,b,c) {
-                        debugger;
-                    });
-                }
-            };
-
-            this._model = $.extend(modelToBind, this._model);
-            this.modelObservable = new kendo.data.ObservableObject(this._model);
-            kendo.bind(this._container, this.modelObservable);
-        },
-
-        modelObservable: {}
-    });
-});
+var BYF = BYF || {};
+BYF.Home = new ViewModel();
