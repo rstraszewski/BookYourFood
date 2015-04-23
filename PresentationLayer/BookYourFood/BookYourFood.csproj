@@ -222,6 +222,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\arrows.png" />
+    <Content Include="Content\images\background_1.jpg" />
+    <Content Include="Content\images\contact_1.png" />
+    <Content Include="Content\images\ImageAttribution.txt" />
+    <Content Include="Content\images\menu_1.png" />
+    <Content Include="Content\images\reservation_1.png" />
     <Content Include="Content\kendo\2014.3.1411\Black\editor.png" />
     <Content Include="Content\kendo\2014.3.1411\Black\imagebrowser.png" />
     <Content Include="Content\kendo\2014.3.1411\Black\indeterminate.gif" />
@@ -515,6 +521,7 @@
     <Content Include="Content\kendo\2014.3.1411\fonts\DejaVu\LICENSE" />
     <Content Include="Content\kendo\2014.3.1411\images\kendoui.ttf" />
     <Content Include="Content\kendo\2014.3.1411\images\kendoui.woff" />
+    <Content Include="Content\images\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\custom.js" />
