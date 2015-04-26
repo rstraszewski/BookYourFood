@@ -14,7 +14,8 @@ namespace BookYourFood.Controllers
         private readonly IApplicationUserService applicationUserService;
 
         private readonly ApplicationUserManager userManager;
-        public QuestionaireController(IQuestionnaireSevice questionnaireSevice, IApplicationUserService applicationUserService, ApplicationUserManager userManager)
+        public QuestionaireController(IQuestionnaireSevice questionnaireSevice, 
+            IApplicationUserService applicationUserService, ApplicationUserManager userManager)
         {
             this.questionnaireSevice = questionnaireSevice;
             this.applicationUserService = applicationUserService;
@@ -28,6 +29,11 @@ namespace BookYourFood.Controllers
                 "You need to complete questionaire, so we can predict your desires!", MessageType.Info));
             var questions = questionnaireSevice.GetQuestions();
             return View(questions);
+        }
+
+        public ActionResult SelectWayOfCreation()
+        {
+            return View();
         }
 
         [HttpPost]

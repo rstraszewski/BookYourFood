@@ -842,6 +842,7 @@
     <Content Include="Views\Shared\DisplayTemplates\BootstrapMenuHelperModel.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
     <Content Include="Views\Questionaire\Index.cshtml" />
+    <Content Include="Views\Questionaire\SelectWayOfCreation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
