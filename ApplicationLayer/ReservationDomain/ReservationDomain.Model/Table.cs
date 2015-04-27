@@ -1,4 +1,5 @@
-﻿using Common.Model;
+﻿using System.Collections.Generic;
+using Common.Model;
 
 namespace ReservationDomain.Model
 {
@@ -7,16 +8,10 @@ namespace ReservationDomain.Model
         public long TableNumber { get; set; }
         public int SeatsNumber { get; set; }
         public bool IsReserved { get; set; }
-
+        public virtual List<Reservation> Tables { get; set; }
         public void Reserve()
         {
             IsReserved = true;
         }
-
-        public void Release()
-        {
-            IsReserved = false;
-        }
-
     }
 }

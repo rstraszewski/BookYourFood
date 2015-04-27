@@ -67,6 +67,12 @@ namespace Reservaton.Service
             return OperationResult.Success();
         }
 
+        public List<Table> GetTables()
+        {
+            var result = ByfDbContext.Tables.ToList();
+            return result;
+        }
+
         private OperationResult<Reservation> CanReservationBeCreated(Reservation reservation)
         {
             var result = OperationResult<Reservation>.CreateResult(reservation);
