@@ -18,7 +18,7 @@ namespace BookYourFood
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalFilters.Filters.Add(new NotificationActionFilterAttribute());
-
+            //BundleTable.EnableOptimizations = true;
             using (var byfDbContext = new ByfDbContext())
             {
                 byfDbContext.Database.Initialize(false);
