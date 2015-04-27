@@ -51,7 +51,7 @@ namespace BookYourFood.Controllers
         }
 
         [HttpPost]
-        public ActionResult Reserve(long tableId, DateTime fromDateTime, DateTime toDateTime)
+        public ActionResult Reserve(long tableId, DateTime? dateTimeFrom, DateTime? dateTimeTo)
         {
             this.AddFlashMessage("Success!");
             return RedirectToAction("Index","Home");
