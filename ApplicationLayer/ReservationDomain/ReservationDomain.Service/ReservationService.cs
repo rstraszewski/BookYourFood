@@ -22,7 +22,6 @@ namespace Reservaton.Service
             var result = CanReservationBeCreated(reservation);
             if (result.IsSuccessful)
             {
-                reservation.Table.Reserve();
                 ByfDbContext.Reservations.Add(reservation);
                 ByfDbContext.SaveChanges();
             }
@@ -67,6 +66,12 @@ namespace Reservaton.Service
             return OperationResult.Success();
         }
 
+        public List<Table> GetTables()
+        {
+            var result = ByfDbContext.Tables.ToList();
+            return result;
+        }
+
         private OperationResult<Reservation> CanReservationBeCreated(Reservation reservation)
         {
             var result = OperationResult<Reservation>.CreateResult(reservation);
@@ -78,10 +83,6 @@ namespace Reservaton.Service
             if (reservation.Table == null)
             {
                 result.AddError("Table was not found");
-            }
-            else if (reservation.Table.IsReserved)
-            {
-                result.AddError("Table is already reserved");
             }
 
             return result;

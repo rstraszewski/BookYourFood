@@ -209,8 +209,6 @@
     <Compile Include="Controllers\QuestionaireController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
-    <Compile Include="Controllers\SelectCreatorController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -686,6 +684,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\View\Reserve.js" />
     <Content Include="Scripts\View\Home.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -855,8 +854,7 @@
     <Content Include="Views\Reservation\Index.cshtml" />
     <Content Include="Views\Questionaire\Index.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
-    <Content Include="Views\SelectCreator\Index.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Reservation\Reserve.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

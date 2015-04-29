@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
 using ReservationDomain.Model;
 using Reservaton.Service;
+using Utility;
 
 namespace BookYourFood.Controllers
 {
@@ -39,8 +41,20 @@ namespace BookYourFood.Controllers
             var p = new Person() {Name = "Tomasz", Surname = "Grochmal"};
 
             var model = Mapper.Map<PersonViewModel>(p);
-
             return View(p);
+        }
+
+        public ActionResult Reserve()
+        {
+            var tables = reservationService.GetTables();
+            return View(tables);
+        }
+
+        [HttpPost]
+        public ActionResult Reserve(long tableId, DateTime? dateTimeFrom, DateTime? dateTimeTo)
+        {
+            this.AddFlashMessage("Success!");
+            return RedirectToAction("Index","Home");
         }
 
     }

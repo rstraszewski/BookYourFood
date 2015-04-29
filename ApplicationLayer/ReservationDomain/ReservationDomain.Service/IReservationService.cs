@@ -12,5 +12,6 @@ namespace Reservaton.Service
         OperationResult<Reservation> ReserveDrink(long reservationId, List<DrinkForReservation> reservedDrinks);
         OperationResult Finalize(long reservationId);
         OperationResult Finalize(long reservationId, string surname);
+        List<Table> GetTables();
     }
 }

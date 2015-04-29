@@ -25,8 +25,6 @@ namespace BookYourFood.Controllers
         // GET: Questionaire
         public ActionResult Index()
         {
-            this.FlashMessage(MessageResult.Create(
-                "You need to complete questionaire, so we can predict your desires!", MessageType.Info));
             var meals = mealService.GetMeals();
             var drinks = drinkService.GetDrinks();
 
@@ -44,13 +42,8 @@ namespace BookYourFood.Controllers
             if (mealsEntities == null || mealsEntities.Count == 0)
             {
                 this.FlashMessage(MessageResult.Create("You didn't choose any meal!", MessageType.Info));
-                return View();
-            }
-
-            if (drinkEntities == null || drinkEntities.Count == 0)
-            {
-                this.FlashMessage(MessageResult.Create("You didn't choose any drink!", MessageType.Info));
-                return View();
+                var result = new ReserveFoodViewModel { Drinks = drinkEntities, Meals = mealsEntities };
+                return View(result);
             }
 
             var mealsToReserve = mealsEntities
