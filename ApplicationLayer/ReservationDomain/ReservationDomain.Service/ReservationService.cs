@@ -22,6 +22,7 @@ namespace Reservaton.Service
             var result = CanReservationBeCreated(reservation);
             if (result.IsSuccessful)
             {
+                reservation.Table.Reserve();
                 ByfDbContext.Reservations.Add(reservation);
                 ByfDbContext.SaveChanges();
             }
@@ -83,6 +84,10 @@ namespace Reservaton.Service
             if (reservation.Table == null)
             {
                 result.AddError("Table was not found");
+            }
+            else if (reservation.Table.IsReserved)
+            {
+                result.AddError("Table is already reserved");
             }
 
             return result;
