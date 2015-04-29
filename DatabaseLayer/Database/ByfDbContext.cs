@@ -9,6 +9,12 @@ namespace Database
 {
     public class ByfDbContext : IdentityDbContext<ApplicationUser>
     {
+        public ByfDbContext()
+            : base(Environment.MachineName)
+        {
+            System.Data.Entity.Database.SetInitializer(new ByfDbInitializer());
+        }
+
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Meal> Meals { get; set; }
@@ -16,12 +22,6 @@ namespace Database
         public DbSet<HashTag> HashTags { get; set; }
         public DbSet<Table> Tables { get; set; }
         public DbSet<Question> Questions { get; set; }
-
-        public ByfDbContext()
-            : base(Environment.MachineName)
-        {
-            System.Data.Entity.Database.SetInitializer(new ByfDbInitializer());
-        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

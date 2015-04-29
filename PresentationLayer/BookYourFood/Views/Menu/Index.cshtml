@@ -1,0 +1,72 @@
+﻿@model BookYourFood.Models.ReserveFoodViewModel
+
+@{
+    ViewBag.Title = "Suggested Menu";
+}
+
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+@using (Html.BeginForm("Index", "Menu"))
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">Main Course</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.Meals.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h3>@Model.Meals[i].Name</h3>
+                    <h4>@Model.Meals[i].Description</h4>
+                    <input hidden value="@Model.Meals[i].Id" name='meals[@i].Id'/>
+                    Price: @Model.Meals[i].Price
+                    @Html.Kendo().NumericTextBox().Name("meals[" + i + "].Number").Decimals(0).Min(0).Step(1).Value(0)
+                </li>
+            }
+        </ul>
+    </div>
+    
+   @*<div class="panel panel-primary">
+        <div class="panel-heading">Second Course</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h4>@Model[i].Name: @Model[i].Description</h4>
+                    Price: @Model[i].Price $
+                    @Html.Kendo().NumericTextBox().Name("mealsNum[" + i + "]")
+                </li>
+            }
+        </ul>
+    </div>*@
+    <div class="panel panel-primary">
+        <div class="panel-heading">Drinks</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.Drinks.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h4>@Model.Drinks[i].Name</h4>
+                    <input hidden value="@Model.Drinks[i].Id" name='drinks[@i].Id' />
+                    Price: @Model.Drinks[i].Price
+                    @Html.Kendo().NumericTextBox().Name("drinks[" + i + "].Number").Decimals(0).Min(0).Step(1).Value(0)
+                </li>
+            }
+        </ul>
+    </div>
+    @*<div class="panel panel-primary">
+        <div class="panel-heading">Desserts</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h4>@Model[i].Name: @Model[i].Description</h4>
+                    Price: @Model[i].Price $
+                    @Html.Kendo().NumericTextBox().Name("mealsNum[" + i + "]")
+                </li>
+            }
+        </ul>
+    </div>*@
+
+    <input type="submit" class="btn btn-lg btn-primary" value="Send!" />
+}
+

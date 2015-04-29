@@ -9,7 +9,7 @@ using ReservationDomain.Model;
 
 namespace Database
 {
-    public class ByfDbInitializer : DropCreateDatabaseAlways<ByfDbContext>
+    public class ByfDbInitializer : DropCreateDatabaseIfModelChanges<ByfDbContext>
     {
         protected override void Seed(ByfDbContext context)
         {
@@ -502,6 +502,7 @@ namespace Database
             context.SaveChanges();
             #endregion
 
+            context.Reservations.Add(new Reservation(DateTime.Now.AddDays(5), 2, null));
 
             base.Seed(context);
         }
@@ -509,16 +510,15 @@ namespace Database
         protected virtual bool AddHashTagToMeal(string hashTag, Meal meal, ByfDbContext context)
         {
             // If meal already contains such hashtag
-            if (meal.HashTags.Where(h => h.Name == hashTag.ToLower()).SingleOrDefault() != null)
+            if (meal.HashTags.Any(h => h.Name == hashTag.ToLower()))
             {
                 return true;
             }
             // Check the existence of a hashtag 
-            var tmpHashTag = context.HashTags.Where(h => h.Name == hashTag.ToLower()).SingleOrDefault();
+            var tmpHashTag = context.HashTags.FirstOrDefault(h => h.Name == hashTag.ToLower());
             if (tmpHashTag == null)
             {
-                meal.HashTags.Add(context.HashTags.Add(new HashTag() { Name = hashTag.ToLower() }));
-                context.SaveChanges();
+                meal.HashTags.Add(context.HashTags.Add(new HashTag { Name = hashTag.ToLower() }));
                 return true;
             }
             else

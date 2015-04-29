@@ -9,7 +9,7 @@ namespace ReservationDomain.Model
         public string Description { get; set; }
         public IngredientType IngredientType { get; set; }
         public IngredientImportance IngredientImportance { get; set; }
-        public List<HashTag> HashTags { get; set; }
+        public virtual List<HashTag> HashTags { get; set; }
     }
 
     public enum IngredientImportance

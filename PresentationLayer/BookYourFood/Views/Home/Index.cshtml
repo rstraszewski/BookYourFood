@@ -7,15 +7,25 @@
 <div class="da-slider">
 
     <div class="da-slide">
-        <h2>Some headline</h2>
-        <p>Some description</p>
-        <a href="#" class="da-link">Read more</a>
         <div class="da-img">
-            <img src="/Content/images/1.png" alt="image01"/>
+            <img src="/Content/images/reservation_1.png" alt="Book your table and meal"/>
         </div>
+        <h3>Book your table and meal</h3>
     </div>
 
     <div class="da-slide">
+        <h3>Menu</h3>
+            <div class="da-img">
+                <img src="/Content/images/menu_1.png" alt="Menu" />
+            </div>
+        <!-- ... -->
+    </div>
+
+    <div class="da-slide">
+        <div class="da-img">
+            <img src="/Content/images/contact_1.png" alt="Contact" />
+        </div>
+        <h3>Contact</h3>
         <!-- ... -->
     </div>
 
@@ -50,31 +60,13 @@
 
 
 <div class="row container">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p>
-            <a class="k-button k-primary " href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a>
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p>
-            <button class="btn btn-default" data-bind="click: onclick">Learn more &raquo;</button>
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p>
-            <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a>
-        </p>
-    </div>
+    <h3>Some useful informations</h3>
+    <p>
+        This is website was made for IT application Project by Rafal Straszewski, Kamil Burda, Dawid Jachowicz and Tomasz Grochmal.
+        The main goal of this service is to allow customer make reservations of tables and meals.
+        The innovative part is algorithm which sugest meal according to user preferences.
+    </p>
+    <button class="btn btn-primary" data-bind="click: onclick">Test</button>
 </div>
 
 @(Html.CreateJsViewModel()

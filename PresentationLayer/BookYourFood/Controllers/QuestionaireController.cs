@@ -31,13 +31,8 @@ namespace BookYourFood.Controllers
             return View(questions);
         }
 
-        public ActionResult SelectWayOfCreation()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public ActionResult Index(List<long> answerIds)
+        public ActionResult Index(List<long> answerIds, List<long> numbers)
         {
             var questions = questionnaireSevice.GetQuestions();
             var numberOfQuestions = questionnaireSevice.GetNumberOfQuestions();
