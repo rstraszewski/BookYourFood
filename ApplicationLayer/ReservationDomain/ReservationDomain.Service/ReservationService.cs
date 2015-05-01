@@ -72,6 +72,26 @@ namespace Reservaton.Service
             return result;
         }
 
+        public List<Table> GetAvailableTables(DateTime? dateTimeFrom, DateTime? dateTimeTo)
+        {
+            if(dateTimeFrom.HasValue && dateTimeTo.HasValue)
+            {
+                var tables = ByfDbContext.Tables.ToList();
+                var result = tables.Where(table => table.IsFree(dateTimeFrom.Value, dateTimeTo.Value)).ToList();
+                return result;
+            }
+
+            throw new Exception("You need to provide dates!");
+        }
+
+        public Reservation GetReservation(long id)
+        {
+
+            var reservation = ByfDbContext.Reservations.FirstOrDefault(r => r.Id == id);
+
+            return reservation;
+        }
+
         private OperationResult<Reservation> CanReservationBeCreated(Reservation reservation)
         {
             var result = OperationResult<Reservation>.CreateResult(reservation);

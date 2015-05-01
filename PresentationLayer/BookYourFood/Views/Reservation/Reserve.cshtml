@@ -1,5 +1,5 @@
 ﻿@using Utility
-@model List<ReservationDomain.Model.Table>
+@model List<BookYourFood.Controllers.TableViewModel>
 
 @{
     ViewBag.Title = "Reserve";
@@ -8,45 +8,50 @@
 <h2>Reserve</h2>
 
 <div class="reservation-container">
+    
     @using (Html.BeginForm("Reserve", "Reservation"))
     {
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 @(Html.Kendo()
-                .DateTimePicker()
-                .Name("dateTimeFrom")
-                .Value(DateTime.Now)
-                .Min(DateTime.Now)
-                .HtmlAttributes(new {data_bind = "value: dateFrom"}))
+                      .DateTimePicker()
+                      .Name("dateTimeFrom")
+                      .Value(DateTime.Now)
+                      .Min(DateTime.Now)
+                      .HtmlAttributes(new { data_bind = "value: dateFrom", style = "width: 100%" }))
             </div>
-            <div class="col-md-6">
-                @(Html.Kendo()
-                .DateTimePicker()
-                .Name("dateTimeTo")
-                .Value(DateTime.Now)
-                .Min(DateTime.Now)
-                .HtmlAttributes(new { data_bind = "value: dateTo" }))
+            <div class="col-md-4">
+                @*@(Html.Kendo()
+                      .DateTimePicker()
+                      .Name("dateTimeTo")
+                      .Value(DateTime.Now)
+                      .Min(DateTime.Now)
+                      .HtmlAttributes(new {data_bind = "value: dateTo", style="width: 100%"}))*@
+                @(Html.Kendo().NumericTextBox().Name("howLong").Step(1).Min(0).Max(200).Decimals(0).HtmlAttributes(new {data_bind = "value: howLong"}))
+            </div>
+            <div class="col-md-4">
+                <input type="button" class="btn" data-bind="click: checkAvailability" value="Search Available Tables" />
             </div>
         </div>
-        <div class="row">
+        <div class="row tables">
             @for (var i = 0; i < Model.Count; i++)
             {
-                
+
                 var table = Model[i];
-                if (i%3 == 0)
+                if (i%4 == 0)
                 {
                     <div class="clearfix"></div>
                 }
                 var seats = table.SeatsNumber;
                 <div class="col-md-3">
-                    <a data-bind="click: chooseTable" href="javascript:void(0);" id='@string.Format("table{0}", table.Id)' class="thumbnail">
+                    <a data-bind="click: chooseTable" href="javascript:void(0);" id='@string.Format("table{0}", table.Id)' class="thumbnail btn disabled">
                         <img src="http://www.yliving.com/images/estel-brancusi-dining-table/gallery_5.jpg" alt="noImage">Seats: @seats
                     </a>
-                    <input type="radio" id='@string.Format("table{0}", table.Id)' hidden name="tableId" value="@table.Id"/>
+                    <input type="radio" id='@string.Format("table{0}", table.Id)' required hidden name="tableId" value="@table.Id"/>
                 </div>
             }
         </div>
-        <input type="submit" value="Rezerwuj stolik!" class="btn btn-primary"/>
+        <input type="submit" value="Reserve!" class="btn btn-primary"/>
     }
 </div>
 

@@ -1,4 +1,5 @@
-﻿
+﻿@using System.Runtime.InteropServices
+
 @{
     ViewBag.Title = "How to ...";
 }
@@ -14,7 +15,7 @@
             <div class="row">
         <!--Auto creator-->
                 <div class="col-lg-3" style="margin: 4%">
-                    <a href ="#" class="thumbnail" style="min-height: 425px;text-decoration:none">
+                    <a href ="#" class="@string.Format("thumbnail {0}",ViewBag.HasAnswers ? "" : "disabled")" style="min-height: 425px;text-decoration:none">
                         <img src="~/Content/images/auto_creator.png" alt="Auto creator" />
                         <div class="caption">
                             <h3 class="text-center"><u>Auto creator</u></h3>
@@ -40,7 +41,7 @@
                 </div>
         <!--Standard menu-->
                 <div class="col-lg-3" style="margin: 4%">
-                    <a href="#" class="thumbnail" style="min-height: 425px;text-decoration:none">
+                    <a href="@Url.Action("Index","Menu",new{id=ViewBag.ReservationId})" class="thumbnail" style="min-height: 425px;text-decoration:none">
                         <img src="~/Content/images/classic_menu.png" alt="Standard menu">
                         <div class="caption">
                             <h3 class="text-center"><u>Standard menu</u></h3>

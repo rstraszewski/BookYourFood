@@ -15,13 +15,14 @@ namespace ReservationDomain.Model
             if (Reservations == null || Reservations.Count == 0)
                 return true;
 
-            //TODO: Add logic
             foreach (var reservation in Reservations)
             {
                 var reservationStart = reservation.ReservationTime;
                 var reservationEnd = reservation.ReservationTime.AddHours(reservation.Duration);
 
-                if (!(from >= reservationEnd && to <= reservationStart))
+
+                //TODO: Think about this logic - it's wrong probably
+                if (!(from >= reservationEnd || to <= reservationStart))
                     return false;
             }
 

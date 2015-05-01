@@ -8,7 +8,7 @@ using Common.Model;
 
 namespace ReservationDomain.Model
 {
-    public class Reservation: Entity
+    public class Reservation : Entity
     {
         public DateTime ReservationTime { get; set; }
         public int Duration { get; set; }
@@ -50,12 +50,20 @@ namespace ReservationDomain.Model
 
         public decimal CalculateCost(bool withTip)
         {
-            var mealCost = Meals.Select(elem => elem.Meal.Price*(decimal)elem.NumberOfMeals).Sum();
-            var drinkCost = Drinks.Select(elem => elem.Drink.Price*(decimal)elem.NumberOfDrinks).Sum();
-            
+            var mealCost = 0m;
+            var drinkCost = 0m;
+            if (Meals != null)
+            {
+                mealCost = Meals.Select(elem => elem.Meal.Price * (decimal)elem.NumberOfMeals).Sum();
+            }
+            if (Meals != null)
+            {
+                drinkCost = Drinks.Select(elem => elem.Drink.Price * (decimal)elem.NumberOfDrinks).Sum();
+            }
+
             if (withTip)
             {
-                return (mealCost + drinkCost)*1.12m;
+                return (mealCost + drinkCost) * 1.12m;
             }
 
             return mealCost + drinkCost;
