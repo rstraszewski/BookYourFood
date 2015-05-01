@@ -65,6 +65,12 @@ namespace BookYourFood.Models
     public class RegisterViewModel
     {
         [Required]
+        public string Name { get; set; }
+        [Required]
+        public string Surname { get; set; }
+        [Required]
+        [Phone]
+        public string PhoneNumber { get; set; }
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -79,6 +85,8 @@ namespace BookYourFood.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        
     }
 
     public class ResetPasswordViewModel

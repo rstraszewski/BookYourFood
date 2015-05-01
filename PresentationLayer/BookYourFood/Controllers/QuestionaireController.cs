@@ -8,6 +8,7 @@ using Utility;
 
 namespace BookYourFood.Controllers
 {
+    [Authorize]
     public class QuestionaireController : Controller
     {
         private readonly IQuestionnaireSevice questionnaireSevice;

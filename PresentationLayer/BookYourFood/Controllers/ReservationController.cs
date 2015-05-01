@@ -3,46 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using BookYourFood.Models;
+using Microsoft.AspNet.Identity;
 using ReservationDomain.Model;
 using Reservaton.Service;
 using Utility;
 
 namespace BookYourFood.Controllers
 {
-    public class Person
-    {
-        public string Name { get; set; }
-        public string Surname { get; set; }
-    }
-
-    public class PersonViewModel
-    {
-        public string Name { get; set; }
-        public string Surname { get; set; }
-
-        public string Full
-        {
-            get { return Name + " " + Surname; }
-        }
-    }
-
     public class ReservationController : Controller
     {
         private IReservationService reservationService;
-
-        public ReservationController(IReservationService reservationService)
+        private ApplicationUserManager userManager;
+        public ReservationController(IReservationService reservationService, ApplicationUserManager userManager)
         {
             this.reservationService = reservationService;
+            this.userManager = userManager;
         }
 
         // GET: Reservation
         public ActionResult Index()
         {
-            
-            var p = new Person() {Name = "Tomasz", Surname = "Grochmal"};
-
-            var model = Mapper.Map<PersonViewModel>(p);
-            return View(p);
+            return View();
         }
 
         public ActionResult Reserve()
@@ -88,50 +70,37 @@ namespace BookYourFood.Controllers
         {
             var reservation = reservationService.GetReservation(id);
             var model = Mapper.Map<ReservationSummaryViewModel>(reservation);
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = userManager.FindByName(User.Identity.Name);
+                model.Name = user.Name;
+                model.PhoneNumber = user.PhoneNumber;
+                model.Surname = user.Surname;
+            }
             return View(model);
         }
 
         [HttpGet]
         public ActionResult CheckAvailability(DateTime? dateTimeFrom, int? howLong)
         {
-            var tables = reservationService.GetAvailableTables(dateTimeFrom, DateTime.Now.AddHours(howLong.Value));
+            var tables = reservationService.GetAvailableTables(dateTimeFrom, dateTimeFrom.Value.AddHours(howLong.Value));
             var result = tables.Select(table => table.Id);
             return Json(new {tables= result}, JsonRequestBehavior.AllowGet);
         }
 
-    }
+        [HttpPost]
+        public ActionResult Finalize(long id, string phone, string surname)
+        {
+            var reservation = reservationService.GetReservation(id);
+            string userId = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                userId = userManager.FindByName(User.Identity.Name).Id;
+            }
+            var result = reservationService.Finalize(id, phone, surname, userId);
+            this.FlashMessage(result.ToMessageResult());
+            return RedirectToAction("Index","Home");
+        }
 
-    public class DrinkForSummary
-    {
-        public int NumberOfDrinks { get; set; }
-        public decimal Price { get; set; }
-        public string Name { get; set; }
-
-        
-    }
-
-    public class MealForSummary
-    {
-        public int NumberOfMeals { get; set; }
-        public decimal Price { get; set; }
-        public string Name { get; set; }
-
-    }
-
-    public class ReservationSummaryViewModel
-    {
-        public DateTime ReservationTime { get; set; }
-        public int Duration { get; set; }
-        public TableViewModel Table { get; set; }
-        public List<MealForSummary> Meals { get; set; }
-        public List<DrinkForSummary> Drinks { get; set; }
-        public decimal Price { get; set; }
-    }
-
-    public class TableViewModel
-    {
-        public long TableNumber { get; set; }
-        public int SeatsNumber { get; set; }
-        public long Id { get; set; }
     }
 }

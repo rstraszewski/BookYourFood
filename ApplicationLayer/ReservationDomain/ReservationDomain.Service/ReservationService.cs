@@ -92,6 +92,18 @@ namespace Reservaton.Service
             return reservation;
         }
 
+        public OperationResult Finalize(long reservationId, string phoneNumber, string surname, string userId)
+        {
+            var reservation = ByfDbContext.Reservations.Find(reservationId);
+            reservation.AssignPerson(surname);
+            reservation.UserId = userId;
+            reservation.UserPhoneNumber = phoneNumber;
+            reservation.FinalizeReservation();
+
+            ByfDbContext.SaveChanges();
+            return OperationResult.Success();
+        }
+
         private OperationResult<Reservation> CanReservationBeCreated(Reservation reservation)
         {
             var result = OperationResult<Reservation>.CreateResult(reservation);

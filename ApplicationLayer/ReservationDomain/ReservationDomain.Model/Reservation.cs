@@ -12,12 +12,13 @@ namespace ReservationDomain.Model
     {
         public DateTime ReservationTime { get; set; }
         public int Duration { get; set; }
-        public Table Table { get; set; }
-        public long? UserId { get; set; }
+        public virtual Table Table { get; set; }
+        public string UserId { get; set; }
         public string UserSurname { get; set; }
         public bool IsFinalized { get; set; }
         public virtual List<MealForReservation> Meals { get; set; }
         public virtual List<DrinkForReservation> Drinks { get; set; }
+        public string UserPhoneNumber { get; set; }
 
         //Needed by EntityFramework
         protected Reservation() { }

@@ -59,8 +59,8 @@ namespace BookYourFood.Controllers
 
             if (reservationMeal.IsSuccessful && reservationDrink.IsSuccessful)
             {
-                this.FlashMessage(MessageResult.Create("Reservation completes successfuly!"));
-                return RedirectToAction("Index", "Home");
+                this.FlashMessage(MessageResult.Create("One more step!"));
+                return RedirectToAction("Summary", "Reservation", new {id=id});
             }
 
             this.FlashMessage(MessageResult.Create(reservationMeal.Errors.Last(), MessageType.Error));

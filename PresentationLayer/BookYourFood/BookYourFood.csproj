@@ -204,12 +204,16 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\DrinkForSummary.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Models\MealForSummary.cs" />
     <Compile Include="Controllers\QuestionaireController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
+    <Compile Include="Models\ReservationSummaryViewModel.cs" />
     <Compile Include="Controllers\SelectCreatorController.cs" />
+    <Compile Include="Models\TableViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
