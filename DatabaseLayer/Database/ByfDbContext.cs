@@ -22,6 +22,7 @@ namespace Database
         public DbSet<HashTag> HashTags { get; set; }
         public DbSet<Table> Tables { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

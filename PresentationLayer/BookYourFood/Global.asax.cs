@@ -21,7 +21,7 @@ namespace BookYourFood
             //BundleTable.EnableOptimizations = true;
             using (var byfDbContext = new ByfDbContext())
             {
-                byfDbContext.Database.Initialize(false);
+                byfDbContext.Database.Initialize(true);
             }
         }
     }
