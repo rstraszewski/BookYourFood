@@ -29,10 +29,16 @@ namespace ApplicationUserDomain.Service
 
             return OperationResult.Success();
         }
+
+        public List<UserAnswer> GetUserAnswers(string userId)
+        {
+            return ByfDbContext.Users.Find(userId).UserAnswers.ToList();
+        }
     }
 
     public interface IApplicationUserService
     {
         OperationResult AddUserAnswers(List<long> answersIds, string userId);
+        List<UserAnswer> GetUserAnswers(string userId);
     }
 }

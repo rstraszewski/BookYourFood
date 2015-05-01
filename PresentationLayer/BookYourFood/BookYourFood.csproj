@@ -865,6 +865,7 @@
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\Reservation\Reserve.cshtml" />
     <Content Include="Views\SelectCreator\Index.cshtml" />
+    <Content Include="Views\Reservation\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

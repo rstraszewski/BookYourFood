@@ -11,7 +11,6 @@
 
 $.ajaxSetup({
     dataFilter: function (origdata, type) {
-        debugger;
         //the type is determined by the type you indicated in the ajax call
         //if not json, we return the data unharmed
         
@@ -28,11 +27,13 @@ $.ajaxSetup({
             });
         }
 
-        return JSON.stringify(data.result);
+        if (data.result)
+            return JSON.stringify(data.result);
+        return JSON.stringify(data);
     }
 });
 
-$.postOperationResult = function (path, param, success) {
+/*$.postOperationResult = function (path, param, success) {
     if ($.isFunction(param)) {
         $.post(path, function (data) {
             var notificationWidget = $("#notification").data("kendoNotification");
@@ -91,7 +92,7 @@ $.ajaxOperationResult = function (options) {
         }
 
     });
-}
+}*/
 
 function notificationOnShow(e) {
     /*if (!$("." + e.sender._guid)[1]) {

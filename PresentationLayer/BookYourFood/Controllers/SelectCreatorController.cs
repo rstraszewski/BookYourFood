@@ -4,30 +4,45 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationUserDomain.Service;
+using Microsoft.AspNet.Identity;
 
 namespace BookYourFood.Controllers
 {
     public class SelectCreatorController : Controller
     {
-        private readonly IAutoCreatorService autoCreatorService;
-        private readonly ApplicationUserManager userManager;
+        private IApplicationUserService userService;
+        private ApplicationUserManager userManager;
 
-        public SelectCreatorController(IAutoCreatorService autoCreatorService,
-            ApplicationUserManager userManager)
+        public SelectCreatorController(IApplicationUserService userService, ApplicationUserManager userManager)
         {
-            this.autoCreatorService = autoCreatorService;
+            this.userService = userService;
             this.userManager = userManager;
         }
 
-        // GET: SelectCreator
-        public ActionResult Index(long id = 0)
+        // GET: SelectCreatorIU
+        public ActionResult Index(long id)
         {
-            var list = autoCreatorService.GetPreferredMealsFor(User.Identity.Name);
+            //TODO: Change to model and strongly typed view
+            ViewBag.ReservationId = id;
+
+            var hasAnswers = false;
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = userManager.FindByName(User.Identity.Name);
+                var userAnswers = userService.GetUserAnswers(user.Id);
+                if (userAnswers != null && userAnswers.Count > 0)
+                {
+                    hasAnswers = true;
+                }
+            }
+
+            ViewBag.HasAnswers = hasAnswers;
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(string name, long id = 0)
+        public ActionResult Index(long id, string name)
         {
             return RedirectToAction("Index", "Home");
         }

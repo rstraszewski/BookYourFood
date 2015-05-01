@@ -13,5 +13,7 @@ namespace Reservaton.Service
         OperationResult Finalize(long reservationId);
         OperationResult Finalize(long reservationId, string surname);
         List<Table> GetTables();
+        List<Table> GetAvailableTables(DateTime? dateTimeFrom, DateTime? dateTimeTo);
+        Reservation GetReservation(long id);
     }
 }

@@ -4,7 +4,7 @@ namespace ReservationDomain.Model
 {
     public class DrinkForReservation : Entity
     {
-        public Drink Drink { get; set; }
+        public virtual Drink Drink { get; set; }
         public int NumberOfDrinks { get; set; }
     }
 }

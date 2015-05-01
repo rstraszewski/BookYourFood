@@ -23,7 +23,7 @@ namespace BookYourFood.Controllers
         }
 
         // GET: Questionaire
-        public ActionResult Index()
+        public ActionResult Index(long id)
         {
             var meals = mealService.GetMeals();
             var drinks = drinkService.GetDrinks();
@@ -33,7 +33,7 @@ namespace BookYourFood.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(List<MealForReservationViewModel> meals, List<DrinkForReservationViewModel> drinks)
+        public ActionResult Index(List<MealForReservationViewModel> meals, List<DrinkForReservationViewModel> drinks, long id)
         {
             var mealsEntities = mealService.GetMeals(meals.Where(m => m.Number > 0).Select(m => m.Id).ToList());
             var drinkEntities = drinkService.GetDrinks(drinks.Where(m => m.Number > 0).Select(m => m.Id).ToList());
@@ -54,8 +54,8 @@ namespace BookYourFood.Controllers
                 .Select(m => new DrinkForReservation { Drink = m, NumberOfDrinks = drinks.First(me => m.Id == me.Id).Number })
                 .ToList();
 
-            var reservationMeal = reservationService.ReserveMeal(1L, mealsToReserve);
-            var reservationDrink = reservationService.ReserveDrink(1L, drinksToReserve);
+            var reservationMeal = reservationService.ReserveMeal(id, mealsToReserve);
+            var reservationDrink = reservationService.ReserveDrink(id, drinksToReserve);
 
             if (reservationMeal.IsSuccessful && reservationDrink.IsSuccessful)
             {

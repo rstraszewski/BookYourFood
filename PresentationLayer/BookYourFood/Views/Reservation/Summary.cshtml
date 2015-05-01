@@ -1,0 +1,24 @@
+﻿@model BookYourFood.Controllers.ReservationSummaryViewModel
+
+@{
+    ViewBag.Title = "Summary";
+}
+
+<div class="summary-container">
+    <div class="row">
+        
+    </div>
+    @if (Model.Meals != null && Model.Meals.Count > 0)
+    {
+        <div id="meals" class="row">
+            
+        </div>
+    }
+    @if (Model.Drinks != null && Model.Drinks.Count > 0)
+    {
+        <div id="drinks" class="row">
+            
+        </div>
+    }
+</div>
+
