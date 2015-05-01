@@ -27,7 +27,8 @@ var ViewModel = function() {
             var input = $("input#" + id);
             input.attr("checked", "checked");
         },
-        dateFrom: $("#dateTimeFrom").kendoDateTimePicker().val()
+        dateFrom: $("#dateTimeFrom").kendoDateTimePicker().val(),
+        dateTo: $("#dateTimeTo").kendoDateTimePicker().val()
     };
 };
 

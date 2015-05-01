@@ -19,19 +19,28 @@
                 .Min(DateTime.Now)
                 .HtmlAttributes(new {data_bind = "value: dateFrom"}))
             </div>
-            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                @(Html.Kendo()
+                .DateTimePicker()
+                .Name("dateTimeTo")
+                .Value(DateTime.Now)
+                .Min(DateTime.Now)
+                .HtmlAttributes(new { data_bind = "value: dateTo" }))
+            </div>
         </div>
         <div class="row">
             @for (var i = 0; i < Model.Count; i++)
             {
+                
                 var table = Model[i];
                 if (i%3 == 0)
                 {
                     <div class="clearfix"></div>
                 }
+                var seats = table.SeatsNumber;
                 <div class="col-md-3">
                     <a data-bind="click: chooseTable" href="javascript:void(0);" id='@string.Format("table{0}", table.Id)' class="thumbnail">
-                        <img src="~/Content/images/menu_1.png" alt="noImage">
+                        <img src="http://www.yliving.com/images/estel-brancusi-dining-table/gallery_5.jpg" alt="noImage">Seats: @seats
                     </a>
                     <input type="radio" id='@string.Format("table{0}", table.Id)' hidden name="tableId" value="@table.Id"/>
                 </div>
