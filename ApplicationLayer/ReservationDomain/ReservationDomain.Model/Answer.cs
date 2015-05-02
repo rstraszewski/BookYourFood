@@ -7,5 +7,6 @@ namespace ReservationDomain.Model
     {
         public string Value { get; set; }
         public virtual List<HashTag> HashTags { get; set; }
+        
     }
 }

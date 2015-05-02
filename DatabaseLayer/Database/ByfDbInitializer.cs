@@ -381,7 +381,6 @@ namespace Database
             AddHashTagToMeal("dinner", mealTmp9, context);
             AddHashTagToMeal("main_course", mealTmp9, context);
             AddHashTagToMeal("normal", mealTmp9, context);
-            AddHashTagToMeal("vegetarian", mealTmp9, context);
             meals.Add(mealTmp9);
             #endregion
             #region Meal 10 potato pancakes
@@ -502,6 +501,126 @@ namespace Database
             context.SaveChanges();
             #endregion
 
+            #region Filling up questions table
+            var questions = new List<Question>();
+            Answer ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9;
+            Question question;
+            #region Are you a vegetarian?
+            question = new Question() { Value = "Do you like meat?", Answers = new List<Answer>() };
+            ans1 = new Answer() { Value = "Yes", HashTags = new List<HashTag>() };
+            ans2 = new Answer() { Value = "No", HashTags = new List<HashTag>() };
+            AddHashTagToAnswer("meat", ans1, context); //yes
+            AddHashTagToAnswer("vegetarian", ans2, context); //no
+            question.Answers.Add(ans1);
+            question.Answers.Add(ans2);
+            questions.Add(question);
+            #endregion
+            #region Do you like sophisticated food?
+            question = new Question() { Value = "Do you like sophisticated food?", Answers = new List<Answer>() };
+            ans1 = new Answer() { Value = "Yes", HashTags = new List<HashTag>() };
+            ans2 = new Answer() { Value = "No", HashTags = new List<HashTag>() };
+            AddHashTagToAnswer("sophisticated", ans1, context); //yes
+            AddHashTagToAnswer("wine", ans1, context); //yes
+            AddHashTagToAnswer("casual", ans2, context); //no
+            AddHashTagToAnswer("normal", ans2, context); //no
+            AddHashTagToAnswer("neutral", ans2, context); //no
+            AddHashTagToAnswer("beer", ans2, context); //no
+            question.Answers.Add(ans1);
+            question.Answers.Add(ans2);
+            questions.Add(question);
+            #endregion
+            #region What kind of cuisine do you prefer?
+            question = new Question() { Value = "What kind of cuisine do you prefer?", Answers = new List<Answer>() };
+            ans1 = new Answer() { Value = "Polish", HashTags = new List<HashTag>() };
+            ans2 = new Answer() { Value = "German", HashTags = new List<HashTag>() };
+            ans3 = new Answer() { Value = "Italian", HashTags = new List<HashTag>() };
+            ans4 = new Answer() { Value = "American", HashTags = new List<HashTag>() };
+            ans5 = new Answer() { Value = "Chinese", HashTags = new List<HashTag>() };
+            AddHashTagToAnswer("polish", ans1, context);
+            AddHashTagToAnswer("german", ans2, context);
+            AddHashTagToAnswer("italian", ans3, context);
+            AddHashTagToAnswer("american", ans4, context);
+            AddHashTagToAnswer("chinese", ans5, context);
+            question.Answers.Add(ans1);
+            question.Answers.Add(ans2);
+            question.Answers.Add(ans3);
+            question.Answers.Add(ans4);
+            question.Answers.Add(ans5);
+            questions.Add(question);
+            #endregion
+            #region What kind of food do you prefer?
+            question = new Question() { Value = "What kind of food do you prefer?", Answers = new List<Answer>() };
+            ans1 = new Answer() { Value = "Spicy", HashTags = new List<HashTag>() };
+            ans2 = new Answer() { Value = "Sweet and sour", HashTags = new List<HashTag>() };
+            ans3 = new Answer() { Value = "Sweet", HashTags = new List<HashTag>() };
+            ans4 = new Answer() { Value = "Sour", HashTags = new List<HashTag>() };
+            AddHashTagToAnswer("spicy", ans1, context);
+            AddHashTagToAnswer("sweet", ans2, context);
+            AddHashTagToAnswer("sour", ans2, context);
+            AddHashTagToAnswer("sweet", ans3, context);
+            AddHashTagToAnswer("sour", ans4, context);
+            question.Answers.Add(ans1);
+            question.Answers.Add(ans2);
+            questions.Add(question);
+            #endregion
+            #region Which movie is your favourite one?
+            question = new Question() { Value = "Which movie is your favourite one?", Answers = new List<Answer>() };
+            ans1 = new Answer() { Value = "Titanic", HashTags = new List<HashTag>() };
+            ans2 = new Answer() { Value = "Magnum Force", HashTags = new List<HashTag>() };
+            ans3 = new Answer() { Value = "The goodfather", HashTags = new List<HashTag>() };
+            ans4 = new Answer() { Value = "Finding Nemo", HashTags = new List<HashTag>() };
+            AddHashTagToAnswer("romantic", ans1, context);
+            AddHashTagToAnswer("sophisticated", ans1, context);
+            AddHashTagToAnswer("american", ans2, context);
+            AddHashTagToAnswer("meat", ans2, context);
+            AddHashTagToAnswer("steak", ans2, context);
+            AddHashTagToAnswer("italian", ans3, context);
+            AddHashTagToAnswer("pasta", ans3, context);
+            AddHashTagToAnswer("fish", ans4, context);
+            AddHashTagToAnswer("water", ans4, context);
+            question.Answers.Add(ans1);
+            question.Answers.Add(ans2);
+            question.Answers.Add(ans3);
+            question.Answers.Add(ans4);
+            questions.Add(question);
+            #endregion
+            #region Are you crazy?
+            question = new Question() { Value = "Are you crazy?", Answers = new List<Answer>() };
+            ans1 = new Answer() { Value = "Hell yeah!", HashTags = new List<HashTag>() };
+            ans2 = new Answer() { Value = "Sometimes", HashTags = new List<HashTag>() };
+            ans3 = new Answer() { Value = "Rahter not", HashTags = new List<HashTag>() };
+            AddHashTagToAnswer("spicy", ans1, context);
+            AddHashTagToAnswer("alcohol", ans1, context);
+            AddHashTagToAnswer("exotic", ans1, context);
+            AddHashTagToAnswer("casual", ans2, context);
+            AddHashTagToAnswer("normal", ans2, context);
+            AddHashTagToAnswer("american", ans2, context);
+            AddHashTagToAnswer("italian", ans2, context);
+            AddHashTagToAnswer("polish", ans3, context);
+            AddHashTagToAnswer("german", ans3, context);
+            question.Answers.Add(ans1);
+            question.Answers.Add(ans2);
+            question.Answers.Add(ans3);
+            questions.Add(question);
+            #endregion
+            #region Do you mind waiting a long?
+            question = new Question() { Value = "Do you mind waiting a long?", Answers = new List<Answer>() };
+            ans1 = new Answer() { Value = "Yes", HashTags = new List<HashTag>() };
+            ans2 = new Answer() { Value = "No", HashTags = new List<HashTag>() };
+            AddHashTagToAnswer("fast", ans1, context);
+            AddHashTagToAnswer("time_consuming", ans2, context);
+            question.Answers.Add(ans1);
+            question.Answers.Add(ans2);
+            questions.Add(question);
+            #endregion
+
+            foreach (var q in questions)
+            {
+                context.Questions.Add(q);
+            }
+            context.SaveChanges();
+            #endregion
+
             context.Reservations.Add(new Reservation(DateTime.Now.AddDays(5), 2, null));
 
             base.Seed(context);
@@ -519,6 +638,7 @@ namespace Database
             if (tmpHashTag == null)
             {
                 meal.HashTags.Add(context.HashTags.Add(new HashTag { Name = hashTag.ToLower() }));
+                context.SaveChanges();
                 return true;
             }
             else
@@ -545,6 +665,7 @@ namespace Database
             else
             {
                 meal.Ingredients.Add(tmpIngredient);
+                context.SaveChanges();
                 return true;
             }
         }
@@ -589,6 +710,28 @@ namespace Database
             else
             {
                 drink.HashTags.Add(tmpHashTag);
+                return true;
+            }
+        }
+
+        protected virtual bool AddHashTagToAnswer(string hashTag, Answer answer, ByfDbContext context)
+        {
+            // If meal already contains such hashtag
+            if (answer.HashTags.Where(h => h.Name == hashTag.ToLower()).SingleOrDefault() != null)
+            {
+                return true;
+            }
+            // Check the existence of a hashtag 
+            var tmpHashTag = context.HashTags.Where(h => h.Name == hashTag.ToLower()).SingleOrDefault();
+            if (tmpHashTag == null)
+            {
+                answer.HashTags.Add(context.HashTags.Add(new HashTag() { Name = hashTag.ToLower() }));
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                answer.HashTags.Add(tmpHashTag);
                 return true;
             }
         }

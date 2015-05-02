@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Answer.cs" />
+    <Compile Include="CompleteMeal.cs" />
     <Compile Include="Drink.cs" />
     <Compile Include="DrinkForReservation.cs" />
     <Compile Include="HashTag.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Meal.cs" />
     <Compile Include="MealForReservation.cs" />
     <Compile Include="Question.cs" />
+    <Compile Include="RatedMeals.cs" />
     <Compile Include="Reservation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Table.cs" />

@@ -68,6 +68,10 @@
       <Project>{C86CD015-F610-49E3-9936-BC308363E4A2}</Project>
       <Name>Common.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ReservationDomain\ReservationDomain.Model\ReservationDomain.Model.csproj">
+      <Project>{ea5028cb-d8b1-4057-9262-013da796179c}</Project>
+      <Name>ReservationDomain.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ApplicationUser.Model\ApplicationUserDomain.Model.csproj">
       <Project>{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}</Project>
       <Name>ApplicationUserDomain.Model</Name>
@@ -75,6 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
