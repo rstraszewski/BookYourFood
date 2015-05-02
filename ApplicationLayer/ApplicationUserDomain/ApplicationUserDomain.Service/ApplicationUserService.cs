@@ -34,11 +34,35 @@ namespace ApplicationUserDomain.Service
         {
             return ByfDbContext.Users.Find(userId).UserAnswers.ToList();
         }
+
+
+        public List<string> GetUserPreferences(string userId)
+        {
+            var userPrefereces = new List<string>();
+            var userAnswers = this.GetUserAnswers(userId);
+
+            if(userAnswers == null)
+            {
+                return userPrefereces;
+            }
+
+            foreach(var a in userAnswers)
+            {
+                var hashTagsList = ByfDbContext.Answers.Find(a.AnswerId).HashTags.ToList();
+                foreach(var h in hashTagsList)
+                {
+                    userPrefereces.Add(h.Name);
+                }
+            }
+
+            return userPrefereces;
+        }
     }
 
     public interface IApplicationUserService
     {
         OperationResult AddUserAnswers(List<long> answersIds, string userId);
         List<UserAnswer> GetUserAnswers(string userId);
+        List<string> GetUserPreferences(string userId);
     }
 }

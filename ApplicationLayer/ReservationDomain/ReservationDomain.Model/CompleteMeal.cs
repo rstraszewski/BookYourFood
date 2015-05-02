@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ReservationDomain.Model;
 
-namespace ApplicationUserDomain.Model
+namespace ReservationDomain.Model
 {
     public class CompleteMeal
     {

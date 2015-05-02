@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ApplicationUserDomain.Service;
 using Microsoft.AspNet.Identity;
+using ReservationDomain.Service;
 
 namespace BookYourFood.Controllers
 {
@@ -12,11 +13,14 @@ namespace BookYourFood.Controllers
     {
         private IApplicationUserService userService;
         private ApplicationUserManager userManager;
+        private IAutoCreatorService autoCreatorService;
 
-        public SelectCreatorController(IApplicationUserService userService, ApplicationUserManager userManager)
+        public SelectCreatorController(IApplicationUserService userService, ApplicationUserManager userManager,
+            IAutoCreatorService autoCreatorService)
         {
             this.userService = userService;
             this.userManager = userManager;
+            this.autoCreatorService = autoCreatorService;
         }
 
         // GET: SelectCreatorIU
@@ -37,6 +41,12 @@ namespace BookYourFood.Controllers
             }
 
             ViewBag.HasAnswers = hasAnswers;
+
+            // For testing purposes ONLY
+
+            //var userPreferences = userService.GetUserPreferences(userManager.FindByName(User.Identity.Name).Id);
+            
+            //var preferredMeals = autoCreatorService.GetPreferredMealsFor(userPreferences);
 
             return View();
         }
