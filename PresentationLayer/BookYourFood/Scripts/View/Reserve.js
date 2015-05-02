@@ -27,20 +27,28 @@ var ViewModel = function() {
             var input = $("input#" + id);
             var tableNumber = $("input#" + id + "number").val();
 
-            that.getModel().set("chosedTable", input.val());
+            that.getModel().set("chosedTableNumber", input.val());
             that.getModel().set("choosedTableText", "You choosed table number: " + tableNumber);
-
+            that.getModel().set("isInvisible", false);
+            that.getModel().set("isSubmitEnabled", true);
+            $(".reservation-container a").css("background-color", "white");
+            $("#" + id).css("background-color", "#EEEEEE");;
             input.attr("checked", "checked");
         },
         dateFrom: null,
         /* dateTo: $("#dateTimeTo").kendoDateTimePicker().val(),*/
         howLong: 0,
+        defaultColor: "white",
+        isInvisible: true,
+        isSubmitEnabled: false,
         choosedTableText: null,
+        choosedTableNumber: null,
         chosedTable: null,
         checkAvailability: function() {
             $.get("/Reservation/CheckAvailability", { dateTimeFrom: that.getModel().get("dateFrom").toISOString(), howLong: that.getModel().get("howLong") })
                 .done(function(result) {
-                $("a").addClass("disabled");
+                    $(".reservation-container a").addClass("disabled");
+                
                 result.tables.forEach(function (value) {
                     //TODO: If table avaiable unblock submit button (block before)
                     $("#table" + value).removeClass("disabled");

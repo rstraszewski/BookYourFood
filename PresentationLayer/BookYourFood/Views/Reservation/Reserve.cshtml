@@ -60,22 +60,22 @@
                         var seats = table.SeatsNumber;
                         <div class="col-md-3">
                             <a data-bind="click: chooseTable" href="javascript:void(0);" id='@string.Format("table{0}", table.Id)' class="thumbnail btn disabled">
-                                <img src="http://www.yliving.com/images/estel-brancusi-dining-table/gallery_5.jpg" alt="noImage">Seats: @seats
+                                <img src="http://www.yliving.com/images/estel-brancusi-dining-table/gallery_5.jpg" alt="noImage">Seats: @seats Number: @table.TableNumber
                             </a>
-                            <input type="radio" id='@string.Format("table{0}", table.Id)' required hidden name="tableId" value="@table.Id"/>
+                            <input type="radio" data-bind="checked: chosedTable" id='@string.Format("table{0}", table.Id)' required hidden name="tableId" value="@table.Id" />
                             <input hidden id='@string.Format("table{0}number", table.Id)' value="@table.TableNumber" />
                         </div>
                     }
                 </div>
             </div>
         </div>
-            <div class="row">
+            <div class="row" data-bind="invisible: isInvisible">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <span data-bind="text: choosedTableText"></span>
                     </div>
                 </div>
-                <input type="submit" value="Reserve!" class="btn btn-primary"/>
+                <input data-bind="enabled: isSubmitEnabled" type="submit" value="Reserve!" class="btn btn-primary" />
             </div>
         </div>
     }

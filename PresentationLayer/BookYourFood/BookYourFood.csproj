@@ -204,6 +204,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\NameSurnameViewModel.cs" />
     <Compile Include="Models\DrinkForSummary.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -870,6 +871,7 @@
     <Content Include="Views\Reservation\Reserve.cshtml" />
     <Content Include="Views\SelectCreator\Index.cshtml" />
     <Content Include="Views\Reservation\Summary.cshtml" />
+    <Content Include="Views\Manage\ChangeNameAndSurname.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
