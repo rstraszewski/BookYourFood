@@ -22,13 +22,22 @@ namespace BookYourFood.Controllers
             this.drinkService = drinkService;
         }
 
+        public ActionResult ShowMenu()
+        {
+            var meals = mealService.GetMeals();
+            var drinks = drinkService.GetDrinks();
+
+            var result = new MenuViewModel { Drinks = drinks, Meals = meals };
+            return View(result);
+        }
+
         // GET: Questionaire
         public ActionResult Index(long id)
         {
             var meals = mealService.GetMeals();
             var drinks = drinkService.GetDrinks();
 
-            var result = new ReserveFoodViewModel {Drinks = drinks, Meals = meals};
+            var result = new MenuViewModel {Drinks = drinks, Meals = meals};
             return View(result);
         }
 
@@ -42,7 +51,7 @@ namespace BookYourFood.Controllers
             if (mealsEntities == null || mealsEntities.Count == 0)
             {
                 this.FlashMessage(MessageResult.Create("You didn't choose any meal!", MessageType.Info));
-                var result = new ReserveFoodViewModel { Drinks = drinkEntities, Meals = mealsEntities };
+                var result = new MenuViewModel { Drinks = drinkEntities, Meals = mealsEntities };
                 return View(result);
             }
 
