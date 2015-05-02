@@ -45,7 +45,7 @@ namespace ApplicationUserDomain.Service
         }
 
 
-        public List<string> GetUserPreferences(string userId)
+        /*public List<string> GetUserPreferences(string userId)
         {
             var userPrefereces = new List<string>();
             var userAnswers = this.GetUserAnswers(userId);
@@ -61,11 +61,11 @@ namespace ApplicationUserDomain.Service
                 foreach(var h in hashTagsList)
                 {
                     userPrefereces.Add(h.Name);
-    }
+                }
             }
 
             return userPrefereces;
-        }
+        }*/
     }
 
     public interface IApplicationUserService
@@ -73,6 +73,6 @@ namespace ApplicationUserDomain.Service
         OperationResult AddUserAnswers(List<long> answersIds, string userId);
         List<UserAnswer> GetUserAnswers(string userId);
         void ChangeNameAndSurname(string userId, string name, string surname);
-        List<string> GetUserPreferences(string userId);
+        //List<string> GetUserPreferences(string userId);
     }
 }

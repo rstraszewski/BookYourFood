@@ -19,7 +19,7 @@ namespace ReservationDomain.Service
 
         public List<CompleteMeal> GetPreferredMealsFor(List<string> userPreferences)
         {
-            var List = new List<CompleteMeal>();
+            var list = new List<CompleteMeal>();
             var ratedMeals = new List<RatedMeals>();
 
             // Get list of meals
@@ -27,7 +27,7 @@ namespace ReservationDomain.Service
             foreach(var m in meals)
             {
                 var mealHashTags = m.HashTags.ToList();
-                long score = 0;
+                var score = 0L;
                 foreach(var u in userPreferences)
                 {
                     if (mealHashTags.FirstOrDefault(x => x.Name == u) != null)
@@ -41,7 +41,7 @@ namespace ReservationDomain.Service
             ratedMeals.Sort( (y,x) => x.Score.CompareTo(y.Score) );
 
 
-            return List;
+            return list;
         }
     }
 
