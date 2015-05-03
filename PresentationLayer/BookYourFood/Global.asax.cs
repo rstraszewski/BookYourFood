@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using BookYourFood.Controllers;
+using BookYourFood.Models;
 using Database;
 using ReservationDomain.Model;
 
@@ -26,6 +29,12 @@ namespace BookYourFood
                 byfDbContext.Database.Initialize(true);
             }
             RegisterMappings();
+        }
+
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
         }
 
         protected void RegisterMappings()

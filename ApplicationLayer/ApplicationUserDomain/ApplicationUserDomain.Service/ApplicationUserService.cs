@@ -24,9 +24,10 @@ namespace ApplicationUserDomain.Service
             }
 
             var answers = answersIds.Select(answer => new UserAnswer {AnswerId = answer}).ToList();
+            entity.UserAnswers.RemoveAll(a => true);
             entity.UserAnswers = answers;
             ByfDbContext.SaveChanges();
-
+            ByfDbContext.Database.ExecuteSqlCommand("DELETE FROM UserAnswer WHERE ApplicationUser_Id IS NULL");
             return OperationResult.Success();
         }
 
@@ -34,6 +35,15 @@ namespace ApplicationUserDomain.Service
         {
             return ByfDbContext.Users.Find(userId).UserAnswers.ToList();
         }
+
+        public void ChangeNameAndSurname(string userId, string name, string surname)
+        {
+            var user = ByfDbContext.Users.Find(userId);
+            user.Name = name;
+            user.Surname = surname;
+            ByfDbContext.SaveChanges();
+        }
+
 
         public List<long> GetUserPreferences(string userId)
         {
@@ -46,7 +56,7 @@ namespace ApplicationUserDomain.Service
             }
 
             foreach(var a in userAnswersList)
-            {
+                {
                 userAnswersIdList.Add(a.AnswerId);
             }
 
@@ -59,5 +69,7 @@ namespace ApplicationUserDomain.Service
         OperationResult AddUserAnswers(List<long> answersIds, string userId);
         List<UserAnswer> GetUserAnswers(string userId);
         List<long> GetUserPreferences(string userId);
+        void ChangeNameAndSurname(string userId, string name, string surname);
+        //List<string> GetUserPreferences(string userId);
     }
 }

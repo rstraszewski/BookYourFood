@@ -123,7 +123,7 @@ namespace BookYourFood.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber, Name = model.Name, Surname = model.Surname};
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -16,7 +16,7 @@ var ViewModel = function() {
 
     this.rebindModel = function() {
         kendo.unbind(this._container);
-        this._model = $.extend(that.modelToBind, this._model);
+        this._model = $.extend(that.modelToBind, { model: this._model });
         this.modelObservable = new kendo.data.ObservableObject(this._model);
         kendo.bind(this._container, this.modelObservable);
     };
@@ -25,15 +25,30 @@ var ViewModel = function() {
         chooseTable: function(e) {
             var id = e.currentTarget.id;
             var input = $("input#" + id);
+            var tableNumber = $("input#" + id + "number").val();
+
+            that.getModel().set("chosedTableNumber", input.val());
+            that.getModel().set("choosedTableText", "You choosed table number: " + tableNumber);
+            that.getModel().set("isInvisible", false);
+            that.getModel().set("isSubmitEnabled", true);
+            $(".reservation-container a").css("background-color", "white");
+            $("#" + id).css("background-color", "#EEEEEE");;
             input.attr("checked", "checked");
         },
-/*        dateFrom: $("#dateTimeFrom").kendoDateTimePicker().val(),
-        dateTo: $("#dateTimeTo").kendoDateTimePicker().val(),*/
+        dateFrom: null,
+        /* dateTo: $("#dateTimeTo").kendoDateTimePicker().val(),*/
         howLong: 0,
+        defaultColor: "white",
+        isInvisible: true,
+        isSubmitEnabled: false,
+        choosedTableText: null,
+        choosedTableNumber: null,
+        chosedTable: null,
         checkAvailability: function() {
-            $.get("/Reservation/CheckAvailability", { dateTimeFrom: $("#dateTimeFrom").data("kendoDateTimePicker").value().toISOString(), howLong: that.getModel().get("howLong") })
+            $.get("/Reservation/CheckAvailability", { dateTimeFrom: that.getModel().get("dateFrom").toISOString(), howLong: that.getModel().get("howLong") })
                 .done(function(result) {
-                $("a").addClass("disabled");
+                    $(".reservation-container a").addClass("disabled");
+                
                 result.tables.forEach(function (value) {
                     //TODO: If table avaiable unblock submit button (block before)
                     $("#table" + value).removeClass("disabled");

@@ -69,9 +69,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLinkAuthorized("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLinkAuthorized("Make reservation", "Reserve", "Reservation")</li>
                     <li>@Html.ActionLinkAuthorized("About", "About", "Home")</li>
                     <li>@Html.ActionLinkAuthorized("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLinkAuthorized("Select Creator", "Index", "SelectCreator")</li>
+                    <li>@Html.ActionLinkAuthorized("Menu", "ShowMenu", "Menu")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

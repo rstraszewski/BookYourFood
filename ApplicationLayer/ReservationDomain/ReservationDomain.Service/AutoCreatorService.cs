@@ -27,7 +27,7 @@ namespace ReservationDomain.Service
             foreach(var m in meals)
             {
                 var mealHashTags = m.HashTags.ToList();
-                long score = 0;
+                var score = 0L;
                 foreach(var u in userPreferences)
                 {
                     if (mealHashTags.FirstOrDefault(x => x.Id == u) != null)

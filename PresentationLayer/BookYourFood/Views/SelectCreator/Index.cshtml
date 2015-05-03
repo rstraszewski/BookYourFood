@@ -7,9 +7,6 @@
 <div class="page-header">
     <h2>@ViewBag.Title create your meal?</h2>
 </div>
-
-@using (Html.BeginForm("Index","SelectCreator")) {
-    
     <div class="panel panel-primary">
         <div class="panel-heading">Choose the way you want to get your meal!</div>
             <div class="row">
@@ -59,10 +56,10 @@
                 <div class="col-lg-3" style="margin: 4%">
                 </div> 
                 <div class="col-lg-3 text-center" style="margin: 0% 4% 4% 4%">
-                    <input class="btn btn-default" type="submit" value="Continue without a meal reservation" />
+                    <a class="btn btn-default" href="@Url.Action("Summary", "Reservation", new { id = ViewBag.ReservationId })">Continue without a meal reservation</a>
                 </div> 
             </div> <!--row-->
     </div>
     
-}
+
 

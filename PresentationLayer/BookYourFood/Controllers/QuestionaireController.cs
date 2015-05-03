@@ -2,12 +2,21 @@
 using System.Linq;
 using System.Web.Mvc;
 using ApplicationUserDomain.Service;
+using Identity.Model;
 using Microsoft.AspNet.Identity;
+using ReservationDomain.Model;
 using Reservaton.Service;
 using Utility;
 
 namespace BookYourFood.Controllers
 {
+    public class QuestionaireViewModel
+    {
+        public List<Question> Questions { get; set; }
+        public List<UserAnswer> Answers { get; set; }
+    }
+
+    [Authorize]
     public class QuestionaireController : Controller
     {
         private readonly IQuestionnaireSevice questionnaireSevice;
@@ -28,7 +37,9 @@ namespace BookYourFood.Controllers
             this.FlashMessage(MessageResult.Create(
                 "You need to complete questionaire, so we can predict your desires!", MessageType.Info));
             var questions = questionnaireSevice.GetQuestions();
-            return View(questions);
+            var userAnswers = userManager.FindById(User.Identity.GetUserId()).UserAnswers.ToList();
+            var model = new QuestionaireViewModel() {Answers = userAnswers, Questions = questions};
+            return View(model);
         }
 
         [HttpPost]

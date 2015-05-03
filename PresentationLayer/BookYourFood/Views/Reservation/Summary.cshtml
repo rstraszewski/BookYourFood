@@ -1,24 +1,113 @@
-﻿@model BookYourFood.Controllers.ReservationSummaryViewModel
+﻿@model BookYourFood.Models.ReservationSummaryViewModel
 
 @{
     ViewBag.Title = "Summary";
 }
-
+<div class="row">
+    <h2>Summary</h2>
+</div>
 <div class="summary-container">
-    <div class="row">
-        
+    <div id="time-details" class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                Reservation starts at @string.Format("{0:HH:mm} on {1:dddd}, {2:dd/MM/yyyy} and lasts {3} hour(s).", Model.ReservationTime, Model.ReservationTime, Model.ReservationTime, Model.Duration)
+            </div>
+        </div>
     </div>
+    <div id="time-details" class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                You reserved table number @Model.Table.TableNumber with @Model.Table.SeatsNumber seats.
+            </div>
+        </div>
+    </div>
+
     @if (Model.Meals != null && Model.Meals.Count > 0)
     {
         <div id="meals" class="row">
-            
+            <div class="panel panel-default">
+                <div class="panel-heading">Reserved meals</div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>How many</th>
+                        <th>Price for one</th>
+                        <th>Total price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var meal in Model.Meals)
+                    {
+                        <tr>
+                            <td>@meal.Name</td>
+                            <td>@meal.NumberOfMeals</td>
+                            <td>$@meal.Price</td>
+                            <td>$@(meal.Price*meal.NumberOfMeals)</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
     @if (Model.Drinks != null && Model.Drinks.Count > 0)
     {
         <div id="drinks" class="row">
-            
+            <div class="panel panel-default">
+                <div class="panel-heading">Reserved drinks</div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>How many</th>
+                        <th>Price for one</th>
+                        <th>Total price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var drink in Model.Drinks)
+                    {
+                        <tr>
+                            <td>@drink.Name</td>
+                            <td>@drink.NumberOfDrinks</td>
+                            <td>$@drink.Price</td>
+                            <td>$@(drink.Price*drink.NumberOfDrinks)</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+
+            </div>
+
         </div>
     }
+    @if (Model.Price > 0)
+    {
+        <div id="price" class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <span class="pull-left">Total price:</span>
+                    <span class="pull-right">$@Model.Price</span>
+                </div>
+            </div>
+        </div>    
+    }
+    @using (Html.BeginForm("Finalize","Reservation"))
+    {
+        <div id="information" class="panel row">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Surname for reservation:</span>
+                <input type="text" class="form-control" value="@Model.Surname" required name="surname" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div id="information" class="panel row">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Phone number:</span>
+                <input type="text" class="form-control" value="@Model.PhoneNumber" required name="phone" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <input hidden name="id" value="@Model.Id"/>
+        <input type="submit" class="btn btn-primary" value="Finalize"/>
+    }
 </div>
-
