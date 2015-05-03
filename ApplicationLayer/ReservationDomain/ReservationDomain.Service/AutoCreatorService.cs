@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ReservationDomain.Model;
 using Common.Service;
 using Database;
-using Utility;
+using ReservationDomain.Model;
 
 namespace ReservationDomain.Service
 {
@@ -17,45 +13,59 @@ namespace ReservationDomain.Service
         {
         }
 
-        public List<CompleteMeal> GetPreferredMealsFor(List<long> userPreferences)
+        public List<CompleteMeal> GetPreferredMealsFor2(List<long> userPreferences)
         {
             var preferredMeals = new List<CompleteMeal>();
             var ratedMeals = new List<RatedMeals>();
 
             // Get list of meals
-            var meals =  ByfDbContext.Meals.ToList();
-            foreach(var m in meals)
+            var meals = ByfDbContext.Meals.ToList();
+            foreach (var m in meals)
             {
                 var mealHashTags = m.HashTags.ToList();
                 var score = 0L;
-                foreach(var u in userPreferences)
+                foreach (var u in userPreferences)
                 {
                     if (mealHashTags.FirstOrDefault(x => x.Id == u) != null)
                     {
                         score++;
                     }
                 }
-                ratedMeals.Add(new RatedMeals() { MealId = m.Id, Score = score });
+                ratedMeals.Add(new RatedMeals {Meal = m, Score = score});
             }
 
-            ratedMeals.Sort( (y,x) => x.Score.CompareTo(y.Score) );
+            ratedMeals.Sort((y, x) => x.Score.CompareTo(y.Score));
 
-            foreach(var rm in ratedMeals)
+            foreach (var rm in ratedMeals)
             {
-                var meal = ByfDbContext.Meals.SingleOrDefault( m => m.Id == rm.MealId);
-                if(meal == null)
+                var meal = ByfDbContext.Meals.SingleOrDefault(m => m.Id == rm.Meal.Id);
+                if (meal == null)
                 {
                     break;
                 }
-                preferredMeals.Add(new CompleteMeal() { Meal = meal });
+                preferredMeals.Add(new CompleteMeal {Meal = meal});
             }
 
             return preferredMeals;
+        }
+
+        public List<RatedMeals> GetPreferredMealsFor(List<long> hashTags)
+        {
+            var ratedMeals = ByfDbContext.Meals
+                .Select(meal => new RatedMeals
+                {
+                    Meal = meal,
+                    Score = hashTags.Count(u => meal.HashTags.Any(hashTag => hashTag.Id == u))
+                })
+                .OrderByDescending(ratedMeal => ratedMeal.Score).ToList();
+
+            return ratedMeals;
         }
     }
 
     public interface IAutoCreatorService
     {
-        List<CompleteMeal> GetPreferredMealsFor(List<long> userPreferences);
+        List<RatedMeals> GetPreferredMealsFor(List<long> hashTags);
+        List<CompleteMeal> GetPreferredMealsFor2(List<long> userPreferences);
     }
 }

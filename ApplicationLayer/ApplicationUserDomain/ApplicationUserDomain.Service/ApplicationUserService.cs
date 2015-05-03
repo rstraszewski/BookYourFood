@@ -47,10 +47,10 @@ namespace ApplicationUserDomain.Service
 
         public List<long> GetUserPreferences(string userId)
         {
-            var userAnswersList = this.GetUserAnswers(userId);
-            List<long> userAnswersIdList = new List<long>();
+            var userAnswerList = this.GetUserAnswers(userId);
+            //List<long> userAnswersIdList = new List<long>();
 
-            if(userAnswersList == null)
+            /*if(userAnswersList == null)
             {
                 return userAnswersIdList;
             }
@@ -58,9 +58,11 @@ namespace ApplicationUserDomain.Service
             foreach(var a in userAnswersList)
                 {
                 userAnswersIdList.Add(a.AnswerId);
-            }
+            }*/
 
-            return userAnswersIdList;
+            var userAnswerIdList = userAnswerList.Select(answer => answer.AnswerId).ToList();
+
+            return userAnswerIdList;
         }
     }
 

@@ -8,7 +8,7 @@ namespace ReservationDomain.Model
 {
     public class RatedMeals
     {
-        public long MealId { get; set; }
+        public Meal Meal { get; set; }
         public long Score { get; set; }
     }
 }
