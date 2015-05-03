@@ -24,7 +24,7 @@ namespace BookYourFood.Controllers
         }
 
         // GET: SelectCreatorIU
-        public ActionResult Index(long id)
+        public ActionResult Index(long id = 0)
         {
             //TODO: Change to model and strongly typed view
             ViewBag.ReservationId = id;

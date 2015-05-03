@@ -35,27 +35,22 @@ namespace ApplicationUserDomain.Service
             return ByfDbContext.Users.Find(userId).UserAnswers.ToList();
         }
 
-
-        public List<string> GetUserPreferences(string userId)
+        public List<long> GetUserPreferences(string userId)
         {
-            var userPrefereces = new List<string>();
-            var userAnswers = this.GetUserAnswers(userId);
+            var userAnswersList = this.GetUserAnswers(userId);
+            List<long> userAnswersIdList = new List<long>();
 
-            if(userAnswers == null)
+            if(userAnswersList == null)
             {
-                return userPrefereces;
+                return userAnswersIdList;
             }
 
-            foreach(var a in userAnswers)
+            foreach(var a in userAnswersList)
             {
-                var hashTagsList = ByfDbContext.Answers.Find(a.AnswerId).HashTags.ToList();
-                foreach(var h in hashTagsList)
-                {
-                    userPrefereces.Add(h.Name);
-                }
+                userAnswersIdList.Add(a.AnswerId);
             }
 
-            return userPrefereces;
+            return userAnswersIdList;
         }
     }
 
@@ -63,6 +58,6 @@ namespace ApplicationUserDomain.Service
     {
         OperationResult AddUserAnswers(List<long> answersIds, string userId);
         List<UserAnswer> GetUserAnswers(string userId);
-        List<string> GetUserPreferences(string userId);
+        List<long> GetUserPreferences(string userId);
     }
 }

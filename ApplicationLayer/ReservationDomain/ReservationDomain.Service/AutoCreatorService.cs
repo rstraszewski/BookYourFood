@@ -17,9 +17,9 @@ namespace ReservationDomain.Service
         {
         }
 
-        public List<CompleteMeal> GetPreferredMealsFor(List<string> userPreferences)
+        public List<CompleteMeal> GetPreferredMealsFor(List<long> userPreferences)
         {
-            var List = new List<CompleteMeal>();
+            var preferredMeals = new List<CompleteMeal>();
             var ratedMeals = new List<RatedMeals>();
 
             // Get list of meals
@@ -30,7 +30,7 @@ namespace ReservationDomain.Service
                 long score = 0;
                 foreach(var u in userPreferences)
                 {
-                    if (mealHashTags.FirstOrDefault(x => x.Name == u) != null)
+                    if (mealHashTags.FirstOrDefault(x => x.Id == u) != null)
                     {
                         score++;
                     }
@@ -40,13 +40,22 @@ namespace ReservationDomain.Service
 
             ratedMeals.Sort( (y,x) => x.Score.CompareTo(y.Score) );
 
+            foreach(var rm in ratedMeals)
+            {
+                var meal = ByfDbContext.Meals.SingleOrDefault( m => m.Id == rm.MealId);
+                if(meal == null)
+                {
+                    break;
+                }
+                preferredMeals.Add(new CompleteMeal() { Meal = meal });
+            }
 
-            return List;
+            return preferredMeals;
         }
     }
 
     public interface IAutoCreatorService
     {
-        List<CompleteMeal> GetPreferredMealsFor(List<string> userPreferences);
+        List<CompleteMeal> GetPreferredMealsFor(List<long> userPreferences);
     }
 }
