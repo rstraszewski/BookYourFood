@@ -204,6 +204,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\ProposeViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\NameSurnameViewModel.cs" />
     <Compile Include="Models\DrinkForSummary.cs" />
@@ -874,6 +875,7 @@
     <Content Include="Views\Reservation\Summary.cshtml" />
     <Content Include="Views\Manage\ChangeNameAndSurname.cshtml" />
     <Content Include="Views\Menu\ShowMenu.cshtml" />
+    <Content Include="Views\Menu\Propose.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

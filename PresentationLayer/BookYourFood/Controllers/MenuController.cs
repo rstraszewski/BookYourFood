@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using ApplicationUserDomain.Service;
 using BookYourFood.Models;
+using Microsoft.AspNet.Identity;
 using ReservationDomain.Model;
 using ReservationDomain.Service;
 using Reservaton.Service;
@@ -15,14 +17,16 @@ namespace BookYourFood.Controllers
         private readonly IReservationService reservationService;
         private readonly IDrinkService drinkService;
         private readonly IAutoCreatorService autoCreatorService;
-
-
-        public MenuController(IMealService mealService, IReservationService reservationService, IDrinkService drinkService, IAutoCreatorService autoCreatorService)
+        private readonly IApplicationUserService applicationUserService;
+        private readonly IQuestionnaireSevice questionnaireSevice;
+        public MenuController(IMealService mealService, IReservationService reservationService, IDrinkService drinkService, IAutoCreatorService autoCreatorService, IApplicationUserService applicationUserService, IQuestionnaireSevice questionnaireSevice)
         {
             this.mealService = mealService;
             this.reservationService = reservationService;
             this.drinkService = drinkService;
             this.autoCreatorService = autoCreatorService;
+            this.applicationUserService = applicationUserService;
+            this.questionnaireSevice = questionnaireSevice;
         }
 
         public ActionResult ShowMenu()
@@ -33,12 +37,27 @@ namespace BookYourFood.Controllers
             var result = new MenuViewModel { Drinks = drinks, Meals = meals };
             return View(result);
         }
-        public ActionResult Propose()
+        [Authorize]
+        public ActionResult Propose(long id)
         {
-            var userPreference = new List<long> {1, 1, 2, 2, 2, 2, 4, 3, 6, 6, 4};
-            var prop1 = autoCreatorService.GetPreferredMealsFor(userPreference);
-            var prop2 = autoCreatorService.GetPreferredMealsFor2(userPreference);
-            return View();
+            //var userPreference = new List<long> {1, 1, 2, 2, 2, 2, 4, 3, 6, 6, 4}; Test data
+            ViewBag.Id = id;
+            var userAnswers = applicationUserService.GetUserPreferences(User.Identity.GetUserId());
+
+            if (userAnswers == null || userAnswers.Count == 0)
+            {
+                this.FlashMessage("You need to fill in questionaire first!",MessageType.Error);
+                return RedirectToAction("Index", "SelectCreator", new{id = id});
+            }
+
+            var userPreference = questionnaireSevice.GetHashTagsFromAnswers(userAnswers);
+
+            var proposedMeals = autoCreatorService.GetPreferredMealsFor(userPreference);
+            var proposedDrinks= autoCreatorService.GetPreferredDrinksFor(userPreference);
+
+            var model = new ProposeViewModel {RatedMeals = proposedMeals, RatedDrinks = proposedDrinks};
+
+            return View(model);
         }
 
         // GET: Questionaire

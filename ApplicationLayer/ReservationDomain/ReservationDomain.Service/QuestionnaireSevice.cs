@@ -22,11 +22,19 @@ namespace Reservaton.Service
         {
             return ByfDbContext.Questions.ToList();
         }
+
+        public List<long> GetHashTagsFromAnswers(List<long> answerIds)
+        {
+            var answers = ByfDbContext.Answers.Where(answer => answerIds.Contains(answer.Id));//answerIds.Select(answerId => ByfDbContext.Answers.Find(answerId));
+            var hashTags = answers.SelectMany(answer => answer.HashTags).Select(hashtag => hashtag.Id).ToList();
+            return hashTags;
+        }
     }
 
     public interface IQuestionnaireSevice
     {
         int GetNumberOfQuestions();
         List<Question> GetQuestions();
+        List<long> GetHashTagsFromAnswers(List<long> answerIds);
     }
 }

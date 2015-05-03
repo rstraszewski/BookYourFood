@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ReservationDomain.Model
 {
-    public class RatedMeals
+    public class RatedMeal
     {
         public Meal Meal { get; set; }
         public long Score { get; set; }

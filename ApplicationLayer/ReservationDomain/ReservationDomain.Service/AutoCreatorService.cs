@@ -13,10 +13,25 @@ namespace ReservationDomain.Service
         {
         }
 
+        public List<RatedDrink> GetPreferredDrinksFor(List<long> hashTags)
+        {
+            var ratedDrinks = ByfDbContext.Drinks
+                .Select(drink => new RatedDrink
+                {
+                    Drink = drink,
+                    Score = hashTags.Count(u => drink.HashTags.Any(hashTag => hashTag.Id == u))
+                })
+                .OrderByDescending(ratedDrink => ratedDrink.Score)
+                .Take(3)
+                .ToList();
+
+            return ratedDrinks;
+        }
+
         public List<CompleteMeal> GetPreferredMealsFor2(List<long> userPreferences)
         {
             var preferredMeals = new List<CompleteMeal>();
-            var ratedMeals = new List<RatedMeals>();
+            var ratedMeals = new List<RatedMeal>();
 
             // Get list of meals
             var meals = ByfDbContext.Meals.ToList();
@@ -31,7 +46,7 @@ namespace ReservationDomain.Service
                         score++;
                     }
                 }
-                ratedMeals.Add(new RatedMeals {Meal = m, Score = score});
+                ratedMeals.Add(new RatedMeal {Meal = m, Score = score});
             }
 
             ratedMeals.Sort((y, x) => x.Score.CompareTo(y.Score));
@@ -49,15 +64,17 @@ namespace ReservationDomain.Service
             return preferredMeals;
         }
 
-        public List<RatedMeals> GetPreferredMealsFor(List<long> hashTags)
+        public List<RatedMeal> GetPreferredMealsFor(List<long> hashTags)
         {
             var ratedMeals = ByfDbContext.Meals
-                .Select(meal => new RatedMeals
+                .Select(meal => new RatedMeal
                 {
                     Meal = meal,
                     Score = hashTags.Count(u => meal.HashTags.Any(hashTag => hashTag.Id == u))
                 })
-                .OrderByDescending(ratedMeal => ratedMeal.Score).ToList();
+                .OrderByDescending(ratedMeal => ratedMeal.Score)
+                .Take(3)
+                .ToList();
 
             return ratedMeals;
         }
@@ -65,7 +82,8 @@ namespace ReservationDomain.Service
 
     public interface IAutoCreatorService
     {
-        List<RatedMeals> GetPreferredMealsFor(List<long> hashTags);
+        List<RatedMeal> GetPreferredMealsFor(List<long> hashTags);
+        List<RatedDrink> GetPreferredDrinksFor(List<long> hashTags);
         List<CompleteMeal> GetPreferredMealsFor2(List<long> userPreferences);
     }
 }

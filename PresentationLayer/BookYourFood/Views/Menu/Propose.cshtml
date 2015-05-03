@@ -1,0 +1,43 @@
+﻿@model BookYourFood.Models.ProposeViewModel
+
+@{
+    ViewBag.Title = "Propose";
+}
+
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+@using (Html.BeginForm("Index", "Menu", new{id = ViewBag.Id}, FormMethod.Post))
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">Main Course</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.RatedMeals.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h3>@Model.RatedMeals[i].Meal.Name</h3>
+                    <h4>@Model.RatedMeals[i].Meal.Description</h4>
+                    <input hidden value="@Model.RatedMeals[i].Meal.Id" name='meals[@i].Id' />
+                    Price: @Model.RatedMeals[i].Meal.Price
+                    @Html.Kendo().NumericTextBox().Name("meals[" + i + "].Number").Decimals(0).Min(0).Step(1).Value(0)
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Drinks</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.RatedDrinks.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h4>@Model.RatedDrinks[i].Drink.Name</h4>
+                    <input hidden value="@Model.RatedDrinks[i].Drink.Id" name='drinks[@i].Id' />
+                    Price: @Model.RatedDrinks[i].Drink.Price
+                    @Html.Kendo().NumericTextBox().Name("drinks[" + i + "].Number").Decimals(0).Min(0).Step(1).Value(0)
+                </li>
+            }
+        </ul>
+    </div>
+    <input type="submit" class="btn btn-lg btn-primary" value="Send!" />
+}
