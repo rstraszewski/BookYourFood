@@ -29,6 +29,16 @@ namespace Reservaton.Service
             var result = ByfDbContext.Meals.Where(meal => mealIds.Contains(meal.Id)).ToList();
             return result;
         }
+
+        public List<Ingredient> GetIngredients()
+        {
+            return ByfDbContext.Ingredients.ToList();
+        }
+
+        public List<Ingredient> GetIngredients(long mealId)
+        {
+            return ByfDbContext.Meals.Find(mealId).Ingredients.ToList();
+        }
     }
 
     public interface IMealService
@@ -37,6 +47,8 @@ namespace Reservaton.Service
         List<Meal> GetMeals();
 
         List<Meal> GetMeals(List<long> mealIds);
+        List<Ingredient> GetIngredients();
+        List<Ingredient> GetIngredients(long mealId);
     }
 
     

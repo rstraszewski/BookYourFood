@@ -8,4 +8,11 @@ namespace BookYourFood.Models
         public List<Meal> Meals { get; set; }
         public List<Drink> Drinks { get; set; }
     }
+
+    public class CreatorViewModel
+    {
+        public List<Meal> Meals { get; set; }
+        public List<Drink> Drinks { get; set; }
+        public List<Ingredient> Ingredients { get; set; }
+    }
 }

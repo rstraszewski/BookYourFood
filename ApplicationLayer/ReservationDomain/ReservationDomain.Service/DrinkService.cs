@@ -28,13 +28,15 @@ namespace Reservaton.Service
             var result = ByfDbContext.Drinks.Where(drink => drinkIds.Contains(drink.Id)).ToList();
             return result;
         }
+
     }
 
     public interface IDrinkService
     {
         int GetNumberOfDrinks();
         List<Drink> GetDrinks();
-
         List<Drink> GetDrinks(List<long> drinkIds);
+        
     }
+
 }

@@ -37,6 +37,16 @@ namespace BookYourFood.Controllers
             var result = new MenuViewModel { Drinks = drinks, Meals = meals };
             return View(result);
         }
+
+        public ActionResult ShowCreator()
+        {
+            var meals = mealService.GetMeals();
+            var drinks = drinkService.GetDrinks();
+            var ingredients = mealService.GetIngredients();
+            var result = new CreatorViewModel { Drinks = drinks, Meals = meals, Ingredients = ingredients };
+            return View(result);
+        }
+
         [Authorize]
         public ActionResult Propose(long id)
         {
@@ -58,6 +68,12 @@ namespace BookYourFood.Controllers
             var model = new ProposeViewModel {RatedMeals = proposedMeals, RatedDrinks = proposedDrinks};
 
             return View(model);
+        }
+
+        public ActionResult GetIngridents(long mealId)
+        {
+            var ingredients = mealService.GetIngredients(mealId).Select(ing => ing.Id);
+            return Json(ingredients, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Questionaire
