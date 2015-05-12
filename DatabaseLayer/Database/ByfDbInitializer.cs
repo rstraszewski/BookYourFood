@@ -622,12 +622,12 @@ namespace Database
             #endregion
 
             #region tables
-            context.Tables.Add(new Table() {SeatsNumber = 4, TableNumber = 1});
-            context.Tables.Add(new Table() {SeatsNumber = 6, TableNumber = 2});
-            context.Tables.Add(new Table() {SeatsNumber = 6, TableNumber = 3});
+            context.Tables.Add(new Table() {SeatsNumber = 2, TableNumber = 1});
+            context.Tables.Add(new Table() {SeatsNumber = 3, TableNumber = 2});
+            context.Tables.Add(new Table() {SeatsNumber = 4, TableNumber = 3});
             context.Tables.Add(new Table() {SeatsNumber = 2, TableNumber = 4});
             context.Tables.Add(new Table() {SeatsNumber = 2, TableNumber = 5});
-            context.Tables.Add(new Table() {SeatsNumber = 6, TableNumber = 6});
+            context.Tables.Add(new Table() {SeatsNumber = 4, TableNumber = 6});
             #endregion
 
             base.Seed(context);

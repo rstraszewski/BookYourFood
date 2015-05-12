@@ -243,6 +243,9 @@
     <Content Include="Content\images\manual_creator.png" />
     <Content Include="Content\images\menu_1.png" />
     <Content Include="Content\images\reservation_1.png" />
+	<Content Include="Content\images\Table _and_chair_2.png" />
+    <Content Include="Content\images\Table _and_chair_3.png" />
+    <Content Include="Content\images\Table _and_chair_4.png" />
     <Content Include="Content\kendo\2015.1.318\Black\editor.png" />
     <Content Include="Content\kendo\2015.1.318\Black\imagebrowser.png" />
     <Content Include="Content\kendo\2015.1.318\Black\indeterminate.gif" />
