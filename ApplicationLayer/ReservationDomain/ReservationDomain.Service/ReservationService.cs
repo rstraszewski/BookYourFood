@@ -104,6 +104,27 @@ namespace Reservaton.Service
             return OperationResult.Success();
         }
 
+        public List<Reservation> GetReservationsForToday()
+        {
+            var startDate = DateTime.Today;
+            var endDate = startDate.AddDays(1);
+            return ByfDbContext.Reservations.Where(r => r.ReservationTime >= startDate && r.ReservationTime < endDate && r.IsFinalized).OrderBy(r => r.ReservationTime).ToList();
+        }
+
+        public IQueryable<ReservationDto> GetReservationsQueryable()
+        {
+            return ByfDbContext.Reservations.Where(r => r.IsFinalized).Select(r => new ReservationDto()
+            {
+                Duration = r.Duration,
+                ReservationTime = r.ReservationTime,
+                TableNumber = r.Table.TableNumber,
+                UserSurname = r.UserSurname,
+                UserPhoneNumber = r.UserPhoneNumber
+            });
+        }
+
+
+
         private OperationResult<Reservation> CanReservationBeCreated(Reservation reservation)
         {
             var result = OperationResult<Reservation>.CreateResult(reservation);
@@ -119,5 +140,28 @@ namespace Reservaton.Service
 
             return result;
         }
+    }
+
+    public class ReservationDto
+    {
+        public DateTime ReservationTime { get; set; }
+
+        public string ReservationTimeAsString
+        {
+            get { return ReservationTime.ToShortDateString() + " " + ReservationTime.ToShortTimeString(); }
+        }
+
+        public DateTime ReservationDate
+        {
+            get
+            {
+                return ReservationTime.Date;  
+            } 
+        }
+
+        public int Duration { get; set; }
+        public long TableNumber { get; set; }
+        public string UserSurname { get; set; }
+        public string UserPhoneNumber { get; set; }
     }
 }

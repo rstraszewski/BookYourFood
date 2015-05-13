@@ -1,0 +1,93 @@
+﻿@using ReservationDomain.Model
+@using Reservaton.Service
+@model IEnumerable<ReservationDomain.Model.Reservation>
+
+@{
+    ViewBag.Title = "Display";
+}
+
+<h2>Display reservations</h2>
+
+<div class="panel">@(Html.Kendo().Grid<ReservationDto>()
+                         .Name("grid")
+                         .Columns(columns =>
+                         {
+                             columns.Bound(c => c.ReservationTime).Title("Time").Format("{0:dd/MM/yyyy HH:mm}");
+                             columns.Bound(c => c.Duration).Title("Duration");
+                             columns.Bound(c => c.UserPhoneNumber).Title("Phone number").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+                             ;
+                             columns.Bound(c => c.UserSurname).Title("Surname").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+                             ;
+                             columns.Bound(c => c.TableNumber).Title("Table number").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+                             ;
+                         })
+                         .HtmlAttributes(new {style = "height: 380px;"})
+                         .Scrollable()
+                         .Groupable()
+                         .Sortable()
+                         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                         .Pageable(pageable => pageable
+                             .Refresh(true)
+                             .PageSizes(new[] {10, 20, 50, 100})
+                             .ButtonCount(5))
+                         .DataSource(dataSource => dataSource
+                             .Ajax()
+                             .Read(read => read.Action("ReadReservation", "Reservation"))
+                         )
+                         )
+</div>
+@if(Model.Any())
+{
+<table class="table">
+    <tr>
+        <th>
+            <label>Time</label>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            <label>Surname</label>
+        </th>
+        <th>
+            <label>Phone number</label>
+        </th>
+        <th>
+            <label>Table number</label>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr style="@string.Format("background-color: {0};", item.ReservationTime >= DateTime.Now ? "yellowgreen" : "lightcoral")">
+        <td>
+            @Html.DisplayFor(modelItem => item.ReservationTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration) hour(s)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserSurname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserPhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Table.TableNumber)
+        </td>
+    </tr>
+}
+
+</table>
+}
+
+<script type="text/javascript">
+  function DateTimeFilter(control)
+  {
+      $(control).kendoDateTimePicker({
+          format: "dd/MM/yyyy HH:mm",
+          timeFormat: "HH:mm"
+      });
+  }
+</script>

@@ -295,6 +295,9 @@ namespace BookYourFood.Controllers
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await authenticationManager.GetExternalLoginInfoAsync();
+            var name = loginInfo.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:name").Value.Split(' ');
+            var firstName = name.First();
+            var lastName = name.Last();
             if (loginInfo == null)
             {
                 return RedirectToAction("Login");
@@ -315,12 +318,11 @@ namespace BookYourFood.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return RedirectToAction("ExternalLoginConfirmation", new{Email = loginInfo.Email, FirstName = firstName, LastName = lastName, returnUrl = returnUrl});//View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email, FirstName = firstName, LastName = lastName});
             }
         }
 
         // POST: /Account/ExternalLoginConfirmation
-        [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
@@ -337,13 +339,14 @@ namespace BookYourFood.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.FirstName, Surname = model.LastName};
                 
                 var result = await userManager.CreateAsync(user);
-                var addRoleResult = await userManager.AddToRoleAsync(user.Id, "User");
+                var userId = userManager.FindByEmail(user.Email).Id;
+                var addRoleResult = await userManager.AddToRoleAsync(userId, "User");
                 if (result.Succeeded && addRoleResult.Succeeded)
                 {
-                    result = await userManager.AddLoginAsync(user.Id, info.Login);
+                    result = await userManager.AddLoginAsync(userId, info.Login);
                     if (result.Succeeded)
                     {
                         await signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

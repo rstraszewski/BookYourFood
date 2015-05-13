@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ReservationDomain.Model;
 using Utility;
 
@@ -16,5 +17,7 @@ namespace Reservaton.Service
         List<Table> GetAvailableTables(DateTime? dateTimeFrom, DateTime? dateTimeTo);
         Reservation GetReservation(long id);
         OperationResult Finalize(long reservationId, string phoneNumber, string surname, string userId);
+        List<Reservation> GetReservationsForToday();
+        IQueryable<ReservationDto> GetReservationsQueryable();
     }
 }
