@@ -888,6 +888,7 @@
     <Content Include="Scripts\kendo\2015.1.318\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo\2015.1.318\kendo.window.min.js.map" />
     <Content Include="Views\Reservation\Display.cshtml" />
+    <Content Include="Views\Menu\MealGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

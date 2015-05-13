@@ -1,0 +1,33 @@
+﻿@using ReservationDomain.Model
+
+@{
+    ViewBag.Title = "MealGrid";
+}
+
+<h2>MealGrid</h2>
+
+@(Html.Kendo().Grid<Meal>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.Name);
+        columns.Bound(p => p.Description);
+        columns.Bound(p => p.Price);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(172);
+    })
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(editable => editable.Mode(GridEditMode.InLine))
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    .HtmlAttributes(new { style = "height:430px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Model(model => model.Id(p => p.Id))
+        .Create(update => update.Action("CreateMeal", "Menu"))
+        .Read(read => read.Action("ReadMeals", "Menu"))
+        .Update(update => update.Action("UpdateMeal", "Menu"))
+        .Destroy(update => update.Action("DestroyMeal", "Menu"))
+    )
+)

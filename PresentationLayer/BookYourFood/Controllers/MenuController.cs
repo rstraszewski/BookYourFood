@@ -3,6 +3,8 @@ using System.Linq;
 using System.Web.Mvc;
 using ApplicationUserDomain.Service;
 using BookYourFood.Models;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using Microsoft.AspNet.Identity;
 using ReservationDomain.Model;
 using ReservationDomain.Service;
@@ -27,6 +29,49 @@ namespace BookYourFood.Controllers
             this.autoCreatorService = autoCreatorService;
             this.applicationUserService = applicationUserService;
             this.questionnaireSevice = questionnaireSevice;
+        }
+
+        public ActionResult MealGrid()
+        {
+            return View();
+        }
+
+        public ActionResult ReadMeals([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(mealService.GetMeals().ToDataSourceResult(request));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CreateMeal([DataSourceRequest] DataSourceRequest request, Meal meal)
+        {
+            if (meal != null && ModelState.IsValid)
+            {
+                mealService.CreateMeal(meal);
+            }
+
+            return Json(new[] { meal }.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UpdateMeal([DataSourceRequest] DataSourceRequest request, Meal meal)
+        {
+            if (meal != null && ModelState.IsValid)
+            {
+                mealService.UpdateMeal(meal);
+            }
+
+            return Json(new[] { meal }.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult DestroyMeal([DataSourceRequest] DataSourceRequest request, Meal meal)
+        {
+            if (meal != null)
+            {
+                mealService.RemoveMeal(meal);
+            }
+
+            return Json(new[] { meal }.ToDataSourceResult(request, ModelState));
         }
 
         public ActionResult ShowMenu()

@@ -39,6 +39,28 @@ namespace Reservaton.Service
         {
             return ByfDbContext.Meals.Find(mealId).Ingredients.ToList();
         }
+
+        public void CreateMeal(Meal meal)
+        {
+            ByfDbContext.Meals.Add(meal);
+            ByfDbContext.SaveChanges();
+        }
+
+        public void UpdateMeal(Meal meal)
+        {
+            var mealEntity = ByfDbContext.Meals.Find(meal.Id);
+            mealEntity.Description = meal.Description;
+            mealEntity.Name = meal.Name;
+            mealEntity.Price = meal.Price;
+            ByfDbContext.SaveChanges();
+        }
+
+        public void RemoveMeal(Meal meal)
+        {
+            var mealEntity = ByfDbContext.Meals.Find(meal.Id);
+            ByfDbContext.Meals.Remove(mealEntity);
+            ByfDbContext.SaveChanges();
+        }
     }
 
     public interface IMealService
@@ -49,6 +71,9 @@ namespace Reservaton.Service
         List<Meal> GetMeals(List<long> mealIds);
         List<Ingredient> GetIngredients();
         List<Ingredient> GetIngredients(long mealId);
+        void CreateMeal(Meal meal);
+        void UpdateMeal(Meal meal);
+        void RemoveMeal(Meal meal);
     }
 
     
