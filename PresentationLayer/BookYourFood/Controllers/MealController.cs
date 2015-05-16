@@ -37,6 +37,11 @@ namespace BookYourFood.Controllers
             mealService.SetIngredientsForMeal(mealId, ingIds);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
+        public ActionResult SetHashTags(long mealId, List<long> ingIds)
+        {
+            mealService.SetHashTagsForMeal(mealId, ingIds);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
 
         [HttpPost]
         public ActionResult CreateMeal([DataSourceRequest] DataSourceRequest request, Meal meal)

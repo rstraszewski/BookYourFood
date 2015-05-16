@@ -27,7 +27,7 @@ namespace BookYourFood.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetIngridents(long mealId)
+        public ActionResult GetIngredientsForMeal(long mealId)
         {
             var ingredients = mealService.GetIngredients(mealId).Select(ing => ing.Id);
 

@@ -71,13 +71,21 @@ namespace Reservaton.Service
             mealEntity.Ingredients = ingredients;
             ByfDbContext.SaveChanges();
         }
+
+        public void SetHashTagsForMeal(long mealId, List<long> ingIds)
+        {
+            var mealEntity = ByfDbContext.Meals.Find(mealId);
+            var hashTags = ByfDbContext.HashTags.Where(i => ingIds.Contains(i.Id)).ToList();
+            mealEntity.HashTags.Clear();
+            mealEntity.HashTags = hashTags;
+            ByfDbContext.SaveChanges();
+        }
     }
 
     public interface IMealService
     {
         int GetNumberOfMeals();
         List<Meal> GetMeals();
-
         List<Meal> GetMeals(List<long> mealIds);
         List<Ingredient> GetIngredients();
         List<Ingredient> GetIngredients(long mealId);
@@ -85,6 +93,7 @@ namespace Reservaton.Service
         void UpdateMeal(Meal meal);
         void RemoveMeal(Meal meal);
         void SetIngredientsForMeal(long mealId, List<long> ingIds);
+        void SetHashTagsForMeal(long mealId, List<long> ingIds);
     }
 
     

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AutoCreatorService.cs" />
     <Compile Include="DrinkService.cs" />
+    <Compile Include="HashTagService.cs" />
     <Compile Include="IReservationService.cs" />
     <Compile Include="MealService.cs" />
     <Compile Include="QuestionnaireSevice.cs" />

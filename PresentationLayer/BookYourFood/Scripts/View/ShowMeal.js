@@ -32,17 +32,29 @@ var ViewModel = function () {
     this.mealChange = function() {
         var selectedItem = this.dataItem(this.select());
         that.selected = selectedItem;
-        $.get("/Ingredient/GetIngridents", { mealId: selectedItem.Id }, function (ingredients) {
+        $.get("/Ingredient/GetIngredientsForMeal", { mealId: selectedItem.Id }, function (ingredients) {
             var multiselect = $("#ingridents").data("kendoMultiSelect");
             multiselect.value([]);
             multiselect.value(ingredients);
+        });
+        $.get("/HashTag/GetHashTagsForMeal", { mealId: selectedItem.Id }, function (hashTags) {
+            var multiselect = $("#hashtags").data("kendoMultiSelect");
+            multiselect.value([]);
+            multiselect.value(hashTags);
         });
     };
 
     this.multiSelectIngChange = function() {
         if (that.selected) {
             var multiselect = $("#ingridents").data("kendoMultiSelect");
-            $.post("/Meal/SetIngridents", { mealId: selected.Id, ingIds: multiselect.value() });
+            $.post("/Meal/SetIngridents", { mealId: that.selected.Id, ingIds: multiselect.value() });
+        }
+    }
+
+    this.multiSelectHashChange = function () {
+        if (that.selected) {
+            var multiselect = $("#hashtags").data("kendoMultiSelect");
+            $.post("/Meal/SetHashTags", { mealId: that.selected.Id, ingIds: multiselect.value() });
         }
     }
 };
