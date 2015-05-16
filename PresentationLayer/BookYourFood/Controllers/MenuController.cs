@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using ApplicationUserDomain.Service;
 using BookYourFood.Models;
@@ -29,49 +30,6 @@ namespace BookYourFood.Controllers
             this.autoCreatorService = autoCreatorService;
             this.applicationUserService = applicationUserService;
             this.questionnaireSevice = questionnaireSevice;
-        }
-
-        public ActionResult MealGrid()
-        {
-            return View();
-        }
-
-        public ActionResult ReadMeals([DataSourceRequest] DataSourceRequest request)
-        {
-            return Json(mealService.GetMeals().ToDataSourceResult(request));
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CreateMeal([DataSourceRequest] DataSourceRequest request, Meal meal)
-        {
-            if (meal != null && ModelState.IsValid)
-            {
-                mealService.CreateMeal(meal);
-            }
-
-            return Json(new[] { meal }.ToDataSourceResult(request, ModelState));
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult UpdateMeal([DataSourceRequest] DataSourceRequest request, Meal meal)
-        {
-            if (meal != null && ModelState.IsValid)
-            {
-                mealService.UpdateMeal(meal);
-            }
-
-            return Json(new[] { meal }.ToDataSourceResult(request, ModelState));
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult DestroyMeal([DataSourceRequest] DataSourceRequest request, Meal meal)
-        {
-            if (meal != null)
-            {
-                mealService.RemoveMeal(meal);
-            }
-
-            return Json(new[] { meal }.ToDataSourceResult(request, ModelState));
         }
 
         public ActionResult ShowMenu()
@@ -115,11 +73,7 @@ namespace BookYourFood.Controllers
             return View(model);
         }
 
-        public ActionResult GetIngridents(long mealId)
-        {
-            var ingredients = mealService.GetIngredients(mealId).Select(ing => ing.Id);
-            return Json(ingredients, JsonRequestBehavior.AllowGet);
-        }
+        
 
         // GET: Questionaire
         public ActionResult Index(long id)

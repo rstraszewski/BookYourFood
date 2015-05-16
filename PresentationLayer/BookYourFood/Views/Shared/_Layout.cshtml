@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
@@ -10,28 +10,30 @@
 
     <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
     @Scripts.Render("~/bundles/jquery")
-    	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
-    	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/jquery.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/jszip.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.all.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.aspnetmvc.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css"/>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.318/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.318/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
 </head>
 <body>
-    <div id="fb-root"></div>
-    <script>
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.3&appId=436221759874203";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+<div id="fb-root"></div>
+<script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.3&appId=436221759874203";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, "script", "facebook-jssdk"));
+</script>
 @(Html.Kendo().Notification()
       .Name("notification")
       .Stacking(NotificationStackingSettings.Up)

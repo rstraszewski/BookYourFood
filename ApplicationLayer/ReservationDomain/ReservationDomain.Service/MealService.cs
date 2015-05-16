@@ -61,6 +61,16 @@ namespace Reservaton.Service
             ByfDbContext.Meals.Remove(mealEntity);
             ByfDbContext.SaveChanges();
         }
+
+        public void SetIngredientsForMeal(long mealId, List<long> ingIds)
+        {
+            //TODO: Why exception? Twice the same foreign key?
+            var mealEntity = ByfDbContext.Meals.Find(mealId);
+            var ingredients = ByfDbContext.Ingredients.Where(i => ingIds.Contains(i.Id)).ToList();
+            mealEntity.Ingredients.Clear();
+            mealEntity.Ingredients = ingredients;
+            ByfDbContext.SaveChanges();
+        }
     }
 
     public interface IMealService
@@ -74,6 +84,7 @@ namespace Reservaton.Service
         void CreateMeal(Meal meal);
         void UpdateMeal(Meal meal);
         void RemoveMeal(Meal meal);
+        void SetIngredientsForMeal(long mealId, List<long> ingIds);
     }
 
     

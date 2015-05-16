@@ -3,19 +3,18 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Database;
+using Microsoft.AspNet.Identity;
 using ReservationDomain.Model;
-using Reservaton.Service;
 using Utility;
 
 namespace BookYourFood.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IReservationService reservationService;
-
-        public HomeController(IReservationService reservationService)
+        private readonly ApplicationUserManager userManager;
+        public HomeController(ApplicationUserManager userManager)
         {
-            this.reservationService = reservationService;
+            this.userManager = userManager;
         }
 
         public ActionResult Index()
@@ -39,6 +38,12 @@ namespace BookYourFood.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Hello()
+        {
+            var user = userManager.FindById(User.Identity.GetUserId());
+            return PartialView(user);
         }
 
     }
