@@ -1649,3 +1649,18 @@ a.disabled {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
+
+.reserve-table {
+    background-color: lightgreen; 
+}
+
+
+.reserve-table.disabled {
+    background-color: pink !important; 
+}
+
+.reserve-table.selected {
+    background-color: lightgrey !important; 
+}
+
+

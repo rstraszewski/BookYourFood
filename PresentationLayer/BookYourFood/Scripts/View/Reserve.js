@@ -31,8 +31,10 @@ var ViewModel = function() {
             that.getModel().set("choosedTableText", "You choosed table number: " + tableNumber);
             that.getModel().set("isInvisible", false);
             that.getModel().set("isSubmitEnabled", true);
-            $(".reservation-container a").css("background-color", "white");
-            $("#" + id).css("background-color", "#EEEEEE");;
+            //$(".reservation-container a").css("background-color", "white");
+            $(".reservation-container a").removeClass("selected");
+            //$("#" + id).css("background-color", "#EEEEEE");;
+            $("#" + id).addClass("selected");
             input.attr("checked", "checked");
         },
         dateFrom: null,

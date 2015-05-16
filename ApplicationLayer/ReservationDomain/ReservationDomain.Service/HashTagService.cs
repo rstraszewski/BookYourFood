@@ -27,10 +27,4 @@ namespace Reservaton.Service
             return byfDbContext.Meals.Find(mealId).HashTags.ToList();
         }
     }
-
-    public interface IHashTagService
-    {
-        List<HashTag> GetHashTags();
-        List<HashTag> GetHashTags(long mealId);
-    }
 }

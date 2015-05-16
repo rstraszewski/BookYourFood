@@ -59,7 +59,7 @@
                         }
                         var seats = table.SeatsNumber;
                         <div class="col-md-3">
-                            <a data-bind="click: chooseTable" href="javascript:void(0);" id='@string.Format("table{0}", table.Id)' class="thumbnail btn disabled">
+                            <a data-bind="click: chooseTable" href="javascript:void(0);" id='@string.Format("table{0}", table.Id)' class="thumbnail btn disabled reserve-table">
                                 <img src="@string.Format("/Content/images/Table _and_chair_{0}.png",seats)" alt="noImage">Seats: @seats Number: @table.TableNumber
                             </a>
                             <input type="radio" data-bind="checked: chosedTable" id='@string.Format("table{0}", table.Id)' required hidden name="tableId" value="@table.Id" />

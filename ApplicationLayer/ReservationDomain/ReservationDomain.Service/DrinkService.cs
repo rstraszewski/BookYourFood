@@ -30,13 +30,4 @@ namespace Reservaton.Service
         }
 
     }
-
-    public interface IDrinkService
-    {
-        int GetNumberOfDrinks();
-        List<Drink> GetDrinks();
-        List<Drink> GetDrinks(List<long> drinkIds);
-        
-    }
-
 }

@@ -30,11 +30,4 @@ namespace Reservaton.Service
             return hashTags;
         }
     }
-
-    public interface IQuestionnaireSevice
-    {
-        int GetNumberOfQuestions();
-        List<Question> GetQuestions();
-        List<long> GetHashTagsFromAnswers(List<long> answerIds);
-    }
 }
