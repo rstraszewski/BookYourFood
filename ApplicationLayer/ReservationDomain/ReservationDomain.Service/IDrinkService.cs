@@ -8,6 +8,9 @@ namespace Reservaton.Service
         int GetNumberOfDrinks();
         List<Drink> GetDrinks();
         List<Drink> GetDrinks(List<long> drinkIds);
-        
+
+        void CreateDrink(Drink drink);
+        void UpdateMeal(Drink drink);
+        void RemoveMeal(Drink drink);
     }
 }

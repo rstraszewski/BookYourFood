@@ -29,5 +29,26 @@ namespace Reservaton.Service
             return result;
         }
 
+        public void CreateDrink(Drink drink)
+        {
+            ByfDbContext.Drinks.Add(drink);
+            ByfDbContext.SaveChanges();
+        }
+
+        public void UpdateMeal(Drink drink)
+        {
+            var drinkEntity = ByfDbContext.Drinks.Find(drink.Id);
+            drinkEntity.Name = drink.Name;
+            drinkEntity.Price = drink.Price;
+            drinkEntity.DrinkType = drink.DrinkType;
+            ByfDbContext.SaveChanges();
+        }
+
+        public void RemoveMeal(Drink drink)
+        {
+            var drinkEntity = ByfDbContext.Drinks.Find(drink.Id);
+            ByfDbContext.Drinks.Remove(drinkEntity);
+            ByfDbContext.SaveChanges();
+        }
     }
 }
