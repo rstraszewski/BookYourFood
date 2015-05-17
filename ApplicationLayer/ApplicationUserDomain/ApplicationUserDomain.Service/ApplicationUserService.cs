@@ -48,17 +48,6 @@ namespace ApplicationUserDomain.Service
         public List<long> GetUserPreferences(string userId)
         {
             var userAnswerList = this.GetUserAnswers(userId);
-            //List<long> userAnswersIdList = new List<long>();
-
-            /*if(userAnswersList == null)
-            {
-                return userAnswersIdList;
-            }
-
-            foreach(var a in userAnswersList)
-                {
-                userAnswersIdList.Add(a.AnswerId);
-            }*/
 
             var userAnswerIdList = userAnswerList.Select(answer => answer.AnswerId).ToList();
 

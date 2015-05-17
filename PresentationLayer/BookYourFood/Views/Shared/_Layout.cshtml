@@ -34,72 +34,72 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, "script", "facebook-jssdk"));
 </script>
-@(Html.Kendo().Notification()
+    @(Html.Kendo().Notification()
       .Name("notification")
       .Stacking(NotificationStackingSettings.Up)
       .Events(e => e.Show("notificationOnShow"))
       .Button(true)
-      )
+    )
 
 @{
-    var msg = ViewData["Message"] as MessageResult;
-    var msgs = ViewData["Messages"] as List<MessageResult>;
-    if (msg != null)
-    {
-        <script>
-            $(function() {
-                var notificationWidget = $("#notification").data("kendoNotification");
-                notificationWidget.show("@msg.Message", "@msg.MessageType.GetDescription()");
-            });
-        </script>
-    }
-    if (msgs != null)
-    {
-        foreach (var elem in msgs)
+        var msg = ViewData["Message"] as MessageResult;
+        var msgs = ViewData["Messages"] as List<MessageResult>;
+        if (msg != null)
         {
             <script>
-                $(function() {
+            $(function() {
                     var notificationWidget = $("#notification").data("kendoNotification");
-                    notificationWidget.show("@elem.Message", "@elem.MessageType.GetDescription()");
+                    notificationWidget.show("@msg.Message", "@msg.MessageType.GetDescription()");
                 });
             </script>
         }
+        if (msgs != null)
+        {
+            foreach (var elem in msgs)
+            {
+                <script>
+                $(function() {
+                        var notificationWidget = $("#notification").data("kendoNotification");
+                        notificationWidget.show("@elem.Message", "@elem.MessageType.GetDescription()");
+                    });
+                </script>
+            }
+        }
     }
-}
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             @Html.ActionLink("BookYourFood", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLinkAuthorized("Home", "Index", "Home")</li>
-                <li>@Html.ActionLinkAuthorized("Make reservation", "Reserve", "Reservation")</li>
-                <li>@Html.ActionLinkAuthorized("About", "About", "Home")</li>
-                <li>@Html.ActionLinkAuthorized("Contact", "Contact", "Home")</li>
-                <li>@Html.ActionLinkAuthorized("Menu", "ShowMenu", "Menu")</li>
-            </ul>
-            @Html.Partial("_LoginPartial")
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLinkAuthorized("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLinkAuthorized("Make reservation", "Reserve", "Reservation")</li>
+                    <li>@Html.ActionLinkAuthorized("About", "About", "Home")</li>
+                    <li>@Html.ActionLinkAuthorized("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLinkAuthorized("Menu", "ShowMenu", "Menu")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
     </div>
-</div>
-<div class="container body-content">
-    @RenderBody()
+    <div class="container body-content">
+        @RenderBody()
 
     <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
-</div>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - BookYourFood ASP.NET Application</p>
+        </footer>
+    </div>
 
 
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", false)
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", false)
 </body>
 </html>
