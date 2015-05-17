@@ -23,6 +23,7 @@ namespace ReservationDomain.Model
 
         public virtual List<HashTag> HashTags { get; set; }
 
+        public decimal Price { get; set; }
     }
 
     public enum IngredientImportance

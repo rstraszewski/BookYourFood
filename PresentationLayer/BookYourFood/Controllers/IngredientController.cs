@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Reservaton.Service;
+using Utility;
 
 namespace BookYourFood.Controllers
 {
@@ -32,6 +33,13 @@ namespace BookYourFood.Controllers
             var ingredients = mealService.GetIngredients(mealId).Select(ing => ing.Id);
 
             return Json(ingredients, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetPriceForIngredients(List<long> ingredients)
+        {
+            var price = mealService.GetPriceForIngredients(ingredients);
+            return Json(new {price}, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿/// <reference path="Home.js" />
-/// <reference path="../kendo/2014.3.1411/kendo.all-vsdoc.js" />
+/// <reference path="../kendo/2015.1.318/kendo.all-vsdoc.js" />
 ///<reference path="../jquery-1.10.2.intellisense.js"/>
 var ViewModel = function() {
     var that = this;

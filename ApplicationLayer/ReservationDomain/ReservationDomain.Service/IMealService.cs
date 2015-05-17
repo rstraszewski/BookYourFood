@@ -10,6 +10,7 @@ namespace Reservaton.Service
         List<Meal> GetMeals(List<long> mealIds);
         List<Ingredient> GetIngredients();
         List<Ingredient> GetIngredients(long mealId);
+        decimal GetPriceForIngredients(List<long> ingredientIds);
         void CreateMeal(Meal meal);
         void UpdateMeal(Meal meal);
         void RemoveMeal(Meal meal);

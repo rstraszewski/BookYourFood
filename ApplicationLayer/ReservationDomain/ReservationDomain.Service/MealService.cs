@@ -40,6 +40,11 @@ namespace Reservaton.Service
             return ByfDbContext.Meals.Find(mealId).Ingredients.ToList();
         }
 
+        public decimal GetPriceForIngredients(List<long> ingredientIds)
+        {
+            return ByfDbContext.Ingredients.Where(i => ingredientIds.Contains(i.Id)).Sum(i => i.Price)*1.5m;
+        }
+
         public void CreateMeal(Meal meal)
         {
             ByfDbContext.Meals.Add(meal);
