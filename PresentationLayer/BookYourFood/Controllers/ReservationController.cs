@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using BookYourFood.Models;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using ReservationDomain.Model;
 using Reservaton.Service;
 using Utility;
+using UtilityMvc;
 
 namespace BookYourFood.Controllers
 {
@@ -62,7 +68,7 @@ namespace BookYourFood.Controllers
                 return RedirectToAction("Index", "SelectCreator", new { id = result.Result.Id });
             }
 
-            this.AddFlashMessage("Something went wrong :(", MessageType.Error);
+            this.AddFlashMessage(result.ToMessageResult());
             return RedirectToAction("Reserve");
         }
 
@@ -88,6 +94,13 @@ namespace BookYourFood.Controllers
             return Json(new {tables= result}, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult ReadReservation([CustomDataSourceRequest] DataSourceRequest request)
+        {
+            var reservations = reservationService.GetReservationsQueryable();
+
+            return Json(reservations.ToDataSourceResult(request));
+        }
+
         [HttpPost]
         public ActionResult Finalize(long id, string phone, string surname)
         {
@@ -100,6 +113,13 @@ namespace BookYourFood.Controllers
             var result = reservationService.Finalize(id, phone, surname, userId);
             this.FlashMessage(result.ToMessageResult());
             return RedirectToAction("Index","Home");
+        }
+
+        public ActionResult Display()
+        {
+            var reservations = reservationService.GetReservationsForToday();
+
+            return View(reservations);
         }
 
     }

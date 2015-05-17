@@ -1,0 +1,204 @@
+﻿@using ReservationDomain.Model
+@model BookYourFood.Models.CreatorViewModel
+
+@{
+    ViewBag.Title = "ShowCreator";
+}
+
+
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Choose meal, and modify it!
+    </div>
+
+    <div class="panel-body">
+        <div class="row">
+            @(Html.Kendo().DropDownList()
+                  .Name("mealToEdit")
+                  .DataTextField("Name")
+                  .DataValueField("Id")
+                  .BindTo(Model.Meals)
+                  .Events(events => events.Change("mealChange"))
+                  .OptionLabel("Meals")
+                  .HtmlAttributes(new { style = "width:100%;" })
+            )
+        </div>
+        <div class="row">
+            @(Html.Kendo().MultiSelect()
+                          .Name("ingridents")
+                  .Placeholder("Select ingridents...")
+                  .BindTo(Model.Ingredients)
+                  .DataTextField("Name")
+                                          .DataSource(conf => conf
+                                              .Custom()
+                                              .Group(g => g
+                                                  .Add("IngredientImportanceAsString", typeof(string))))
+                  .DataValueField("Id")
+                  .ItemTemplate("Name: #: data.Name #" +
+                                    ", Type: #: data.IngredientTypeAsString #")
+            )
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("Index", "Menu"))
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">Main Course</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.Meals.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h3>@Model.Meals[i].Name</h3>
+                    <h4>@Model.Meals[i].Description</h4>
+                    <input hidden value="@Model.Meals[i].Id" name='meals[@i].Id' />
+                    Price: @Model.Meals[i].Price
+                    @Html.Kendo().NumericTextBox().Name("meals[" + i + "].Number").Decimals(0).Min(0).Step(1).Value(0)
+                </li>
+            }
+        </ul>
+    </div>
+
+
+    @*<div class="panel panel-primary">
+            <div class="panel-heading">Second Course</div>
+            <ul class="list-group">
+                @for (var i = 0; i < Model.Count; i++)
+                {
+                    <li class="list-group-item">
+                        <h4>@Model[i].Name: @Model[i].Description</h4>
+                        Price: @Model[i].Price $
+                        @Html.Kendo().NumericTextBox().Name("mealsNum[" + i + "]")
+                    </li>
+                }
+            </ul>
+        </div>*@
+    <div class="panel panel-primary">
+        <div class="panel-heading">Drinks</div>
+        <ul class="list-group">
+            @for (var i = 0; i < Model.Drinks.Count; i++)
+            {
+                <li class="list-group-item">
+                    <h4>@Model.Drinks[i].Name</h4>
+                    <input hidden value="@Model.Drinks[i].Id" name='drinks[@i].Id' />
+                    Price: @Model.Drinks[i].Price
+                    @Html.Kendo().NumericTextBox().Name("drinks[" + i + "].Number").Decimals(0).Min(0).Step(1).Value(0)
+                </li>
+            }
+        </ul>
+    </div>
+    @*<div class="panel panel-primary">
+            <div class="panel-heading">Desserts</div>
+            <ul class="list-group">
+                @for (var i = 0; i < Model.Count; i++)
+                {
+                    <li class="list-group-item">
+                        <h4>@Model[i].Name: @Model[i].Description</h4>
+                        Price: @Model[i].Price $
+                        @Html.Kendo().NumericTextBox().Name("mealsNum[" + i + "]")
+                    </li>
+                }
+            </ul>
+        </div>*@
+
+    <input type="submit" class="btn btn-lg btn-primary" value="Send!" />
+}
+
+<script>
+    function mealChange(e) {
+        var mealDropDownList = $("#mealToEdit").data("kendoDropDownList");
+
+        $.get("/Menu/GetIngridents", { mealId: mealDropDownList.value() }, function(ingredients) {
+            var multiselect = $("#ingridents").data("kendoMultiSelect");
+            multiselect.value(ingredients);
+        });
+    }
+
+</script>
+<style>
+    .dropdown-header {
+        font-size: 1.2em;
+    }
+
+    .dropdown-header > span {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        text-align: left;
+        display: inline-block;
+        border-style: solid;
+        border-width: 0 0 1px 1px;
+        padding: .3em .6em;
+        width: 312px;
+    }
+
+    .dropdown-header > span:first-child {
+        width: 82px;
+        border-left-width: 0;
+    }
+
+    .demo-section {
+        width: 400px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+
+    .selected-value {
+        float: left;
+        width: 16px;
+        margin: 0 4px;
+    }
+
+    #ingridents-list .k-item > span{
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        display: inline-block;
+        border-style: solid;
+        border-width: 0 0 1px 1px;
+        vertical-align: top;
+        /*min-height: 95px;*/
+        width: 79%;
+        padding: .6em 0 0 .6em;
+    }
+
+    #ingridents-list .k-item > span:first-child{
+        width: 300px;
+        border-left-width: 0;
+        padding: .6em 0 0 0;
+    }
+
+    #ingridents-list h3 {
+        font-size: 1.6em;
+        margin: 0;
+        padding: 0;
+    }
+
+    #ingridents-list p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .k-popup .k-list .k-item>.k-group {
+        background: #adadad;
+        color: #fff;
+        border-bottom-left-radius: 3px;
+        padding: 5px !important;
+    }
+
+    .k-static-header {
+        display: none !important;
+    }
+
+    .k-popup .k-item.k-first, .k-virtual-item.k-first {
+        border-style: none !important;
+    }
+
+</style>

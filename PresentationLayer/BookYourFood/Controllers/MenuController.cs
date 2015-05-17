@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using ApplicationUserDomain.Service;
 using BookYourFood.Models;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using Microsoft.AspNet.Identity;
 using ReservationDomain.Model;
 using ReservationDomain.Service;
@@ -37,6 +40,16 @@ namespace BookYourFood.Controllers
             var result = new MenuViewModel { Drinks = drinks, Meals = meals };
             return View(result);
         }
+
+        public ActionResult ShowCreator()
+        {
+            var meals = mealService.GetMeals();
+            var drinks = drinkService.GetDrinks();
+            var ingredients = mealService.GetIngredients();
+            var result = new CreatorViewModel { Drinks = drinks, Meals = meals, Ingredients = ingredients };
+            return View(result);
+        }
+
         [Authorize]
         public ActionResult Propose(long id)
         {
@@ -59,6 +72,8 @@ namespace BookYourFood.Controllers
 
             return View(model);
         }
+
+        
 
         // GET: Questionaire
         public ActionResult Index(long id)

@@ -10,6 +10,11 @@ namespace ReservationDomain.Model
 {
     public class Reservation : Entity
     {
+        public DateTime ReservationDate
+        {
+            get { return ReservationTime.Date; }
+        }
+
         public DateTime ReservationTime { get; set; }
         public int Duration { get; set; }
         public virtual Table Table { get; set; }

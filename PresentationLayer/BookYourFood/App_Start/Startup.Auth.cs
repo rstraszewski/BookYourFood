@@ -64,6 +64,8 @@ namespace BookYourFood
                 AppSecret = "e578a3a4a16a560155a76035b3168624"
             };
             facebookAuthenticationOptions.Scope.Add("email");
+            facebookAuthenticationOptions.Scope.Add("public_profile");
+
             app.UseFacebookAuthentication(facebookAuthenticationOptions);
             /*app.UseFacebookAuthentication(
                appId: "436221759874203",

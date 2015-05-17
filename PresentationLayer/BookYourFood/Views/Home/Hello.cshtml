@@ -1,0 +1,7 @@
+﻿@model Identity.Model.ApplicationUser
+@{
+    ViewBag.Title = "Hello";
+}
+
+@Html.ActionLink("Hello " + Model.Name + " " + Model.Surname + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+

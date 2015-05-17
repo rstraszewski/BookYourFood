@@ -16,20 +16,23 @@ $.ajaxSetup({
         
         //data filter receives the raw response. since we have determined it's json
         //we parse it using jQuery's parseJSON to check the contents
-        var data = $.parseJSON(origdata);
-        var notificationWidget = $("#notification").data("kendoNotification");
-        if (data.message) {
-            notificationWidget.show(data.message.content, data.message.type);
-        }
-        if (data.messages) {
-            data.messages.forEach(function(elem) {
-                notificationWidget.show(elem.content, elem.type);
-            });
-        }
+        if (origdata) {
+            var data = $.parseJSON(origdata);
+            var notificationWidget = $("#notification").data("kendoNotification");
+            if (data.message) {
+                notificationWidget.show(data.message.content, data.message.type);
+            }
+            if (data.messages) {
+                data.messages.forEach(function(elem) {
+                    notificationWidget.show(elem.content, elem.type);
+                });
+            }
 
-        if (data.result)
-            return JSON.stringify(data.result);
-        return JSON.stringify(data);
+            if (data.result)
+                return JSON.stringify(data.result);
+            return JSON.stringify(data);
+        }
+        return origdata;
     }
 });
 
