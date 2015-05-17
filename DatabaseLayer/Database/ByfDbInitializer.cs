@@ -5,7 +5,6 @@ using ReservationDomain.Model;
 using System.Linq;
 using System;
 using Common.Model;
-using ReservationDomain.Model;
 
 namespace Database
 {
@@ -184,8 +183,7 @@ namespace Database
             var mealTmp1 = new Meal()
             {
                 Name = "veal cutlet with baked potatoes and salad",
-                Description = @"A standard polish constructional worker's meal
-                                that will fuck your palate up into space.",
+                Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
                 Ingredients = new List<Ingredient>()
@@ -209,8 +207,7 @@ namespace Database
             var mealTmp2 = new Meal()
             {
                 Name = "pork cutlet with baked potatoes and salad",
-                Description = @"A standard polish constructional worker's meal
-                                that will fuck your palate up into space.",
+                Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
                 Ingredients = new List<Ingredient>()
@@ -234,8 +231,7 @@ namespace Database
             var mealTmp3 = new Meal()
             {
                 Name = "beef steak with baked potatoes and salad",
-                Description = @"A standard polish constructional worker's meal
-                                that will fuck your palate up into space.",
+                Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
                 Ingredients = new List<Ingredient>()
@@ -260,8 +256,7 @@ namespace Database
             var mealTmp4 = new Meal()
             {
                 Name = "ribs in country style",
-                Description = @"A standard polish constructional worker's meal
-                                that will fuck your palate up into space.",
+                Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
                 Ingredients = new List<Ingredient>()
@@ -280,8 +275,7 @@ namespace Database
             var mealTmp5 = new Meal()
             {
                 Name = "pork knuckle",
-                Description = @"A standard polish constructional worker's meal
-                                that will fuck your palate up into space.",
+                Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
                 Ingredients = new List<Ingredient>()
@@ -302,8 +296,7 @@ namespace Database
             var mealTmp6 = new Meal()
             {
                 Name = "stuffed cabbage rolls",
-                Description = @"A standard polish constructional worker's meal
-                                that will fuck your palate up into space.",
+                Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
                 Ingredients = new List<Ingredient>()
@@ -623,11 +616,11 @@ namespace Database
 
             #region tables
             context.Tables.Add(new Table() {SeatsNumber = 4, TableNumber = 1});
-            context.Tables.Add(new Table() {SeatsNumber = 6, TableNumber = 2});
-            context.Tables.Add(new Table() {SeatsNumber = 6, TableNumber = 3});
+            context.Tables.Add(new Table() {SeatsNumber = 3, TableNumber = 2});
+            context.Tables.Add(new Table() {SeatsNumber = 3, TableNumber = 3});
             context.Tables.Add(new Table() {SeatsNumber = 2, TableNumber = 4});
             context.Tables.Add(new Table() {SeatsNumber = 2, TableNumber = 5});
-            context.Tables.Add(new Table() {SeatsNumber = 6, TableNumber = 6});
+            context.Tables.Add(new Table() {SeatsNumber = 3, TableNumber = 6});
             #endregion
 
             base.Seed(context);

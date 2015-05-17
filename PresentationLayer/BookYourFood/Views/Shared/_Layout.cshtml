@@ -30,7 +30,7 @@
       .Button(true)
     )
 
-@{
+    @{
         var msg = ViewData["Message"] as MessageResult;
         var msgs = ViewData["Messages"] as List<MessageResult>;
         if (msg != null)
@@ -82,7 +82,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - BookYourFood ASP.NET Application</p>
         </footer>
     </div>
 

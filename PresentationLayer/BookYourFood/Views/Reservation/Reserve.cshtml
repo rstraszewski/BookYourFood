@@ -60,7 +60,7 @@
                         var seats = table.SeatsNumber;
                         <div class="col-md-3">
                             <a data-bind="click: chooseTable" href="javascript:void(0);" id='@string.Format("table{0}", table.Id)' class="thumbnail btn disabled">
-                                <img src="http://www.yliving.com/images/estel-brancusi-dining-table/gallery_5.jpg" alt="noImage">Seats: @seats Number: @table.TableNumber
+                                <img src="@string.Format("/Content/images/Table _and_chair_{0}.png",seats)" alt="noImage">Seats: @seats Number: @table.TableNumber
                             </a>
                             <input type="radio" data-bind="checked: chosedTable" id='@string.Format("table{0}", table.Id)' required hidden name="tableId" value="@table.Id" />
                             <input hidden id='@string.Format("table{0}number", table.Id)' value="@table.TableNumber" />
