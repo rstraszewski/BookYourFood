@@ -28,23 +28,33 @@ var ViewModel = function () {
             var multiselect = $("#ingridents").data("kendoMultiSelect");
             var ingredients = multiselect.value();
 
-            $.get("/Ingredient/GetPriceForIngredients", JSON.stringify({ ingredients: ingredients }), function (result) {
-                alert(result.price);
+            $.post("/Ingredient/GetInformationForIngredients", { ingredients: ingredients }, function (result) {
                 that.getModel().set("isVisible", true);
-                that.getModel().set("numberOfCustom", that.getModel().get("numberOfCustom") + 1);
+
+                var number = that.getModel().get("numberOfCustom");
                 var list = $("#customMeals .list-group");
+                var name = "Ingredients: " + result.Names;
+                var description = that.getModel().get("customMealComment");
+                var customMeal = "customMeals[" + number + "]"; 
+
                 var item = '<li class="list-group-item">';
-                item += '<h3>Ingredients: ' + ingredients.toString() + '</h3>';
-                item += '<h4>' + that.getModel().get("customMealComment");
+
+                item += '<h3>' + name + '</h3>';
+                item += '<h4>' + description;
                 item += "</h4>";
-                item += '<input hidden value="' + that.getModel().get("numberOfCustom") + '" name="test"/>';
-                item += 'Price: testPrice ';
-                item += '<input id="customMeal' + that.getModel().get("numberOfCustom") + '" type="number" name="test" value="0" min="0" max="10" step="1" />';
+                item += '<input hidden value="' + name + '" name="' + customMeal + '.Name"/>';
+                item += '<input hidden value="' + description + '" name="' + customMeal + '.Description"/>';
+                item += '<input hidden value="' + result.Price + '" name="' + customMeal + '.Price"/>';
+                item += 'Price: $' + result.Price.toFixed(2);
+                item += '<input id="customMeal' + number + '" type="number" name="' + customMeal + '.Count" value="0" min="0" max="10" step="1" />';
                 item += '</li>';
                 list.append(item);
+                $("#customMeal" + number).kendoNumericTextBox();
+
+                that.getModel().set("numberOfCustom", number + 1);
             });
 
-            $("#customMeal" + that.getModel().get("numberOfCustom")).kendoNumericTextBox();
+            
 
         },
         customMealComment: "",

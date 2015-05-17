@@ -50,7 +50,8 @@ namespace BookYourFood
             AutoMapper.Mapper.CreateMap<DrinkForReservation, DrinkForSummary>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Drink.Name))
                 .ForMember(dest => dest.NumberOfDrinks, opt => opt.MapFrom(src => src.NumberOfDrinks))
-                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Drink.Price)); ;
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Drink.Price));
+            AutoMapper.Mapper.CreateMap<CustomMealViewModel, Meal>();
         }
     }
 }

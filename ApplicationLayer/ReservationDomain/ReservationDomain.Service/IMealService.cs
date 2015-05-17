@@ -16,5 +16,6 @@ namespace Reservaton.Service
         void RemoveMeal(Meal meal);
         void SetIngredientsForMeal(long mealId, List<long> ingIds);
         void SetHashTagsForMeal(long mealId, List<long> ingIds);
+        List<string> GetIngredientsNames(List<long> ingredients);
     }
 }
