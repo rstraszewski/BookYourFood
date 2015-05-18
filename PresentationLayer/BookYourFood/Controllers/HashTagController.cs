@@ -31,5 +31,13 @@ namespace BookYourFood.Controllers
 
             return Json(hashTags, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult GetHashTagsForDrink(long drinkId)
+        {
+            var hashTags = hashTagService.GetHashTagsForDrink(drinkId).Select(tag => tag.Id);
+
+            return Json(hashTags, JsonRequestBehavior.AllowGet);
+        }
     }
 }

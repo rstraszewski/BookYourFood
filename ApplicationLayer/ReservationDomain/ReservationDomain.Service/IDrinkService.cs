@@ -10,7 +10,8 @@ namespace Reservaton.Service
         List<Drink> GetDrinks(List<long> drinkIds);
 
         void CreateDrink(Drink drink);
-        void UpdateMeal(Drink drink);
-        void RemoveMeal(Drink drink);
+        void UpdateDrink(Drink drink);
+        void RemoveDrink(Drink drink);
+        void SetHashTagsForDrink(long drinkId, List<long> tagsIds);
     }
 }

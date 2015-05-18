@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
@@ -30,7 +31,7 @@ namespace BookYourFood.Controllers
             return Json(drinks.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult CreatDrink([DataSourceRequest] DataSourceRequest request, Drink drink)
+        public ActionResult CreateDrink([DataSourceRequest] DataSourceRequest request, Drink drink)
         {
             if (drink != null && ModelState.IsValid)
             {
@@ -44,7 +45,7 @@ namespace BookYourFood.Controllers
         {
             if (drink != null && ModelState.IsValid)
             {
-                drinkService.UpdateMeal(drink);
+                drinkService.UpdateDrink(drink);
             }
 
             return Json(new[] { drink }.ToDataSourceResult(request, ModelState));
@@ -55,11 +56,16 @@ namespace BookYourFood.Controllers
         {
             if (drink != null)
             {
-                drinkService.RemoveMeal(drink);
+                drinkService.RemoveDrink(drink);
             }
 
             return Json(new[] { drink }.ToDataSourceResult(request, ModelState));
         }
 
+        public ActionResult SetHashTags(long drinkId, List<long> tagsIds)
+        {
+            drinkService.SetHashTagsForDrink(drinkId, tagsIds);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
     }
 }

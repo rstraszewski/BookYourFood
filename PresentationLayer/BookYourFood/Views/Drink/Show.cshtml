@@ -9,35 +9,48 @@
 <div class="show-drink-container" >
     <div class="panel">
         @(Html.Kendo().Grid<Drink>()
-        .Name("grid")
-        .Columns(columns =>
-        {
-            columns.Bound(p => p.Id).Hidden();
-            columns.Bound(p => p.Name);
-            columns.Bound(p => p.DrinkType);
-            columns.Bound(p => p.Price);
-            columns.Command(command =>
-                {
-                    command.Edit();
-                    command.Destroy();
-                }).Width(172);
-        })
-         .ToolBar(toolbar => toolbar.Create())
+              .Name("grid")
+              .Columns(columns =>
+              {
+                  columns.Bound(p => p.Id).Hidden();
+                  columns.Bound(p => p.Name);
+                  columns.Bound(p => p.DrinkType);
+                  columns.Bound(p => p.Price);
+                  columns.Command(command =>
+                  {
+                      command.Edit();
+                      command.Destroy();
+                  }).Width(172);
+              })
+              .ToolBar(toolbar => toolbar.Create())
               .Editable(editable => editable.Mode(GridEditMode.InLine))
               .Pageable()
               .Sortable()
               .Selectable()
+              .Events(e => e.Change("BYF.ShowDrink.drinkChange"))
               .Scrollable()
-              .HtmlAttributes(new { style = "height:430px;" })
+              .HtmlAttributes(new {style = "height:430px;"})
               .DataSource(dataSource => dataSource
                   .Ajax()
                   .PageSize(10)
                   .Model(model => model.Id(p => p.Id))
-                          .Create(update => update.Action("CreateDrink", "Drink"))
-                          .Read(read => read.Action("GetDrink", "Drink").Type(HttpVerbs.Get))
-                          .Update(update => update.Action("UpdateDrink", "Drink"))
-                          .Destroy(update => update.Action("DestroyDrink", "Drink"))
+                  .Create(update => update.Action("CreateDrink", "Drink"))
+                  .Read(read => read.Action("GetDrink", "Drink").Type(HttpVerbs.Get))
+                  .Update(update => update.Action("UpdateDrink", "Drink"))
+                  .Destroy(update => update.Action("DestroyDrink", "Drink"))
               ))
+    </div>
+    <div class="panel">
+
+        @(Html.Kendo().MultiSelect()
+          .Name("hashtags")
+          .Placeholder("Select hash tags...")
+          .Events(e => e.Change("BYF.ShowDrink.multiSelectHashChange"))
+          .DataSource(config => config
+              .Read("GetHashTags", "HashTag"))
+          .DataTextField("Name")
+          .DataValueField("Id")
+        )
     </div>
 </div>
 

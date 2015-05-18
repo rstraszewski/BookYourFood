@@ -26,5 +26,10 @@ namespace Reservaton.Service
         {
             return byfDbContext.Meals.Find(mealId).HashTags.ToList();
         }
+
+        public List<HashTag> GetHashTagsForDrink(long drinkId)
+        {
+            return byfDbContext.Drinks.Find(drinkId).HashTags.ToList();
+        }
     }
 }

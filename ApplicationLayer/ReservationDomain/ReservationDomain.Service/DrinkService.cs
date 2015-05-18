@@ -35,7 +35,7 @@ namespace Reservaton.Service
             ByfDbContext.SaveChanges();
         }
 
-        public void UpdateMeal(Drink drink)
+        public void UpdateDrink(Drink drink)
         {
             var drinkEntity = ByfDbContext.Drinks.Find(drink.Id);
             drinkEntity.Name = drink.Name;
@@ -44,10 +44,19 @@ namespace Reservaton.Service
             ByfDbContext.SaveChanges();
         }
 
-        public void RemoveMeal(Drink drink)
+        public void RemoveDrink(Drink drink)
         {
             var drinkEntity = ByfDbContext.Drinks.Find(drink.Id);
             ByfDbContext.Drinks.Remove(drinkEntity);
+            ByfDbContext.SaveChanges();
+        }
+
+        public void SetHashTagsForDrink(long drinkId, List<long> tagsIds)
+        {
+            var drinkEntity = ByfDbContext.Drinks.Find(drinkId);
+            var hashTags = ByfDbContext.HashTags.Where(i => tagsIds.Contains(i.Id)).ToList();
+            drinkEntity.HashTags.Clear();
+            drinkEntity.HashTags = hashTags;
             ByfDbContext.SaveChanges();
         }
     }
