@@ -41,8 +41,9 @@ namespace BookYourFood.Controllers
             return View(result);
         }
 
-        public ActionResult ShowCreator()
+        public ActionResult ShowCreator(long id)
         {
+            ViewBag.Id = id;
             var meals = mealService.GetMeals();
             var drinks = drinkService.GetDrinks();
             var ingredients = mealService.GetIngredients();
@@ -86,22 +87,38 @@ namespace BookYourFood.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(List<MealForReservationViewModel> meals, List<DrinkForReservationViewModel> drinks, long id)
+        public ActionResult Index(List<MealForReservationViewModel> meals, List<DrinkForReservationViewModel> drinks, long id, List<CustomMealViewModel> customMeals)
         {
             var mealsEntities = mealService.GetMeals(meals.Where(m => m.Number > 0).Select(m => m.Id).ToList());
             var drinkEntities = drinkService.GetDrinks(drinks.Where(m => m.Number > 0).Select(m => m.Id).ToList());
 
 
-            if (mealsEntities == null || mealsEntities.Count == 0)
+            if (mealsEntities.Count == 0 && customMeals.Count == 0)
             {
                 this.FlashMessage(MessageResult.Create("You didn't choose any meal!", MessageType.Info));
                 var result = new MenuViewModel { Drinks = drinkEntities, Meals = mealsEntities };
                 return View(result);
             }
 
+            var createdMealsToReserve = new List<MealForReservation>();
+
+            if (customMeals.Count != 0)
+            {
+                var mealsToCreate = customMeals.Where(m => m.Count != 0).ToList();
+                foreach (var mealToCreate in mealsToCreate)
+                {
+                    var mealMap = AutoMapper.Mapper.Map<Meal>(mealToCreate);
+                    mealMap.CreatedByUser = true;
+                    mealService.CreateMeal(mealMap);
+                    createdMealsToReserve.Add(new MealForReservation(){Meal = mealMap, NumberOfMeals = mealToCreate.Count});
+                }
+            }
+
             var mealsToReserve = mealsEntities
                 .Select(m => new MealForReservation {Meal = m, NumberOfMeals = meals.First(me => m.Id == me.Id).Number})
                 .ToList();
+
+            mealsToReserve.AddRange(createdMealsToReserve);
 
             var drinksToReserve = drinkEntities
                 .Select(m => new DrinkForReservation { Drink = m, NumberOfDrinks = drinks.First(me => m.Id == me.Id).Number })
@@ -123,5 +140,13 @@ namespace BookYourFood.Controllers
         }
 
         
+    }
+
+    public class CustomMealViewModel
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+        public int Count { get; set; }
     }
 }

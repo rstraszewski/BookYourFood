@@ -35,11 +35,12 @@ namespace BookYourFood.Controllers
             return Json(ingredients, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
-        public ActionResult GetPriceForIngredients(List<long> ingredients)
+        [HttpPost]
+        public ActionResult GetInformationForIngredients(List<long> ingredients)
         {
             var price = mealService.GetPriceForIngredients(ingredients);
-            return Json(new {price}, JsonRequestBehavior.AllowGet);
+            var names = mealService.GetIngredientsNames(ingredients);
+            return Json(new {Price = price, Names = string.Join(", ",names)}, JsonRequestBehavior.AllowGet);
         }
     }
 }

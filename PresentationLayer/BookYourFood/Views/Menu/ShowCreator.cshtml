@@ -17,52 +17,56 @@
 
         <div class="panel-body">
             <div class="row">
-                @(Html.Kendo().DropDownList()
-                  .Name("mealToEdit")
-                  .DataTextField("Name")
-                  .DataValueField("Id")
-                  .BindTo(Model.Meals)
-                  .Events(events => events.Change("BYF.ShowCreator.mealChange"))
-                  .OptionLabel("Meals")
-                  .HtmlAttributes(new { style = "width:100%;" })
-                )
-            </div>
-            <div class="row">
-                @(Html.Kendo().MultiSelect()
-                  .Name("ingridents")
-                          .Placeholder("Select ingredients...")
-                  .DataTextField("Name")
-                    .DataSource(config => config
-                    .Read("GetIngredients", "Ingredient")
-                      .Custom()
-                      .Group(g => g
-                          .Add("IngredientImportanceAsString", typeof(string))))
-                  .DataValueField("Id")
-                  .ItemTemplate("Name: #: data.Name #" +
-                                ", Type: #: data.IngredientTypeAsString #")
-                )
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <label>Comments:</label>
-                    <textarea class="form-control" row="5" data-bind="value: customMealComment"></textarea>
+                <div class="panel col-md-12">
+                    @(Html.Kendo().DropDownList()
+                      .Name("mealToEdit")
+                      .DataTextField("Name")
+                      .DataValueField("Id")
+                      .BindTo(Model.Meals)
+                      .Events(events => events.Change("BYF.ShowCreator.mealChange"))
+                      .OptionLabel("Meals")
+                      .HtmlAttributes(new { style = "width:100%;" })
+                    )
                 </div>
-            </div>
-            <div class="row">
-                <button class="btn" data-bind="click: createMeal">Add meal</button>
+                <div class="panel col-md-12">
+                    @(Html.Kendo().MultiSelect()
+                      .Name("ingridents")
+                      .Placeholder("Select ingredients...")
+                      .DataTextField("Name")
+                      .DataSource(config => config
+                          .Read("GetIngredients", "Ingredient")
+                          .Custom()
+                          .Group(g => g
+                              .Add("IngredientImportanceAsString", typeof(string))))
+                      .DataValueField("Id")
+                      .ItemTemplate("Name: #: data.Name #" +
+                                    ", Type: #: data.IngredientTypeAsString #")
+                    )
+                </div>
+                <div class="panel col-md-12">
+                    <div class="form-group">
+                        <label>Comments:</label>
+                        <textarea class="form-control" row="5" data-bind="value: customMealComment"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-primary" data-bind="click: createMeal">Add meal</button>
+                </div>
             </div>
         </div>
     </div>
     @using (Html.BeginForm("Index", "Menu"))
     {
         <div id="customMeals" data-bind="visible: isVisible" class="panel panel-primary">
-            <div class="panel-heading">Main Course</div>
+            <div class="panel-heading">Custom meals</div>
             <ul class="list-group">
-                
+
             </ul>
         </div>
+        
+        <input hidden name="id" value="@ViewBag.Id"/>
         <div class="panel panel-primary">
-            <div class="panel-heading">Custom meals</div>
+            <div class="panel-heading">Main Course</div>
             <ul class="list-group">
                 @for (var i = 0; i < Model.Meals.Count; i++)
                 {

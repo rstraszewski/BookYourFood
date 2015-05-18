@@ -85,5 +85,10 @@ namespace Reservaton.Service
             mealEntity.HashTags = hashTags;
             ByfDbContext.SaveChanges();
         }
+
+        public List<string> GetIngredientsNames(List<long> ingredients)
+        {
+            return ByfDbContext.Ingredients.Where(i => ingredients.Contains(i.Id)).Select(i => i.Name).ToList();
+        }
     }
 }
