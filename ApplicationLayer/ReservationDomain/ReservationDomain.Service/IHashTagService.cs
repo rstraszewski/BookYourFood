@@ -7,5 +7,6 @@ namespace Reservaton.Service
     {
         List<HashTag> GetHashTags();
         List<HashTag> GetHashTags(long mealId);
+        List<HashTag> GetHashTagsForDrink(long drinkId);
     }
 }
