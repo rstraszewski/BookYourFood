@@ -10,6 +10,23 @@ using Kendo.Mvc.UI;
 
 namespace UtilityMvc
 {
+    public static class SelectListHelper
+    {
+        public static SelectList EnumToSelectList( Type enumType )
+        {
+            var list = Enum
+                .GetValues(enumType)
+                .Cast<int>()
+                .Select(i => new SelectListItem
+                {
+                    Value = i.ToString(),
+                    Text = Enum.GetName(enumType, i),
+                }
+                );
+
+            return new SelectList(list,"Value", "Text");
+        }
+    }
     public class CustomDataSourceRequestAttribute : DataSourceRequestAttribute
     {
         public override IModelBinder GetBinder()

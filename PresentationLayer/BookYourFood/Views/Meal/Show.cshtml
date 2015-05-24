@@ -17,13 +17,14 @@
                   columns.Bound(p => p.ImageData).Title("Image").ClientTemplate("<img class='resize60' src='#=ImageData#'>").Width(115);
                   columns.Bound(p => p.Name);
                   columns.Bound(p => p.Description);
-                  columns.Bound(p => p.Price);
+                  columns.Bound(p => p.Price).EditorTemplateName("Currency");
                   columns.Command(command =>
                   {
                       command.Edit();
                       command.Destroy();
                   }).Width(172);
               })
+             
               .ToolBar(toolbar => toolbar.Create())
               .Editable(editable => editable.Mode(GridEditMode.InLine))
               .Pageable( p => p.Refresh(true))
@@ -35,7 +36,11 @@
               .DataSource(dataSource => dataSource
                   .Ajax()
                   .PageSize(10)
-                  .Model(model => model.Id(p => p.Id))
+                  .Model(model =>
+                  {
+                      model.Id(p => p.Id);
+                      model.Field(m => m.ImageData).Editable(false);
+                  })
                   .Create(update => update.Action("CreateMeal", "Meal"))
                   .Read(read => read.Action("GetMeals", "Meal").Type(HttpVerbs.Get))
                   .Update(update => update.Action("UpdateMeal", "Meal"))

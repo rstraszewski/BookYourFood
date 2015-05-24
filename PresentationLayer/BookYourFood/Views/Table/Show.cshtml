@@ -14,8 +14,8 @@
               .Columns(columns =>
               {
                   columns.Bound(p => p.Id).Hidden();
-                  columns.Bound(p => p.TableNumber);
-                  columns.Bound(p => p.SeatsNumber);
+                  columns.Bound(p => p.TableNumber).EditorTemplateName("Integer");
+                  columns.Bound(p => p.SeatsNumber).EditorTemplateName("Integer"); ;
                   columns.Command(command =>
                   {
                       command.Edit();
@@ -39,10 +39,4 @@
                           .Destroy(update => update.Action("DestroyTable", "Table"))
              ))
     </div>
-    )
 </div>
-
-
-@(Html.CreateJsViewModel()
-    .Container(".show-table-container")
-    .ViewModelName("ShowTable"))

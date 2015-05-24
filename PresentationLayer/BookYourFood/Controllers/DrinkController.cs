@@ -8,6 +8,7 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using ReservationDomain.Model;
 using Reservaton.Service;
+using UtilityMvc;
 
 namespace BookYourFood.Controllers
 {
@@ -21,6 +22,8 @@ namespace BookYourFood.Controllers
         }
         public ActionResult Show()
         {
+
+            ViewData["DrinkType_Data"] = SelectListHelper.EnumToSelectList(typeof(DrinkType));
             return View();
         }
 
