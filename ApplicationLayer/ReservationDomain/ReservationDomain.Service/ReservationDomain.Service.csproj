@@ -62,11 +62,13 @@
     <Compile Include="IMealService.cs" />
     <Compile Include="IQuestionnaireSevice.cs" />
     <Compile Include="IReservationService.cs" />
+    <Compile Include="ITableService.cs" />
     <Compile Include="MealService.cs" />
     <Compile Include="QuestionnaireSevice.cs" />
     <Compile Include="ReservationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dtos\ReservationDto.cs" />
+    <Compile Include="TableService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CommonDomain\Common.Service\Common.Service.csproj">

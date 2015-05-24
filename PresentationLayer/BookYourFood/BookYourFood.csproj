@@ -209,6 +209,7 @@
     <Compile Include="Controllers\HashTagController.cs" />
     <Compile Include="Controllers\IngredientController.cs" />
     <Compile Include="Controllers\MealController.cs" />
+    <Compile Include="Controllers\TableController.cs" />
     <Compile Include="Models\ProposeViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\NameSurnameViewModel.cs" />
@@ -898,6 +899,7 @@
     <Content Include="Views\Meal\Show.cshtml" />
     <Content Include="Views\Home\Hello.cshtml" />
     <Content Include="Views\Drink\Show.cshtml" />
+    <Content Include="Views\Table\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
