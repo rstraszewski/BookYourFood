@@ -1,5 +1,4 @@
-﻿@using ReservationDomain.Model
-@model BookYourFood.Models.MenuViewModel
+﻿@model BookYourFood.Models.MenuViewModel
 
 @{
     ViewBag.Title = "Show Menu";
@@ -12,13 +11,14 @@
 <div class="panel panel-primary">
     <div class="panel-heading">Main Course</div>
     <ul class="list-group">
-        @foreach (Meal meal in Model.Meals)
+        @foreach (var meal in Model.Meals)
         {
             <li class="list-group-item">
-                <h3>@meal.Name<div class="fb-like pull-right" data-href="#@meal.Id" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div></h3>
+                <img class="resize100" src="@meal.ImageData"/>
+                <h3>@meal.Name</h3>
+                <div class="fb-like pull-right" data-href="http://facebook.com/@meal.Name" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
                 <h4>@meal.Description</h4>
                 Price: @meal.Price
-                
             </li>
         }
     </ul>
@@ -26,7 +26,7 @@
 <div class="panel panel-primary">
     <div class="panel-heading">Drinks</div>
     <ul class="list-group">
-        @foreach (Drink drink in Model.Drinks)
+        @foreach (var drink in Model.Drinks)
         {
             <li class="list-group-item">
                 <h4>@drink.Name</h4>

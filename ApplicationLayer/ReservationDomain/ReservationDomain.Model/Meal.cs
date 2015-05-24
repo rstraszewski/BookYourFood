@@ -11,6 +11,7 @@ namespace ReservationDomain.Model
         public int? Rating { get; set; }
         public virtual List<Ingredient> Ingredients { get; set; }
         public virtual List<HashTag> HashTags { get; set; }
-        public bool CreatedByUser { get; set; } 
+        public bool CreatedByUser { get; set; }
+        public byte[] Image { get; set; }
     }
 }

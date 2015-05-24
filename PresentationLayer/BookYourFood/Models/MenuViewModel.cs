@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using BookYourFood.Controllers;
 using ReservationDomain.Model;
 
 namespace BookYourFood.Models
 {
     public class MenuViewModel
     {
-        public List<Meal> Meals { get; set; }
+        public List<MealViewModel> Meals { get; set; }
         public List<Drink> Drinks { get; set; }
     }
 

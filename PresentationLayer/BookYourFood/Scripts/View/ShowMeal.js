@@ -57,6 +57,16 @@ var ViewModel = function () {
             $.post("/Meal/SetHashTags", { mealId: that.selected.Id, ingIds: multiselect.value() });
         }
     }
+
+    this.saveImage = function(e) {
+        var id = that.selected.Id;
+        e.data = { mealId: id };
+    }
+
+    this.refreshGrid = function () {
+        var grid = $("#meals").data("kendoGrid");
+        grid.dataSource.read();
+    }
 };
 
 var BYF = BYF || {};

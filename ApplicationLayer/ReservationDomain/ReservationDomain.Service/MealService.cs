@@ -90,5 +90,12 @@ namespace Reservaton.Service
         {
             return ByfDbContext.Ingredients.Where(i => ingredients.Contains(i.Id)).Select(i => i.Name).ToList();
         }
+
+        public void AddPhotoToMeal(long mealId, byte[] image)
+        {
+            var meal = ByfDbContext.Meals.Find(mealId);
+            meal.Image = image;
+            ByfDbContext.SaveChanges();
+        }
     }
 }
