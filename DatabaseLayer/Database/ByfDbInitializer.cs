@@ -182,7 +182,7 @@ namespace Database
             #region Meal 1 veal cutlet with baked potatoes and salad
             var mealTmp1 = new Meal()
             {
-                Name = "veal cutlet with baked potatoes and salad",
+                Name = "Veal cutlet with baked potatoes and salad",
                 Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
@@ -206,7 +206,7 @@ namespace Database
             #region Meal 2 pork cutlet with baked potatoes and salad
             var mealTmp2 = new Meal()
             {
-                Name = "pork cutlet with baked potatoes and salad",
+                Name = "Pork cutlet with baked potatoes and salad",
                 Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
@@ -230,7 +230,7 @@ namespace Database
             #region Meal 3 beef steak with baked potatoes and salad
             var mealTmp3 = new Meal()
             {
-                Name = "beef steak with baked potatoes and salad",
+                Name = "Beef steak with baked potatoes and salad",
                 Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
@@ -255,7 +255,7 @@ namespace Database
             #region Meal 4 ribs in country style
             var mealTmp4 = new Meal()
             {
-                Name = "ribs in country style",
+                Name = "Ribs in country style",
                 Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
@@ -274,7 +274,7 @@ namespace Database
             #region Meal 5 pork knuckle
             var mealTmp5 = new Meal()
             {
-                Name = "pork knuckle",
+                Name = "Pork knuckle",
                 Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
@@ -295,7 +295,7 @@ namespace Database
             #region Meal 6 stuffed cabbage rolls
             var mealTmp6 = new Meal()
             {
-                Name = "stuffed cabbage rolls",
+                Name = "Stuffed cabbage rolls",
                 Description = @"A standard polish constructional worker's meal....",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
@@ -316,7 +316,7 @@ namespace Database
             #region Meal 7 spaghetti
             var mealTmp7 = new Meal()
             {
-                Name = "spaghetti",
+                Name = "Spaghetti",
                 Description = @"Italiano",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
@@ -342,7 +342,7 @@ namespace Database
             #region Meal 8 dumplings with meat
             var mealTmp8 = new Meal()
             {
-                Name = "dumplings",
+                Name = "Dumplings with meat (aka pierogi)",
                 Description = @"dumplings with meat",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
@@ -361,7 +361,7 @@ namespace Database
             #region Meal 9 cheese and potato dumplings
             var mealTmp9 = new Meal()
             {
-                Name = "cheese and potato dumplings",
+                Name = "Cheese and potato dumplings (aka pierogi ruskie)",
                 Description = @"cheese and potato dumplings",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
@@ -379,7 +379,7 @@ namespace Database
             #region Meal 10 potato pancakes
             var mealTmp10 = new Meal()
             {
-                Name = "potato pancakes",
+                Name = "Potato pancakes",
                 Description = @"potato pancakes",
                 Price = 12.00M,
                 HashTags = new List<HashTag>(),
@@ -509,7 +509,7 @@ namespace Database
             questions.Add(question);
             #endregion
             #region Do you like sophisticated food?
-            question = new Question() { Value = "Do you like sophisticated food?", Answers = new List<Answer>() };
+            question = new Question() { Value = "Do you like a sophisticated food?", Answers = new List<Answer>() };
             ans1 = new Answer() { Value = "Yes", HashTags = new List<HashTag>() };
             ans2 = new Answer() { Value = "No", HashTags = new List<HashTag>() };
             AddHashTagToAnswer("sophisticated", ans1, context); //yes
@@ -597,7 +597,7 @@ namespace Database
             questions.Add(question);
             #endregion
             #region Do you mind waiting a long?
-            question = new Question() { Value = "Do you mind waiting a long?", Answers = new List<Answer>() };
+            question = new Question() { Value = "Do you mind waiting in a long queue?", Answers = new List<Answer>() };
             ans1 = new Answer() { Value = "Yes", HashTags = new List<HashTag>() };
             ans2 = new Answer() { Value = "No", HashTags = new List<HashTag>() };
             AddHashTagToAnswer("fast", ans1, context);
@@ -614,7 +614,7 @@ namespace Database
             context.SaveChanges();
             #endregion
 
-            #region tables
+            #region Tables
             context.Tables.Add(new Table() {SeatsNumber = 4, TableNumber = 1});
             context.Tables.Add(new Table() {SeatsNumber = 3, TableNumber = 2});
             context.Tables.Add(new Table() {SeatsNumber = 3, TableNumber = 3});

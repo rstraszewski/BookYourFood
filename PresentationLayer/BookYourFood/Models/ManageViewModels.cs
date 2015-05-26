@@ -15,6 +15,7 @@ namespace BookYourFood.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public bool FilledQuestionaire { get; set; }
+        public int NumberOfFavouriteMeals { get; set; }
     }
 
     public class ManageLoginsViewModel

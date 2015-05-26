@@ -5,7 +5,8 @@
     ViewBag.Title = "Reserve";
 }
 
-<h2>Reserve</h2>
+<h2>Start making your reservation</h2>
+<hr />
 
 <div class="reservation-container">
 
@@ -13,14 +14,14 @@
     {
         <div class="row">
             <div class="col-md-6">
-
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Specify date, time and duration of your reservation!</h3>
+                        <h3 class="panel-title">Specify date, time and the duration of your reservation!</h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
+                                <h3 class="panel-title">Date and time</h3>
                                 @(Html.Kendo()
                                       .DateTimePicker()
                                       .Name("dateTimeFrom")
@@ -31,12 +32,19 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                @(Html.Kendo().NumericTextBox().Name("howLong").Step(1).Min(0).Max(200).Decimals(0).HtmlAttributes(new {data_bind = "value: howLong", style = "width: 100%", @class = "panel"}))
+                                <h3 class="panel-title" style="margin-bottom: 1px">Duration [hrs]</h3>
+                                @(Html.Kendo()
+                                .NumericTextBox()
+                                .Name("howLong")
+                                .Step(1).Min(0).Max(200)
+                                .Decimals(0)
+                                .Format("n0")
+                                .HtmlAttributes(new {data_bind = "value: howLong", style = "width: 100%", @class = "panel"}))
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <input type="button" class="btn btn-primary" data-bind="click: checkAvailability" value="Search Available Tables"/>
+                                <input type="button" style="float: right" class="btn btn-primary" data-bind="click: checkAvailability" value="Search For Available Tables"/>
                             </div>
                         </div>
                     </div>

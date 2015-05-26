@@ -36,9 +36,28 @@ namespace BookYourFood.Controllers
         {
             var meals = mealService.GetMeals();
             var drinks = drinkService.GetDrinks();
+            var tmpFavouriteUserMeals = applicationUserService
+                .GetUserFavouriteMeals(User.Identity.GetUserId());
 
-            var result = new MenuViewModel { Drinks = drinks, Meals = meals };
+            var favouriteUserMeals = meals
+                .Where(m => tmpFavouriteUserMeals.Contains(m.Id))
+                .ToList();
+
+            var result = new MenuViewModel { 
+                Drinks = drinks, 
+                Meals = meals,
+                FavouriteUserMeals = (favouriteUserMeals != null? favouriteUserMeals : new List<Meal>() )
+            };
             return View(result);
+        }
+
+        [HttpGet]
+        public JsonResult AddMealToUserFavourites(long id)
+        {
+            applicationUserService.AddFavouriteMeal(id,User.Identity.GetUserId());           
+
+            // zwróc informację o tym, że dodałeś danie do listy użytkownika
+            return Json(id, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ShowCreator(long id)
@@ -79,10 +98,26 @@ namespace BookYourFood.Controllers
         // GET: Questionaire
         public ActionResult Index(long id)
         {
-            var meals = mealService.GetMeals();
+            var tmpFavouriteMeals = applicationUserService
+                .GetUserFavouriteMeals(User.Identity.GetUserId());
+
+            var userFavouriteMeals = mealService.GetMeals()
+                .Where(m => tmpFavouriteMeals.Contains(m.Id))
+                .ToList();
+
+            var meals = mealService.GetMeals()
+                .Where(m => !tmpFavouriteMeals.Contains(m.Id))
+                .ToList();
+
             var drinks = drinkService.GetDrinks();
 
-            var result = new MenuViewModel {Drinks = drinks, Meals = meals};
+            // In case registered user don't have any favourite meals
+            if(userFavouriteMeals == null)
+            {
+                userFavouriteMeals = new List<Meal>();
+            }
+
+            var result = new MenuViewModel {Drinks = drinks, Meals = meals, FavouriteUserMeals = userFavouriteMeals};
             return View(result);
         }
 
@@ -102,15 +137,18 @@ namespace BookYourFood.Controllers
 
             var createdMealsToReserve = new List<MealForReservation>();
 
-            if (customMeals.Count != 0)
+            if (customMeals != null)
             {
                 var mealsToCreate = customMeals.Where(m => m.Count != 0).ToList();
-                foreach (var mealToCreate in mealsToCreate)
+                if (mealsToCreate != null)
                 {
-                    var mealMap = AutoMapper.Mapper.Map<Meal>(mealToCreate);
-                    mealMap.CreatedByUser = true;
-                    mealService.CreateMeal(mealMap);
-                    createdMealsToReserve.Add(new MealForReservation(){Meal = mealMap, NumberOfMeals = mealToCreate.Count});
+                    foreach (var mealToCreate in mealsToCreate)
+                    {
+                        var mealMap = AutoMapper.Mapper.Map<Meal>(mealToCreate);
+                        mealMap.CreatedByUser = true;
+                        mealService.CreateMeal(mealMap);
+                        createdMealsToReserve.Add(new MealForReservation() { Meal = mealMap, NumberOfMeals = mealToCreate.Count });
+                    }
                 }
             }
 
@@ -137,16 +175,6 @@ namespace BookYourFood.Controllers
             this.FlashMessage(MessageResult.Create(reservationDrink.Errors.Last(), MessageType.Error));
 
             return View(meals);
-        }
-
-        
-    }
-
-    public class CustomMealViewModel
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        public int Count { get; set; }
+        }        
     }
 }

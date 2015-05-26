@@ -7,6 +7,7 @@ namespace BookYourFood.Models
     {
         public List<Meal> Meals { get; set; }
         public List<Drink> Drinks { get; set; }
+        public List<Meal> FavouriteUserMeals { get; set; }
     }
 
     public class CreatorViewModel

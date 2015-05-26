@@ -2,7 +2,7 @@
 @model BookYourFood.Models.MenuViewModel
 
 @{
-    ViewBag.Title = "Show Menu";
+    ViewBag.Title = "Menu";
 }
 
 <div class="page-header">
@@ -12,13 +12,39 @@
 <div class="panel panel-primary">
     <div class="panel-heading">Main Course</div>
     <ul class="list-group">
-        @foreach (Meal meal in Model.Meals)
+        @for (int i = 0; i < Model.Meals.Count; i++)
         {
-            <li class="list-group-item">
-                <h3>@meal.Name<div class="fb-like pull-right" data-href="#@meal.Id" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div></h3>
-                <h4>@meal.Description</h4>
-                Price: @meal.Price
-                
+            Meal meal = @Model.Meals.ElementAt(i);
+            <li class="list-group-item" style="padding-top: 0px; padding-bottom: 0px ; background-color: @((i % 2) == 0 ? "#DCDCDC" : "")">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h3>@meal.Name</h3>
+                            <h4>@meal.Description</h4>
+                            Price: @meal.Price &euro;
+                        </div>
+                        <div class="col-md-2" style="padding: 6px 0px 0px 0px">
+                            <div class="fb-like" 
+                                 data-href="#@meal.Id" 
+                                 data-layout="button_count" 
+                                 data-action="like" 
+                                 data-show-faces="false" 
+                                 data-share="false">
+                            </div>
+                            <br />
+                            <div id="@string.Format("addToFav_button_wrapper_{0}",@meal.Id)"
+                                 onmouseover="getTitleForButtonWrapper(@meal.Id)">
+                                <button class="@string.Format("btn btn-sm btn-primary {0}", ( (!User.Identity.IsAuthenticated) || Model.FavouriteUserMeals.Select(m => m.Id).ToList().Contains(meal.Id) ) ? "disabled" : "" )"
+                                        type="button"
+                                        id="@string.Format("addToFav_button_{0}",@meal.Id)"
+                                        onclick="addMealToUserFavourites(@meal.Id)"
+                                        style="margin-top: 10px">
+                                    Add to favourites!
+                                </button>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>                
             </li>
         }
     </ul>
@@ -26,12 +52,44 @@
 <div class="panel panel-primary">
     <div class="panel-heading">Drinks</div>
     <ul class="list-group">
-        @foreach (Drink drink in Model.Drinks)
+        @for (int j = 0; j < Model.Drinks.Count; j++ )
         {
-            <li class="list-group-item">
+            Drink drink = Model.Drinks.ElementAt(j);
+            <li class="list-group-item" style="background-color: @((j % 2) == 0 ? "#DCDCDC" : "")">
                 <h4>@drink.Name</h4>
                 Price: @drink.Price
             </li>
         }
     </ul>
 </div>
+
+<script type="text/javascript">
+    function getTitleForButtonWrapper(mealId) {
+        if ('@User.Identity.IsAuthenticated' === 'True')
+        {
+            if ($('#addToFav_button_' + mealId).hasClass("disabled"))
+            {
+                $('#addToFav_button_wrapper_' + mealId).attr("title", "This item has been added");
+            } else {
+                $('#addToFav_button_wrapper_' + mealId).attr("title", "Add this item to your favourites");
+            }
+        } else {
+            $('#addToFav_button_wrapper_' + mealId)
+                .attr("title", "This option is available only for the logged in users.");
+        }
+    }
+
+    function addMealToUserFavourites(a) {
+        var actionUrl = '@Url.Action("AddMealToUserFavourites", "Menu", new { id = "_id"})'.replace("_id", a);
+        $.getJSON(actionUrl, processResult);
+    }
+
+    function processResult(response) {
+        if (response != null) {
+            var res = response.toString();
+            $("#addToFav_button_" + res)
+                .addClass("disabled")
+                .after('<span class="glyphicon glyphicon-ok" style="color: green"></span>');
+        }
+    }
+</script>

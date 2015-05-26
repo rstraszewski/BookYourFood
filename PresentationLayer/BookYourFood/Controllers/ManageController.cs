@@ -40,6 +40,7 @@ namespace BookYourFood.Controllers
             var userId = User.Identity.GetUserId();
             var user = userManager.FindById(userId);
             var filledQuestionaire = user.UserAnswers != null && user.UserAnswers.Count > 0;
+            var numberOfFavouriteMeals = user.FavouriteMeals.Count();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -49,7 +50,8 @@ namespace BookYourFood.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
                 Name = user.Name,
                 Surname = user.Surname,
-                FilledQuestionaire = filledQuestionaire
+                FilledQuestionaire = filledQuestionaire,
+                NumberOfFavouriteMeals = numberOfFavouriteMeals
             };
             return View(model);
         }

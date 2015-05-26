@@ -53,5 +53,50 @@ namespace ApplicationUserDomain.Service
 
             return userAnswerIdList;
         }
+
+        public OperationResult AddFavouriteMeal(long mealId, string userId)
+        {
+            var user = ByfDbContext.Users.Find(userId);
+            if(user == null)
+            {
+                return OperationResult.ErrorResult("User not found.");
+            }
+
+            if (user.FavouriteMeals.FirstOrDefault(m => m.MealId == mealId) == null)
+            {
+                user.FavouriteMeals.Add(new UserMeal { MealId = mealId });
+                ByfDbContext.SaveChanges();
+            }            
+            
+            return OperationResult.Success();
+        }
+
+        public List<long> GetUserFavouriteMeals(string userId)
+        {
+            var user = ByfDbContext.Users.Find(userId);
+
+            if(user != null)
+            {
+                var userFavouriteMeals = user.FavouriteMeals.Select(m => m.MealId).ToList();
+                if (userFavouriteMeals != null)
+                {
+                    return userFavouriteMeals;
+                }
+            }
+
+            return new List<long>();
+        }
+
+        public OperationResult RemoveFavouriteMeal(long mealId, string userId)
+        {
+            var favouriteMeal = ByfDbContext
+                .Users
+                .Find(userId)
+                .FavouriteMeals.Find(m => m.MealId == mealId);
+
+            ByfDbContext.UserMeals.Remove(favouriteMeal);
+            ByfDbContext.SaveChanges();
+            return OperationResult.Success();
+        }
     }
 }

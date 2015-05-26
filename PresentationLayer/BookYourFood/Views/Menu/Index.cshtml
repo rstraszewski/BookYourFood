@@ -1,7 +1,7 @@
 ﻿@model BookYourFood.Models.MenuViewModel
 
 @{
-    ViewBag.Title = "Suggested Menu";
+    ViewBag.Title = "Standard Menu";
 }
 
 <div class="page-header">
@@ -10,17 +10,39 @@
 
 @using (Html.BeginForm("Index", "Menu"))
 {
+    <!--CAUTION!-->
+    <!--This i variable must be in the forms global scope since we use meals[i] in two loops-->
+    int i = 0;
+    if (Model.FavouriteUserMeals.Count > 0)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">Your favourite meals</div>
+            <ul class="list-group">
+                @for (i = 0; i < Model.FavouriteUserMeals.Count; i++)
+                {
+                    <li class="list-group-item">
+                        <h3>@Model.FavouriteUserMeals[i].Name</h3>
+                        <h4>@Model.FavouriteUserMeals[i].Description</h4>
+                        <input hidden value="@Model.FavouriteUserMeals[i].Id" name='meals[@i].Id' />
+                        Price: @Model.FavouriteUserMeals[i].Price &euro;,
+                        Amount: @Html.Kendo().NumericTextBox().Name("meals[" + i + "].Number").Decimals(0).Min(0).Step(1).Value(0)
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+
     <div class="panel panel-primary">
         <div class="panel-heading">Main Course</div>
         <ul class="list-group">
-            @for (var i = 0; i < Model.Meals.Count; i++)
+            @for (int j = 0; j < Model.Meals.Count; j++, i++)
             {
                 <li class="list-group-item">
-                    <h3>@Model.Meals[i].Name</h3>
-                    <h4>@Model.Meals[i].Description</h4>
-                    <input hidden value="@Model.Meals[i].Id" name='meals[@i].Id'/>
-                    Price: @Model.Meals[i].Price
-                    @Html.Kendo().NumericTextBox().Name("meals[" + i + "].Number").Decimals(0).Min(0).Step(1).Value(0)
+                    <h3>@Model.Meals[j].Name</h3>
+                    <h4>@Model.Meals[j].Description</h4>
+                    <input hidden value="@Model.Meals[j].Id" name='meals[@i].Id'/>
+                    Price: @Model.Meals[j].Price &euro;,
+                    Amount: @Html.Kendo().NumericTextBox().Name("meals[" + i + "].Number").Decimals(0).Min(0).Step(1).Value(0)
                 </li>
             }
         </ul>
@@ -43,13 +65,13 @@
     <div class="panel panel-primary">
         <div class="panel-heading">Drinks</div>
         <ul class="list-group">
-            @for (var i = 0; i < Model.Drinks.Count; i++)
+            @for (var j = 0; j < Model.Drinks.Count; j++)
             {
                 <li class="list-group-item">
-                    <h4>@Model.Drinks[i].Name</h4>
-                    <input hidden value="@Model.Drinks[i].Id" name='drinks[@i].Id' />
-                    Price: @Model.Drinks[i].Price
-                    @Html.Kendo().NumericTextBox().Name("drinks[" + i + "].Number").Decimals(0).Min(0).Step(1).Value(0)
+                    <h4>@Model.Drinks[j].Name</h4>
+                    <input hidden value="@Model.Drinks[j].Id" name='drinks[@j].Id' />
+                    Price: @Model.Drinks[j].Price &euro;,
+                    Amount: @Html.Kendo().NumericTextBox().Name("drinks[" + j + "].Number").Decimals(0).Min(0).Step(1).Value(0)
                 </li>
             }
         </ul>

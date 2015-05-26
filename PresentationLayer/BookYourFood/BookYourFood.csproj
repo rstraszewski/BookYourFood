@@ -206,9 +206,12 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DrinkController.cs" />
+    <Compile Include="Controllers\FavouriteMealController.cs" />
     <Compile Include="Controllers\HashTagController.cs" />
     <Compile Include="Controllers\IngredientController.cs" />
     <Compile Include="Controllers\MealController.cs" />
+    <Compile Include="Models\CustomMealViewModel.cs" />
+    <Compile Include="Models\FavouriteMealViewModel.cs" />
     <Compile Include="Models\ProposeViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\NameSurnameViewModel.cs" />
@@ -898,6 +901,7 @@
     <Content Include="Views\Meal\Show.cshtml" />
     <Content Include="Views\Home\Hello.cshtml" />
     <Content Include="Views\Drink\Show.cshtml" />
+    <Content Include="Views\FavouriteMeal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

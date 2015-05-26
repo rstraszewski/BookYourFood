@@ -23,6 +23,7 @@ namespace Database
         public DbSet<Table> Tables { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<UserMeal> UserMeals { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
