@@ -9,6 +9,7 @@ using Utility;
 
 namespace BookYourFood.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ApplicationUserManager userManager;

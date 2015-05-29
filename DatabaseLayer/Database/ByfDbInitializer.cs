@@ -14,6 +14,7 @@ namespace Database
         {
             context.Roles.Add(new IdentityRole("User"));
             context.Roles.Add(new IdentityRole("Administrator"));
+            context.Roles.Add(new IdentityRole("Restaurant"));
 
             #region Filling up ingredients' table
             var ingredients = new List<Ingredient>();

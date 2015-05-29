@@ -27,12 +27,15 @@ namespace BookYourFood.Controllers
             this.userManager = userManager;
         }
 
+
         // GET: Reservation
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Reserve()
         {
             var tables = reservationService.GetTables();
@@ -41,6 +44,7 @@ namespace BookYourFood.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Reserve(long? tableId, DateTime? dateTimeFrom, int? howLong)
         {
             if (tableId == null)
@@ -72,6 +76,7 @@ namespace BookYourFood.Controllers
             return RedirectToAction("Reserve");
         }
 
+        [AllowAnonymous]
         public ActionResult Summary(long id)
         {
             var reservation = reservationService.GetReservation(id);
@@ -87,6 +92,7 @@ namespace BookYourFood.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult CheckAvailability(DateTime? dateTimeFrom, int? howLong)
         {
             var tables = reservationService.GetAvailableTables(dateTimeFrom, dateTimeFrom.Value.AddHours(howLong.Value));
@@ -94,6 +100,7 @@ namespace BookYourFood.Controllers
             return Json(new {tables= result}, JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
         public ActionResult ReadReservation([CustomDataSourceRequest] DataSourceRequest request)
         {
             var reservations = reservationService.GetReservationsQueryable();
@@ -102,6 +109,7 @@ namespace BookYourFood.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Finalize(long id, string phone, string surname)
         {
             var reservation = reservationService.GetReservation(id);
@@ -115,6 +123,7 @@ namespace BookYourFood.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        [Authorize(Roles = "Administrator,Restaurant")]
         public ActionResult Display()
         {
             var reservations = reservationService.GetReservationsForToday();
