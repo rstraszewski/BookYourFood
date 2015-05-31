@@ -5,8 +5,8 @@ namespace Reservaton.Service
 {
     public interface IMealService
     {
-        int GetNumberOfMeals();
-        List<Meal> GetMeals();
+        int GetNumberOfMeals(bool withoutUserMeals = true);
+        List<Meal> GetMeals(bool withoutUserMeals = true);
         List<Meal> GetMeals(List<long> mealIds);
         List<Ingredient> GetIngredients();
         List<Ingredient> GetIngredients(long mealId);

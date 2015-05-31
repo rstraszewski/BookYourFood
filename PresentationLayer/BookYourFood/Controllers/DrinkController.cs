@@ -12,6 +12,7 @@ using UtilityMvc;
 
 namespace BookYourFood.Controllers
 {
+    [Authorize(Roles = "Administrator,Restaurant")]
     public class DrinkController : Controller
     {
         private readonly IDrinkService drinkService;
@@ -20,6 +21,7 @@ namespace BookYourFood.Controllers
         {
             this.drinkService = drinkService;
         }
+
         public ActionResult Show()
         {
 

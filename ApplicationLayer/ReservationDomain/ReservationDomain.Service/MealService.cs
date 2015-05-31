@@ -14,14 +14,18 @@ namespace Reservaton.Service
         {
         }
 
-        public int GetNumberOfMeals()
+        public int GetNumberOfMeals(bool withoutUserMeals = true)
         {
-            return ByfDbContext.Meals.Count();
+            return withoutUserMeals 
+                ? ByfDbContext.Meals.Count(m => m.CreatedByUser == false) 
+                : ByfDbContext.Meals.Count();
         }
 
-        public List<Meal> GetMeals()
+        public List<Meal> GetMeals(bool withoutUserMeals = true)
         {
-            return ByfDbContext.Meals.ToList();
+            return withoutUserMeals
+                ? ByfDbContext.Meals.Where(m => m.CreatedByUser == false).ToList()
+                : ByfDbContext.Meals.ToList();
         }
 
         public List<Meal> GetMeals(List<long> mealIds)

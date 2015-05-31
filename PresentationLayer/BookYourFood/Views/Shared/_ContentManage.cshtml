@@ -1,0 +1,12 @@
+﻿@using Utility
+@if (User.IsInRole("Administrator"))
+{
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage content<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+            <li>@Html.ActionLinkAuthorized("Manage tables", "Show", "Table")</li>
+            <li>@Html.ActionLinkAuthorized("Manage meals", "Show", "Meal")</li>
+            <li>@Html.ActionLinkAuthorized("Manage drinks", "Show", "Drink")</li>
+        </ul>
+    </li>
+}

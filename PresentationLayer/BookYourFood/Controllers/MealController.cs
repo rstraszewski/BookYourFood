@@ -14,6 +14,7 @@ using BookYourFood.Models;
 
 namespace BookYourFood.Controllers
 {
+    [Authorize(Roles = "Administrator,Restaurant")]
     public class MealController : Controller
     {
         private readonly IMealService mealService;
@@ -23,11 +24,13 @@ namespace BookYourFood.Controllers
             this.mealService = mealService;
         }
 
+        [Authorize(Roles = "Administrator,Restaurant")]
         public ActionResult Show()
         {
             return View();
         }
 
+        [Authorize(Roles = "Administrator,Restaurant")]
         public ActionResult SaveImage(IEnumerable<HttpPostedFileBase> image, long mealId)
         {
             MemoryStream target = new MemoryStream();
@@ -39,17 +42,21 @@ namespace BookYourFood.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult GetMeals([DataSourceRequest] DataSourceRequest request)
         {
             var meals = AutoMapper.Mapper.Map<List<MealViewModel>>(mealService.GetMeals());
             return Json(meals.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Administrator,Restaurant")]
         public ActionResult SetIngridents(long mealId, List<long> ingIds)
         {
             mealService.SetIngredientsForMeal(mealId, ingIds);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
+
+        [Authorize(Roles = "Administrator,Restaurant")]
         public ActionResult SetHashTags(long mealId, List<long> ingIds)
         {
             mealService.SetHashTagsForMeal(mealId, ingIds);
@@ -57,6 +64,7 @@ namespace BookYourFood.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator,Restaurant")]
         public ActionResult CreateMeal([DataSourceRequest] DataSourceRequest request, Meal meal)
         {
             if (meal != null && ModelState.IsValid)
@@ -68,6 +76,7 @@ namespace BookYourFood.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator,Restaurant")]
         public ActionResult UpdateMeal([DataSourceRequest] DataSourceRequest request, Meal meal)
         {
             if (meal != null && ModelState.IsValid)
@@ -79,6 +88,7 @@ namespace BookYourFood.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator,Restaurant")]
         public ActionResult DestroyMeal([DataSourceRequest] DataSourceRequest request, Meal meal)
         {
             if (meal != null)

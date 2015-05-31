@@ -10,6 +10,7 @@ using Kendo.Mvc.Extensions;
 
 namespace BookYourFood.Controllers
 {
+    [Authorize(Roles = "Administrator,Restaurant")]
     public class TableController : Controller
     {
         private readonly ITableService tableService;
