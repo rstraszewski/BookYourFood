@@ -1747,3 +1747,12 @@ a.disabled {
         border-style: none !important;
     }
 
+
+    img.resize100{
+        width:100px;
+    height: auto;
+}    
+    img.resize60{
+        width:100px;
+    height: 100px;
+}

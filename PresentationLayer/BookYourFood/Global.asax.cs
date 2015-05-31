@@ -52,6 +52,17 @@ namespace BookYourFood
                 .ForMember(dest => dest.NumberOfDrinks, opt => opt.MapFrom(src => src.NumberOfDrinks))
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Drink.Price));
             AutoMapper.Mapper.CreateMap<CustomMealViewModel, Meal>();
+            AutoMapper.Mapper.CreateMap<Meal, MealViewModel>()
+                .AfterMap((src, dest) =>
+                {
+                    if(src.Image != null)
+                    {
+                        var imageBase64Data=Convert.ToBase64String(src.Image);
+                        var imageDataUrl= string.Format("data:image/png;base64,{0}", imageBase64Data);
+                        dest.ImageData = imageDataUrl;
+                        
+                    }
+                });
         }
     }
 }

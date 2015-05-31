@@ -212,6 +212,8 @@
     <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Models\CustomMealViewModel.cs" />
     <Compile Include="Models\FavouriteMealViewModel.cs" />
+    <Compile Include="Controllers\TableController.cs" />
+    <Compile Include="Models\MealViewModel.cs" />
     <Compile Include="Models\ProposeViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\NameSurnameViewModel.cs" />
@@ -902,6 +904,7 @@
     <Content Include="Views\Home\Hello.cshtml" />
     <Content Include="Views\Drink\Show.cshtml" />
     <Content Include="Views\FavouriteMeal\Index.cshtml" />
+    <Content Include="Views\Table\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

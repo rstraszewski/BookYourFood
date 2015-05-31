@@ -7,34 +7,40 @@
 }
 
 <h2>MealGrid</h2>
-<div class="show-meal-container">
+<div class="show-meal-container container">
     <div class="panel">
-        @(Html.Kendo().Grid<Meal>()
-              .Name("grid")
+        @(Html.Kendo().Grid<MealViewModel>()
+              .Name("meals")
               .Columns(columns =>
               {
                   columns.Bound(p => p.Id).Hidden();
+                  columns.Bound(p => p.ImageData).Title("Image").ClientTemplate("<img class='resize60' src='#=ImageData#'>").Width(115);
                   columns.Bound(p => p.Name);
                   columns.Bound(p => p.Description);
-                  columns.Bound(p => p.Price);
+                  columns.Bound(p => p.Price).EditorTemplateName("Currency");
                   columns.Command(command =>
                   {
                       command.Edit();
                       command.Destroy();
                   }).Width(172);
               })
+             
               .ToolBar(toolbar => toolbar.Create())
               .Editable(editable => editable.Mode(GridEditMode.InLine))
-              .Pageable()
+              .Pageable( p => p.Refresh(true))
               .Sortable()
               .Selectable()
               .Events(e => e.Change("BYF.ShowMeal.mealChange"))
               .Scrollable()
-              .HtmlAttributes(new {style = "height:430px;"})
+              .HtmlAttributes(new { style = "height:430px;" })
               .DataSource(dataSource => dataSource
                   .Ajax()
                   .PageSize(10)
-                  .Model(model => model.Id(p => p.Id))
+                  .Model(model =>
+                  {
+                      model.Id(p => p.Id);
+                      model.Field(m => m.ImageData).Editable(false);
+                  })
                   .Create(update => update.Action("CreateMeal", "Meal"))
                   .Read(read => read.Action("GetMeals", "Meal").Type(HttpVerbs.Get))
                   .Update(update => update.Action("UpdateMeal", "Meal"))
@@ -51,26 +57,40 @@
                   .Read("GetIngredients", "Ingredient")
                   .Custom()
                   .Group(g => g
-                      .Add("IngredientImportanceAsString", typeof (string))))
+                      .Add("IngredientImportanceAsString", typeof(string))))
               .DataTextField("Name")
               .DataValueField("Id")
               .ItemTemplate("Name: #: data.Name #" +
                             ", Type: #: data.IngredientTypeAsString #")
-              )
+        )
     </div>
     <div class="panel">
 
         @(Html.Kendo().MultiSelect()
-          .Name("hashtags")
-          .Placeholder("Select hash tags...")
-          .Events(e => e.Change("BYF.ShowMeal.multiSelectHashChange"))
-          .DataSource(config => config
-              .Read("GetHashTags", "HashTag"))
-          .DataTextField("Name")
-          .DataValueField("Id")
+              .Name("hashtags")
+              .Placeholder("Select hash tags...")
+              .Events(e => e.Change("BYF.ShowMeal.multiSelectHashChange"))
+              .DataSource(config => config
+                  .Read("GetHashTags", "HashTag"))
+              .DataTextField("Name")
+              .DataValueField("Id")
         )
     </div>
-    </div>
+
+    @(Html.Kendo().Upload()
+            .Name("image")
+            .Async(a => a
+                        .Save("SaveImage", "Meal")
+                .AutoUpload(false)
+            )
+            .Messages(c => c.Select("Choose a photo for the meal..."))
+            .Multiple(false)
+            .HtmlAttributes(new { accept = ".png,.jpg,.gif" })
+            .Events(e => e
+                .Upload("BYF.ShowMeal.saveImage")
+                        .Success("BYF.ShowMeal.refreshGrid"))
+    )
+</div>
 
 
 @(Html.CreateJsViewModel()

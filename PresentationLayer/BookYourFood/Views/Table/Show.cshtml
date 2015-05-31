@@ -1,0 +1,42 @@
+﻿@using BookYourFood.Controllers
+@using ReservationDomain.Model
+@using Utility
+
+@{
+    ViewBag.Title = "TableGrid";
+}
+
+<h2>TableGrid</h2>
+<div class="show-table-container container">
+    <div class="panel">
+        @(Html.Kendo().Grid<Table>()
+              .Name("tables")
+              .Columns(columns =>
+              {
+                  columns.Bound(p => p.Id).Hidden();
+                  columns.Bound(p => p.TableNumber).EditorTemplateName("Integer");
+                  columns.Bound(p => p.SeatsNumber).EditorTemplateName("Integer"); ;
+                  columns.Command(command =>
+                  {
+                      command.Edit();
+                      command.Destroy();
+                  }).Width(172);
+              })
+              .ToolBar(toolbar => toolbar.Create())
+              .Editable(editable => editable.Mode(GridEditMode.InLine))
+              .Pageable(p => p.Refresh(true))
+              .Sortable()
+              .Selectable()
+              .Scrollable()
+              .HtmlAttributes(new { style = "height:430px;" })
+              .DataSource(dataSource => dataSource
+                  .Ajax()
+                  .PageSize(10)
+                  .Model(model => model.Id(p => p.Id))
+                          .Create(update => update.Action("CreateTable", "Table"))
+                          .Read(read => read.Action("GetTables", "Table").Type(HttpVerbs.Get))
+                          .Update(update => update.Action("UpdateTable", "Table"))
+                          .Destroy(update => update.Action("DestroyTable", "Table"))
+             ))
+    </div>
+</div>

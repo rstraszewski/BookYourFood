@@ -32,30 +32,42 @@ var ViewModel = function () {
     this.mealChange = function() {
         var selectedItem = this.dataItem(this.select());
         that.selected = selectedItem;
-        $.get("/Ingredient/GetIngredientsForMeal", { mealId: selectedItem.Id }, function (ingredients) {
-            var multiselect = $("#ingridents").data("kendoMultiSelect");
-            multiselect.value([]);
-            multiselect.value(ingredients);
-        });
-        $.get("/HashTag/GetHashTagsForMeal", { mealId: selectedItem.Id }, function (hashTags) {
-            var multiselect = $("#hashtags").data("kendoMultiSelect");
-            multiselect.value([]);
-            multiselect.value(hashTags);
-        });
+        if (selectedItem && selectedItem.Id !== 0) {
+            $.get("/Ingredient/GetIngredientsForMeal", { mealId: selectedItem.Id }, function(ingredients) {
+                var multiselect = $("#ingridents").data("kendoMultiSelect");
+                multiselect.value([]);
+                multiselect.value(ingredients);
+            });
+            $.get("/HashTag/GetHashTagsForMeal", { mealId: selectedItem.Id }, function(hashTags) {
+                var multiselect = $("#hashtags").data("kendoMultiSelect");
+                multiselect.value([]);
+                multiselect.value(hashTags);
+            });
+        }
     };
 
     this.multiSelectIngChange = function() {
-        if (that.selected) {
+        if (that.selected && that.selected.Id !== 0) {
             var multiselect = $("#ingridents").data("kendoMultiSelect");
             $.post("/Meal/SetIngridents", { mealId: that.selected.Id, ingIds: multiselect.value() });
         }
     }
 
     this.multiSelectHashChange = function () {
-        if (that.selected) {
+        if (that.selected && that.selected.Id !== 0) {
             var multiselect = $("#hashtags").data("kendoMultiSelect");
             $.post("/Meal/SetHashTags", { mealId: that.selected.Id, ingIds: multiselect.value() });
         }
+    }
+
+    this.saveImage = function(e) {
+        var id = that.selected.Id;
+        e.data = { mealId: id };
+    }
+
+    this.refreshGrid = function () {
+        var grid = $("#meals").data("kendoGrid");
+        grid.dataSource.read();
     }
 };
 

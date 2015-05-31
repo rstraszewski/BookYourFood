@@ -29,15 +29,17 @@
     this.drinkChange = function () {
         var selectedItem = this.dataItem(this.select());
         that.selected = selectedItem;
-        $.get("/HashTag/GetHashTagsForDrink", { drinkId: selectedItem.Id }, function (hashTags) {
-            var multiselect = $("#hashtags").data("kendoMultiSelect");
-            multiselect.value([]);
-            multiselect.value(hashTags);
-        });
+        if (that.selected && that.selected.Id !== 0) {
+            $.get("/HashTag/GetHashTagsForDrink", { drinkId: selectedItem.Id }, function(hashTags) {
+                var multiselect = $("#hashtags").data("kendoMultiSelect");
+                multiselect.value([]);
+                multiselect.value(hashTags);
+            });
+        }
     };
 
     this.multiSelectHashChange = function () {
-        if (that.selected) {
+        if (that.selected && that.selected.Id !== 0) {
             var multiselect = $("#hashtags").data("kendoMultiSelect");
             $.post("/Drink/SetHashTags", { drinkId: that.selected.Id, tagsIds: multiselect.value() });
         }

@@ -10,6 +10,7 @@ using ApplicationUserDomain.Service;
 using ReservationDomain.Model;
 using ReservationDomain.Service;
 using Reservaton.Service;
+using AutoMapper;
 
 namespace BookYourFood.Controllers
 {
@@ -36,7 +37,7 @@ namespace BookYourFood.Controllers
 
             FavouriteMealViewModel model = new FavouriteMealViewModel
             { 
-                FavouriteMeals = userFavouriteMeals
+                FavouriteMeals = Mapper.Map<List<MealViewModel>>(userFavouriteMeals)
             };
 
             return View(model);
@@ -56,7 +57,7 @@ namespace BookYourFood.Controllers
 
             FavouriteMealViewModel model = new FavouriteMealViewModel
             {
-                FavouriteMeals = userFavouriteMeals
+                FavouriteMeals = Mapper.Map<List<MealViewModel>>(userFavouriteMeals)
             };
 
             return View(model);

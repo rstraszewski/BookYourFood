@@ -8,6 +8,6 @@ namespace BookYourFood.Models
 {
     public class FavouriteMealViewModel
     {
-        public List<Meal> FavouriteMeals { get; set; }
+        public List<MealViewModel> FavouriteMeals { get; set; }
     }
 }

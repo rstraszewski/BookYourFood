@@ -1,5 +1,6 @@
 ﻿@using ReservationDomain.Model
 @using Utility
+@using UtilityMvc
 
 @{
     ViewBag.Title = "DrinkGrid";
@@ -14,8 +15,8 @@
               {
                   columns.Bound(p => p.Id).Hidden();
                   columns.Bound(p => p.Name);
-                  columns.Bound(p => p.DrinkType);
-                  columns.Bound(p => p.Price);
+                  columns.Bound(p => p.DrinkType).EditorTemplateName("GridForeignKey");
+                  columns.Bound(p => p.Price).EditorTemplateName("Currency");
                   columns.Command(command =>
                   {
                       command.Edit();
@@ -24,7 +25,7 @@
               })
               .ToolBar(toolbar => toolbar.Create())
               .Editable(editable => editable.Mode(GridEditMode.InLine))
-              .Pageable()
+              .Pageable( p => p.Refresh(true))
               .Sortable()
               .Selectable()
               .Events(e => e.Change("BYF.ShowDrink.drinkChange"))

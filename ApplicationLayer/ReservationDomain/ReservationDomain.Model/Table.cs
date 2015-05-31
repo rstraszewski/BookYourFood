@@ -6,7 +6,7 @@ namespace ReservationDomain.Model
 {
     public class Table : Entity
     {
-        public long TableNumber { get; set; }
+        public int TableNumber { get; set; }
         public int SeatsNumber { get; set; }
         public virtual List<Reservation> Reservations { get; set; }
 
