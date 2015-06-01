@@ -37,7 +37,7 @@ var ViewModel = function() {
             $("#" + id).addClass("selected");
             input.attr("checked", "checked");
         },
-        dateFrom: null,
+        dateFrom: new Date(),
         /* dateTo: $("#dateTimeTo").kendoDateTimePicker().val(),*/
         howLong: 0,
         defaultColor: "white",

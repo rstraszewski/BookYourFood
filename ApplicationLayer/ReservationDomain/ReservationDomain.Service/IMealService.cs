@@ -18,5 +18,8 @@ namespace Reservaton.Service
         void SetHashTagsForMeal(long mealId, List<long> ingIds);
         List<string> GetIngredientsNames(List<long> ingredients);
         void AddPhotoToMeal(long mealId, byte[] image);
+        void CreateIngredient(Ingredient ingredient);
+        void UpdateIngredient(Ingredient ingredient);
+        void RemoveIngredient(Ingredient ingredient);
     }
 }

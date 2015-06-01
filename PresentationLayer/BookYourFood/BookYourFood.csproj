@@ -906,6 +906,7 @@
     <Content Include="Views\FavouriteMeal\Index.cshtml" />
     <Content Include="Views\Table\Show.cshtml" />
     <Content Include="Views\Shared\_ContentManage.cshtml" />
+    <Content Include="Views\Ingredient\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

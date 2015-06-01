@@ -101,5 +101,28 @@ namespace Reservaton.Service
             meal.Image = image;
             ByfDbContext.SaveChanges();
         }
+
+        public void CreateIngredient(Ingredient ingredient)
+        {
+            ByfDbContext.Ingredients.Add(ingredient);
+            ByfDbContext.SaveChanges();
+        }
+
+        public void UpdateIngredient(Ingredient ingredient)
+        {
+            var ingredientEntity = ByfDbContext.Ingredients.Find(ingredient.Id);
+            ingredientEntity.Description = ingredient.Description;
+            ingredientEntity.Name = ingredient.Name;
+            ingredientEntity.Price = ingredient.Price;
+            ingredientEntity.IngredientType = ingredient.IngredientType;
+            ByfDbContext.SaveChanges();
+        }
+
+        public void RemoveIngredient(Ingredient ingredient)
+        {
+            var ingredientEntity = ByfDbContext.Ingredients.Find(ingredient.Id);
+            ByfDbContext.Ingredients.Remove(ingredientEntity);
+            ByfDbContext.SaveChanges();
+        }
     }
 }

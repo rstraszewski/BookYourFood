@@ -1,0 +1,45 @@
+﻿@using BookYourFood.Controllers
+@using ReservationDomain.Model
+@using Utility
+
+@{
+    ViewBag.Title = "Ingredients";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="show-table-container container">
+    <div class="panel">
+        @(Html.Kendo().Grid<Ingredient>()
+              .Name("ingredients")
+              .Columns(columns =>
+              {
+                  columns.Bound(p => p.Id).Hidden();
+                  columns.Bound(p => p.Name);
+                  columns.Bound(p => p.Description);
+                  columns.Bound(p => p.IngredientType).EditorTemplateName("GridForeignKey"); ;
+                  columns.Bound(p => p.IngredientImportance).EditorTemplateName("GridForeignKey"); ;
+                  columns.Bound(p => p.Price).EditorTemplateName("Currency");
+                  columns.Command(command =>
+                  {
+                      command.Edit();
+                      command.Destroy();
+                  }).Width(172);
+              })
+              .ToolBar(toolbar => toolbar.Create())
+              .Editable(editable => editable.Mode(GridEditMode.InLine))
+              .Pageable(p => p.Refresh(true))
+              .Sortable()
+              .Selectable()
+              .Scrollable()
+              .HtmlAttributes(new { style = "height:430px;" })
+              .DataSource(dataSource => dataSource
+                  .Ajax()
+                  .PageSize(10)
+                  .Model(model => model.Id(p => p.Id))
+                                  .Create(update => update.Action("CreateIngredient", "Ingredient"))
+                                          .Read(read => read.Action("GetIngredientsForGrid", "Ingredient").Type(HttpVerbs.Get))
+                                          .Update(update => update.Action("UpdateIngredient", "Ingredient"))
+                                          .Destroy(update => update.Action("DestroyIngredient", "Ingredient"))
+             ))
+    </div>
+</div>

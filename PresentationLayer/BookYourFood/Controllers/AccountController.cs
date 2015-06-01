@@ -125,7 +125,21 @@ namespace BookYourFood.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber, Name = model.Name, Surname = model.Surname};
                 var result = await userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var userId = userManager.FindByEmail(user.Email).Id;
+
+                var role = "User";
+
+                var numberOfUsers = userManager.Users.Count();
+
+                if (numberOfUsers == 1)
+                {
+                    role = "Administrator";
+                }
+                var addRoleResult = await userManager.AddToRoleAsync(userId, role);
+
+
+
+                if (result.Succeeded && addRoleResult.Succeeded)
                 {
                    
 
