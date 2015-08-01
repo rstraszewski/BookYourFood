@@ -25,13 +25,13 @@
                             Price: @meal.Price &euro;
                         </div>
                         <div class="col-md-2" style="padding: 6px 0px 0px 0px">
-                            <div class="fb-like" 
+                           @* <div class="fb-like" 
                                  data-href="#@meal.Id" 
                                  data-layout="button_count" 
                                  data-action="like" 
                                  data-show-faces="false" 
                                  data-share="false">
-                            </div>
+                            </div>*@
                             <br />
                             <div id="@string.Format("addToFav_button_wrapper_{0}",@meal.Id)"
                                  onmouseover="getTitleForButtonWrapper(@meal.Id)">

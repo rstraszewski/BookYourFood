@@ -2,127 +2,127 @@
 using System.Linq;
 using System.Transactions;
 using Common.Service;
-using Database;
+using ReservationDomain.Infrastructure;
 using ReservationDomain.Model;
 
 namespace Reservaton.Service
 {
-    public class MealService : ApplicationService, IMealService
+    public class MealService : ApplicationService<ReservationDomainDbContext>, IMealService
     {
-        public MealService(ByfDbContext byfDbContext)
-            : base(byfDbContext)
+        public MealService(ReservationDomainDbContext context)
+            : base(context)
         {
         }
 
         public int GetNumberOfMeals(bool withoutUserMeals = true)
         {
             return withoutUserMeals 
-                ? ByfDbContext.Meals.Count(m => m.CreatedByUser == false) 
-                : ByfDbContext.Meals.Count();
+                ? _context.Meals.Count(m => m.CreatedByUser == false) 
+                : _context.Meals.Count();
         }
 
         public List<Meal> GetMeals(bool withoutUserMeals = true)
         {
             return withoutUserMeals
-                ? ByfDbContext.Meals.Where(m => m.CreatedByUser == false).ToList()
-                : ByfDbContext.Meals.ToList();
+                ? _context.Meals.Where(m => m.CreatedByUser == false).ToList()
+                : _context.Meals.ToList();
         }
 
         public List<Meal> GetMeals(List<long> mealIds)
         {
-            var result = ByfDbContext.Meals.Where(meal => mealIds.Contains(meal.Id)).ToList();
+            var result = _context.Meals.Where(meal => mealIds.Contains(meal.Id)).ToList();
             return result;
         }
 
         public List<Ingredient> GetIngredients()
         {
-            return ByfDbContext.Ingredients.ToList();
+            return _context.Ingredients.ToList();
         }
 
         public List<Ingredient> GetIngredients(long mealId)
         {
-            return ByfDbContext.Meals.Find(mealId).Ingredients.ToList();
+            return _context.Meals.Find(mealId).Ingredients.ToList();
         }
 
         public decimal GetPriceForIngredients(List<long> ingredientIds)
         {
-            return ByfDbContext.Ingredients.Where(i => ingredientIds.Contains(i.Id)).Sum(i => i.Price)*1.5m;
+            return _context.Ingredients.Where(i => ingredientIds.Contains(i.Id)).Sum(i => i.Price)*1.5m;
         }
 
         public void CreateMeal(Meal meal)
         {
-            ByfDbContext.Meals.Add(meal);
-            ByfDbContext.SaveChanges();
+            _context.Meals.Add(meal);
+            _context.SaveChanges();
         }
 
         public void UpdateMeal(Meal meal)
         {
-            var mealEntity = ByfDbContext.Meals.Find(meal.Id);
+            var mealEntity = _context.Meals.Find(meal.Id);
             mealEntity.Description = meal.Description;
             mealEntity.Name = meal.Name;
             mealEntity.Price = meal.Price;
-            ByfDbContext.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void RemoveMeal(Meal meal)
         {
-            var mealEntity = ByfDbContext.Meals.Find(meal.Id);
-            ByfDbContext.Meals.Remove(mealEntity);
-            ByfDbContext.SaveChanges();
+            var mealEntity = _context.Meals.Find(meal.Id);
+            _context.Meals.Remove(mealEntity);
+            _context.SaveChanges();
         }
 
         public void SetIngredientsForMeal(long mealId, List<long> ingIds)
         {
             //TODO: Why exception? Twice the same foreign key?
-            var mealEntity = ByfDbContext.Meals.Find(mealId);
-            var ingredients = ByfDbContext.Ingredients.Where(i => ingIds.Contains(i.Id)).ToList();
+            var mealEntity = _context.Meals.Find(mealId);
+            var ingredients = _context.Ingredients.Where(i => ingIds.Contains(i.Id)).ToList();
             mealEntity.Ingredients.Clear();
             mealEntity.Ingredients = ingredients;
-            ByfDbContext.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void SetHashTagsForMeal(long mealId, List<long> ingIds)
         {
-            var mealEntity = ByfDbContext.Meals.Find(mealId);
-            var hashTags = ByfDbContext.HashTags.Where(i => ingIds.Contains(i.Id)).ToList();
+            var mealEntity = _context.Meals.Find(mealId);
+            var hashTags = _context.HashTags.Where(i => ingIds.Contains(i.Id)).ToList();
             mealEntity.HashTags.Clear();
             mealEntity.HashTags = hashTags;
-            ByfDbContext.SaveChanges();
+            _context.SaveChanges();
         }
 
         public List<string> GetIngredientsNames(List<long> ingredients)
         {
-            return ByfDbContext.Ingredients.Where(i => ingredients.Contains(i.Id)).Select(i => i.Name).ToList();
+            return _context.Ingredients.Where(i => ingredients.Contains(i.Id)).Select(i => i.Name).ToList();
         }
 
         public void AddPhotoToMeal(long mealId, byte[] image)
         {
-            var meal = ByfDbContext.Meals.Find(mealId);
+            var meal = _context.Meals.Find(mealId);
             meal.Image = image;
-            ByfDbContext.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void CreateIngredient(Ingredient ingredient)
         {
-            ByfDbContext.Ingredients.Add(ingredient);
-            ByfDbContext.SaveChanges();
+            _context.Ingredients.Add(ingredient);
+            _context.SaveChanges();
         }
 
         public void UpdateIngredient(Ingredient ingredient)
         {
-            var ingredientEntity = ByfDbContext.Ingredients.Find(ingredient.Id);
+            var ingredientEntity = _context.Ingredients.Find(ingredient.Id);
             ingredientEntity.Description = ingredient.Description;
             ingredientEntity.Name = ingredient.Name;
             ingredientEntity.Price = ingredient.Price;
             ingredientEntity.IngredientType = ingredient.IngredientType;
-            ByfDbContext.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void RemoveIngredient(Ingredient ingredient)
         {
-            var ingredientEntity = ByfDbContext.Ingredients.Find(ingredient.Id);
-            ByfDbContext.Ingredients.Remove(ingredientEntity);
-            ByfDbContext.SaveChanges();
+            var ingredientEntity = _context.Ingredients.Find(ingredient.Id);
+            _context.Ingredients.Remove(ingredientEntity);
+            _context.SaveChanges();
         }
     }
 }

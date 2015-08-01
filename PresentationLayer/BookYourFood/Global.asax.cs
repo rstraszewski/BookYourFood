@@ -7,9 +7,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using ApplicationUserDomain.Infrastructure;
 using BookYourFood.Controllers;
 using BookYourFood.Models;
-using Database;
+//using Database;
+using ReservationDomain.Infrastructure;
 using ReservationDomain.Model;
 
 namespace BookYourFood
@@ -24,7 +26,11 @@ namespace BookYourFood
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalFilters.Filters.Add(new NotificationActionFilterAttribute());
             //BundleTable.EnableOptimizations = true;
-            using (var byfDbContext = new ByfDbContext())
+            using (var byfDbContext = new ApplicationUserDomainDbContext())
+            {
+                byfDbContext.Database.Initialize(true);
+            }
+            using (var byfDbContext = new ReservationDomainDbContext())
             {
                 byfDbContext.Database.Initialize(true);
             }

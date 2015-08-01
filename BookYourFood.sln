@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookYourFood", "PresentationLayer\BookYourFood\BookYourFood.csproj", "{1D0CBF30-1EA9-4B39-BDF4-5CFBBCEC1FD9}"
 EndProject
@@ -36,6 +36,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityMvc", "Utilities\UtilityMvc\UtilityMvc.csproj", "{5C700888-D53C-404F-9522-F0C1DDFCB321}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserDomain.Service", "ApplicationLayer\ApplicationUserDomain\ApplicationUserDomain.Service\ApplicationUserDomain.Service.csproj", "{2F4DA88C-9071-4B07-A77D-B44ED3260480}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserDomain.Infrastructure", "ApplicationUserDomain.Infrastructure\ApplicationUserDomain.Infrastructure.csproj", "{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationDomain.Infrastructure", "ReservationDomain.Infrastructure\ReservationDomain.Infrastructure.csproj", "{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +87,14 @@ Global
 		{2F4DA88C-9071-4B07-A77D-B44ED3260480}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F4DA88C-9071-4B07-A77D-B44ED3260480}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F4DA88C-9071-4B07-A77D-B44ED3260480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,5 +113,7 @@ Global
 		{05233FD8-1832-4B94-A0DE-C2D390B82ED1} = {3F2235CF-026D-4A61-8CA0-26F07C0E045C}
 		{5C700888-D53C-404F-9522-F0C1DDFCB321} = {7D25F9F8-3195-4AC1-8CB3-AABF503CEAB7}
 		{2F4DA88C-9071-4B07-A77D-B44ED3260480} = {51803CCD-D6D2-45DF-A0FF-B36951B73A8B}
+		{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9} = {51803CCD-D6D2-45DF-A0FF-B36951B73A8B}
+		{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF} = {3F2235CF-026D-4A61-8CA0-26F07C0E045C}
 	EndGlobalSection
 EndGlobal

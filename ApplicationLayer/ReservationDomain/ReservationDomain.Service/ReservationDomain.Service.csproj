@@ -71,6 +71,10 @@
     <Compile Include="TableService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\ReservationDomain.Infrastructure\ReservationDomain.Infrastructure.csproj">
+      <Project>{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}</Project>
+      <Name>ReservationDomain.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CommonDomain\Common.Service\Common.Service.csproj">
       <Project>{C86CD015-F610-49E3-9936-BC308363E4A2}</Project>
       <Name>Common.Service</Name>

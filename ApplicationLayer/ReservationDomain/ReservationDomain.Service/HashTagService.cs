@@ -3,33 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Database;
+using ReservationDomain.Infrastructure;
 using ReservationDomain.Model;
 
 namespace Reservaton.Service
 {
     public class HashTagService : IHashTagService
     {
-        private readonly ByfDbContext byfDbContext;
+        private readonly ReservationDomainDbContext _context;
 
-        public HashTagService(ByfDbContext byfDbContext)
+        public HashTagService(ReservationDomainDbContext context)
         {
-            this.byfDbContext = byfDbContext;
+            this._context = context;
         }
 
         public List<HashTag> GetHashTags()
         {
-            return byfDbContext.HashTags.ToList();
+            return _context.HashTags.ToList();
         }
 
         public List<HashTag> GetHashTags(long mealId)
         {
-            return byfDbContext.Meals.Find(mealId).HashTags.ToList();
+            return _context.Meals.Find(mealId).HashTags.ToList();
         }
 
         public List<HashTag> GetHashTagsForDrink(long drinkId)
         {
-            return byfDbContext.Drinks.Find(drinkId).HashTags.ToList();
+            return _context.Drinks.Find(drinkId).HashTags.ToList();
         }
     }
 }

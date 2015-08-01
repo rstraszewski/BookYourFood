@@ -3,42 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Database;
+
 using ReservationDomain.Model;
 using Common.Service;
+using ReservationDomain.Infrastructure;
 
 namespace Reservaton.Service
 {
-    public class TableService : ApplicationService, ITableService
+    public class TableService : ApplicationService<ReservationDomainDbContext>, ITableService
     {
-        public TableService(ByfDbContext byfDbContext)
-            : base(byfDbContext)
+        public TableService(ReservationDomainDbContext context)
+            : base(context)
         {
         }
         public List<Table> GetTables()
         {
-            return ByfDbContext.Tables.ToList();
+            return _context.Tables.ToList();
         }
         public void CreateTable(Table table)
         {
-            ByfDbContext.Tables.Add(table);
-            ByfDbContext.SaveChanges();
+            _context.Tables.Add(table);
+            _context.SaveChanges();
         }
 
         public void UpdateTable(Table table)
         {
-            var tableEntity = ByfDbContext.Tables.Find(table.Id);
+            var tableEntity = _context.Tables.Find(table.Id);
             tableEntity.Reservations = table.Reservations;
             tableEntity.SeatsNumber = table.SeatsNumber;
             tableEntity.TableNumber = table.TableNumber;
-            ByfDbContext.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void RemoveTable(Table table)
         {
-            var tableEntity = ByfDbContext.Tables.Find(table.Id);
-            ByfDbContext.Tables.Remove(tableEntity);
-            ByfDbContext.SaveChanges();
+            var tableEntity = _context.Tables.Find(table.Id);
+            _context.Tables.Remove(tableEntity);
+            _context.SaveChanges();
         }
     }
 }

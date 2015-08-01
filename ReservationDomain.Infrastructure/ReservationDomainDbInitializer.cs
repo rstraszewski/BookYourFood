@@ -1,21 +1,16 @@
 ﻿using System.Data.Entity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using ReservationDomain.Model;
 using System.Linq;
 using System;
 using Common.Model;
 
-namespace Database
+namespace ReservationDomain.Infrastructure
 {
-/*    public class ByfDbInitializer : DropCreateDatabaseIfModelChanges<ByfDbContext>
+    public class ReservationDomainDbInitializer : DropCreateDatabaseIfModelChanges<ReservationDomainDbContext>
     {
-        protected override void Seed(ByfDbContext context)
+        protected override void Seed(ReservationDomainDbContext context)
         {
-            context.Roles.Add(new IdentityRole("User"));
-            context.Roles.Add(new IdentityRole("Administrator"));
-            context.Roles.Add(new IdentityRole("Restaurant"));
-
             #region Filling up ingredients' table
             var ingredients = new List<Ingredient>();
             #region Ingredient 1 veal
@@ -627,7 +622,7 @@ namespace Database
             base.Seed(context);
         }
 
-        protected virtual bool AddHashTagToMeal(string hashTag, Meal meal, ByfDbContext context)
+        protected virtual bool AddHashTagToMeal(string hashTag, Meal meal, ReservationDomainDbContext context)
         {
             // If meal already contains such hashtag
             if (meal.HashTags.Any(h => h.Name == hashTag.ToLower()))
@@ -649,7 +644,7 @@ namespace Database
             }
         }
 
-        protected virtual bool AddIngredientToMeal(string ingredient, Meal meal, ByfDbContext context)
+        protected virtual bool AddIngredientToMeal(string ingredient, Meal meal, ReservationDomainDbContext context)
         {
             // If meal already contains such ingredient
             if (meal.Ingredients.Where(h => h.Name == ingredient.ToLower()).SingleOrDefault() != null)
@@ -671,7 +666,7 @@ namespace Database
             }
         }
 
-        protected virtual bool AddHashTagToIngredient(string hashTag, Ingredient ingredient, ByfDbContext context)
+        protected virtual bool AddHashTagToIngredient(string hashTag, Ingredient ingredient, ReservationDomainDbContext context)
         {
             // If meal already contains such hashtag
             if (ingredient.HashTags.Where(h => h.Name == hashTag.ToLower()).SingleOrDefault() != null)
@@ -693,7 +688,7 @@ namespace Database
             }
         }
 
-        protected virtual bool AddHashTagToDrink(string hashTag, Drink drink, ByfDbContext context)
+        protected virtual bool AddHashTagToDrink(string hashTag, Drink drink, ReservationDomainDbContext context)
         {
             // If meal already contains such hashtag
             if (drink.HashTags.Where(h => h.Name == hashTag.ToLower()).SingleOrDefault() != null)
@@ -715,7 +710,7 @@ namespace Database
             }
         }
 
-        protected virtual bool AddHashTagToAnswer(string hashTag, Answer answer, ByfDbContext context)
+        protected virtual bool AddHashTagToAnswer(string hashTag, Answer answer, ReservationDomainDbContext context)
         {
             // If meal already contains such hashtag
             if (answer.HashTags.Where(h => h.Name == hashTag.ToLower()).SingleOrDefault() != null)
@@ -736,5 +731,5 @@ namespace Database
                 return true;
             }
         }
-    }*/
+    }
 }

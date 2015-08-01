@@ -1,22 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ApplicationUserDomain.Infrastructure;
 using Common.Service;
-using Database;
+//using Database;
 using Identity.Model;
 using Utility;
 
 namespace ApplicationUserDomain.Service
 {
-    public class ApplicationUserService : ApplicationService, IApplicationUserService
+    public class ApplicationUserService : ApplicationService<ApplicationUserDomainDbContext>, IApplicationUserService
     {
-        public ApplicationUserService(ByfDbContext byfDbContext)
-            : base(byfDbContext)
+        public ApplicationUserService(ApplicationUserDomainDbContext context)
+            : base(context)
         {
         }
 
         public OperationResult AddUserAnswers(List<long> answersIds, string userId)
         {
-            var entity = ByfDbContext.Users.Find(userId);
+            var entity = _context.Users.Find(userId);
 
             if (entity == null)
             {
@@ -26,22 +27,22 @@ namespace ApplicationUserDomain.Service
             var answers = answersIds.Select(answer => new UserAnswer {AnswerId = answer}).ToList();
             entity.UserAnswers.RemoveAll(a => true);
             entity.UserAnswers = answers;
-            ByfDbContext.SaveChanges();
-            ByfDbContext.Database.ExecuteSqlCommand("DELETE FROM UserAnswer WHERE ApplicationUser_Id IS NULL");
+            _context.SaveChanges();
+            _context.Database.ExecuteSqlCommand("DELETE FROM UserAnswer WHERE ApplicationUser_Id IS NULL");
             return OperationResult.Success();
         }
 
         public List<UserAnswer> GetUserAnswers(string userId)
         {
-            return ByfDbContext.Users.Find(userId).UserAnswers.ToList();
+            return _context.Users.Find(userId).UserAnswers.ToList();
         }
 
         public void ChangeNameAndSurname(string userId, string name, string surname)
         {
-            var user = ByfDbContext.Users.Find(userId);
+            var user = _context.Users.Find(userId);
             user.Name = name;
             user.Surname = surname;
-            ByfDbContext.SaveChanges();
+            _context.SaveChanges();
         }
 
 
@@ -56,7 +57,7 @@ namespace ApplicationUserDomain.Service
 
         public OperationResult AddFavouriteMeal(long mealId, string userId)
         {
-            var user = ByfDbContext.Users.Find(userId);
+            var user = _context.Users.Find(userId);
             if(user == null)
             {
                 return OperationResult.ErrorResult("User not found.");
@@ -65,7 +66,7 @@ namespace ApplicationUserDomain.Service
             if (user.FavouriteMeals.FirstOrDefault(m => m.MealId == mealId) == null)
             {
                 user.FavouriteMeals.Add(new UserMeal { MealId = mealId });
-                ByfDbContext.SaveChanges();
+                _context.SaveChanges();
             }            
             
             return OperationResult.Success();
@@ -73,7 +74,7 @@ namespace ApplicationUserDomain.Service
 
         public List<long> GetUserFavouriteMeals(string userId)
         {
-            var user = ByfDbContext.Users.Find(userId);
+            var user = _context.Users.Find(userId);
 
             if(user != null)
             {
@@ -89,13 +90,13 @@ namespace ApplicationUserDomain.Service
 
         public OperationResult RemoveFavouriteMeal(long mealId, string userId)
         {
-            var favouriteMeal = ByfDbContext
+            var favouriteMeal = _context
                 .Users
                 .Find(userId)
                 .FavouriteMeals.Find(m => m.MealId == mealId);
 
-            ByfDbContext.UserMeals.Remove(favouriteMeal);
-            ByfDbContext.SaveChanges();
+            _context.UserMeals.Remove(favouriteMeal);
+            _context.SaveChanges();
             return OperationResult.Success();
         }
     }

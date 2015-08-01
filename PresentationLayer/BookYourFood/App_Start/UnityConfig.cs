@@ -1,12 +1,14 @@
 using System;
 using System.Web;
+using ApplicationUserDomain.Infrastructure;
 using BookYourFood.Models;
-using Database;
+//using Database;
 using Identity.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Practices.Unity;
+using ReservationDomain.Infrastructure;
 using Reservaton.Service;
 
 namespace BookYourFood.App_Start
@@ -47,13 +49,17 @@ namespace BookYourFood.App_Start
             container.RegisterTypes(
                 AllClasses.FromLoadedAssemblies(),
                 WithMappings.FromMatchingInterface);
-            container.RegisterType<ByfDbContext>(new PerRequestLifetimeManager());
+            //container.RegisterType<ByfDbContext>(new PerRequestLifetimeManager());
+            container.RegisterType<ApplicationUserDomainDbContext>();
+            container.RegisterType<ReservationDomainDbContext>();
             container.RegisterType<ApplicationSignInManager>();
             container.RegisterType<ApplicationUserManager>();
             container.RegisterType<IAuthenticationManager>(
                     new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
+            /*container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
+                    new InjectionConstructor(typeof(ByfDbContext)));*/
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
-                    new InjectionConstructor(typeof(ByfDbContext)));
+                    new InjectionConstructor(typeof(ApplicationUserDomainDbContext)));
 
             //container.RegisterType<IReservationService, ReservationService>();
             //container.RegisterType<IQuestionnaireSevice, QuestionnaireSevice>();

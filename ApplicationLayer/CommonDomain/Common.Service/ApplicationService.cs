@@ -4,16 +4,16 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Database;
+using ApplicationUserDomain.Infrastructure;
 
 namespace Common.Service
 {
-    public class ApplicationService
+    public class ApplicationService<T>
     {
-        protected readonly ByfDbContext ByfDbContext; 
-        public ApplicationService(ByfDbContext byfDbContext)
+        protected readonly T _context; 
+        public ApplicationService(T context)
         {
-            ByfDbContext = byfDbContext;
+            _context = context;
         }
     }
 

@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -940,6 +941,10 @@
       <Project>{EA5028CB-D8B1-4057-9262-013DA796179C}</Project>
       <Name>ReservationDomain.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ApplicationUserDomain.Infrastructure\ApplicationUserDomain.Infrastructure.csproj">
+      <Project>{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}</Project>
+      <Name>ApplicationUserDomain.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DatabaseLayer\Database\Database.csproj">
       <Project>{6A71A44F-E6F6-476C-BC34-221B59872AF0}</Project>
       <Name>Database</Name>
@@ -947,6 +952,10 @@
     <ProjectReference Include="..\..\ApplicationLayer\ReservationDomain\ReservationDomain.Service\ReservationDomain.Service.csproj">
       <Project>{05233FD8-1832-4B94-A0DE-C2D390B82ED1}</Project>
       <Name>ReservationDomain.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ReservationDomain.Infrastructure\ReservationDomain.Infrastructure.csproj">
+      <Project>{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}</Project>
+      <Name>ReservationDomain.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Utilities\UtilityMvc\UtilityMvc.csproj">
       <Project>{5c700888-d53c-404f-9522-f0c1ddfcb321}</Project>

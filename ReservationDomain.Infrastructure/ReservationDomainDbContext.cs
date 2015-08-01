@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Identity.Model;
-using Microsoft.AspNet.Identity.EntityFramework;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using ReservationDomain.Model;
 
-namespace Database
+namespace ReservationDomain.Infrastructure
 {
-    /*public class ByfDbContext : IdentityDbContext<ApplicationUser>
+    public class ReservationDomainDbContext : DbContext
     {
-        public ByfDbContext()
+        public ReservationDomainDbContext()
             : base(Environment.MachineName)
         {
-            System.Data.Entity.Database.SetInitializer(new ByfDbInitializer());
+            System.Data.Entity.Database.SetInitializer(new ReservationDomainDbInitializer());
         }
 
         public DbSet<Reservation> Reservations { get; set; }
@@ -23,11 +25,10 @@ namespace Database
         public DbSet<Table> Tables { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
-        public DbSet<UserMeal> UserMeals { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.HasDefaultSchema("ReservationDomain");
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Entity<HashTag>();
@@ -52,5 +53,5 @@ namespace Database
                 .HasMany(entity => entity.HashTags)
                 .WithMany();
         }
-    }*/
+    }
 }

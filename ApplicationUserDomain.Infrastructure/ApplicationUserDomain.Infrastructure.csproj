@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2F4DA88C-9071-4B07-A77D-B44ED3260480}</ProjectGuid>
+    <ProjectGuid>{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ApplicationUserDomain.Service</RootNamespace>
-    <AssemblyName>ApplicationUserDomain.Service</AssemblyName>
+    <RootNamespace>ApplicationUserDomain.Infrastructure</RootNamespace>
+    <AssemblyName>ApplicationUserDomain.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,59 +30,50 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core">
-      <HintPath>..\..\..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>..\..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationUserService.cs" />
-    <Compile Include="IApplicationUserService.cs" />
+    <Compile Include="ApplicationUserDomainDbContext.cs" />
+    <Compile Include="ApplicationUserDomainDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ApplicationUserDomain.Infrastructure\ApplicationUserDomain.Infrastructure.csproj">
-      <Project>{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}</Project>
-      <Name>ApplicationUserDomain.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\DatabaseLayer\Database\Database.csproj">
-      <Project>{6A71A44F-E6F6-476C-BC34-221B59872AF0}</Project>
-      <Name>Database</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Utilities\Utility\Utility.csproj">
-      <Project>{318E94AD-076C-47EA-BCFB-20B2F383A8F1}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CommonDomain\Common.Model\Common.Model.csproj">
-      <Project>{0B7F82F8-EF67-4277-93FE-36756F8D53A7}</Project>
-      <Name>Common.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CommonDomain\Common.Service\Common.Service.csproj">
-      <Project>{C86CD015-F610-49E3-9936-BC308363E4A2}</Project>
-      <Name>Common.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ApplicationUser.Model\ApplicationUserDomain.Model.csproj">
-      <Project>{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}</Project>
-      <Name>ApplicationUserDomain.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <ProjectReference Include="..\ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\ApplicationUserDomain.Model.csproj">
+      <Project>{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}</Project>
+      <Name>ApplicationUserDomain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationLayer\CommonDomain\Common.Model\Common.Model.csproj">
+      <Project>{0B7F82F8-EF67-4277-93FE-36756F8D53A7}</Project>
+      <Name>Common.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

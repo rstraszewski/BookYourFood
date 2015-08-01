@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Service;
-using Database;
+using ReservationDomain.Infrastructure;
 using ReservationDomain.Model;
 
 namespace ReservationDomain.Service
 {
-    public class AutoCreatorService : ApplicationService, IAutoCreatorService
+    public class AutoCreatorService : ApplicationService<ReservationDomainDbContext>, IAutoCreatorService
     {
-        public AutoCreatorService(ByfDbContext byfDbContext)
-            : base(byfDbContext)
+        public AutoCreatorService(ReservationDomainDbContext context)
+            : base(context)
         {
         }
 
         public List<RatedDrink> GetPreferredDrinksFor(List<long> hashTags)
         {
-            var ratedDrinks = ByfDbContext.Drinks
+            var ratedDrinks = _context.Drinks
                 .Select(drink => new RatedDrink
                 {
                     Drink = drink,
@@ -30,7 +30,7 @@ namespace ReservationDomain.Service
 
         public List<RatedMeal> GetPreferredMealsFor(List<long> hashTags)
         {
-            var ratedMeals = ByfDbContext.Meals
+            var ratedMeals = _context.Meals
                 .Select(meal => new RatedMeal
                 {
                     Meal = meal,
