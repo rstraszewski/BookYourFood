@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationLayer", "Applica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserDomain.Model", "ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\ApplicationUserDomain.Model.csproj", "{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationUserDomain", "ApplicationUserDomain", "{51803CCD-D6D2-45DF-A0FF-B36951B73A8B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationUser Bounded Context", "ApplicationUser Bounded Context", "{51803CCD-D6D2-45DF-A0FF-B36951B73A8B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9F0436CE-8946-4A72-AE4B-402A46B47DED}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Bounded Context", "Common Bounded Context", "{9F0436CE-8946-4A72-AE4B-402A46B47DED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Model", "ApplicationLayer\CommonDomain\Common.Model\Common.Model.csproj", "{0B7F82F8-EF67-4277-93FE-36756F8D53A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Service", "ApplicationLayer\CommonDomain\Common.Service\Common.Service.csproj", "{C86CD015-F610-49E3-9936-BC308363E4A2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReservationDomain", "ReservationDomain", "{3F2235CF-026D-4A61-8CA0-26F07C0E045C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reservation Bounded Context", "Reservation Bounded Context", "{3F2235CF-026D-4A61-8CA0-26F07C0E045C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationDomain.Model", "ApplicationLayer\ReservationDomain\ReservationDomain.Model\ReservationDomain.Model.csproj", "{EA5028CB-D8B1-4057-9262-013DA796179C}"
 EndProject
@@ -40,6 +40,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserDomain.Infrastructure", "ApplicationUserDomain.Infrastructure\ApplicationUserDomain.Infrastructure.csproj", "{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationDomain.Infrastructure", "ReservationDomain.Infrastructure\ReservationDomain.Infrastructure.csproj", "{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Infrastructure", "Common.Infrastructure\Common.Infrastructure.csproj", "{A0272637-A005-4523-9298-40C0506DE301}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserBC.Configuration", "ApplicationLayer\ApplicationUserDomain\ApplicationUserBC.Configuratio\ApplicationUserBC.Configuration.csproj", "{89C1FA2B-20C4-41DE-80C7-F12643E0E866}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserBC.Interfaces", "ApplicationLayer\ApplicationUserDomain\ApplicationUserBC.Interfaces\ApplicationUserBC.Interfaces.csproj", "{073B0005-7A5B-4651-B62A-6D1046A5874D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +101,18 @@ Global
 		{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0272637-A005-4523-9298-40C0506DE301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0272637-A005-4523-9298-40C0506DE301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0272637-A005-4523-9298-40C0506DE301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0272637-A005-4523-9298-40C0506DE301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89C1FA2B-20C4-41DE-80C7-F12643E0E866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C1FA2B-20C4-41DE-80C7-F12643E0E866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C1FA2B-20C4-41DE-80C7-F12643E0E866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C1FA2B-20C4-41DE-80C7-F12643E0E866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{073B0005-7A5B-4651-B62A-6D1046A5874D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{073B0005-7A5B-4651-B62A-6D1046A5874D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{073B0005-7A5B-4651-B62A-6D1046A5874D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{073B0005-7A5B-4651-B62A-6D1046A5874D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,5 +133,8 @@ Global
 		{2F4DA88C-9071-4B07-A77D-B44ED3260480} = {51803CCD-D6D2-45DF-A0FF-B36951B73A8B}
 		{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9} = {51803CCD-D6D2-45DF-A0FF-B36951B73A8B}
 		{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF} = {3F2235CF-026D-4A61-8CA0-26F07C0E045C}
+		{A0272637-A005-4523-9298-40C0506DE301} = {9F0436CE-8946-4A72-AE4B-402A46B47DED}
+		{89C1FA2B-20C4-41DE-80C7-F12643E0E866} = {51803CCD-D6D2-45DF-A0FF-B36951B73A8B}
+		{073B0005-7A5B-4651-B62A-6D1046A5874D} = {51803CCD-D6D2-45DF-A0FF-B36951B73A8B}
 	EndGlobalSection
 EndGlobal

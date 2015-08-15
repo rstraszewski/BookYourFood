@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ReservationDomain.Infrastructure</RootNamespace>
-    <AssemblyName>ReservationDomain.Infrastructure</AssemblyName>
+    <AssemblyName>BookYourFood.ReservationDomain.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

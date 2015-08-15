@@ -4,12 +4,13 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Infrastructure;
 using Identity.Model;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ApplicationUserDomain.Infrastructure
 {
-    public class ApplicationUserDomainDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationUserDomainDbContext : IdentityDbContext<ApplicationUser>, IDbContext
     {
         public ApplicationUserDomainDbContext()
             : base(Environment.MachineName)

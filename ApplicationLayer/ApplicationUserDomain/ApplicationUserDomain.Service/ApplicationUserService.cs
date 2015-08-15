@@ -1,6 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
+using ApplicationUserBC.Interfaces.DTOs;
+using ApplicationUserBC.Service;
 using ApplicationUserDomain.Infrastructure;
+using ApplicationUserDomain.Model.Repository;
+using AutoMapper;
 using Common.Service;
 //using Database;
 using Identity.Model;
@@ -10,79 +16,68 @@ namespace ApplicationUserDomain.Service
 {
     public class ApplicationUserService : ApplicationService<ApplicationUserDomainDbContext>, IApplicationUserService
     {
-        public ApplicationUserService(ApplicationUserDomainDbContext context)
+        private readonly IApplicationUserRepository applicationUserRepository;
+        public ApplicationUserService(ApplicationUserDomainDbContext context, IApplicationUserRepository applicationUserRepository)
             : base(context)
         {
+            this.applicationUserRepository = applicationUserRepository;
         }
 
         public OperationResult AddUserAnswers(List<long> answersIds, string userId)
         {
-            var entity = _context.Users.Find(userId);
+            var user = applicationUserRepository.GetUser(userId);
 
-            if (entity == null)
+            if (user == null)
             {
                 return OperationResult.ErrorResult("User not found");
             }
 
             var answers = answersIds.Select(answer => new UserAnswer {AnswerId = answer}).ToList();
-            entity.UserAnswers.RemoveAll(a => true);
-            entity.UserAnswers = answers;
-            _context.SaveChanges();
-            _context.Database.ExecuteSqlCommand("DELETE FROM UserAnswer WHERE ApplicationUser_Id IS NULL");
+            user.AnswerQuestions(answers);
+            applicationUserRepository.UpdateUserGraph(user);
+
             return OperationResult.Success();
         }
 
-        public List<UserAnswer> GetUserAnswers(string userId)
+        public List<long> GetUserAnswers(string userId)
         {
-            return _context.Users.Find(userId).UserAnswers.ToList();
+            var answers = applicationUserRepository.GetUserAnswers(userId).ToList();
+            return answers;
         }
 
         public void ChangeNameAndSurname(string userId, string name, string surname)
         {
-            var user = _context.Users.Find(userId);
-            user.Name = name;
-            user.Surname = surname;
-            _context.SaveChanges();
-        }
-
-
-        public List<long> GetUserPreferences(string userId)
-        {
-            var userAnswerList = this.GetUserAnswers(userId);
-
-            var userAnswerIdList = userAnswerList.Select(answer => answer.AnswerId).ToList();
-
-            return userAnswerIdList;
+            using (var ts = new TransactionScope())
+            {
+                var user = applicationUserRepository.GetUser(userId);
+                applicationUserRepository.UpdateUser(user);
+                ts.Complete();
+            }
         }
 
         public OperationResult AddFavouriteMeal(long mealId, string userId)
         {
-            var user = _context.Users.Find(userId);
+            var user = applicationUserRepository.GetUser(userId);
+
             if(user == null)
             {
                 return OperationResult.ErrorResult("User not found.");
             }
 
-            if (user.FavouriteMeals.FirstOrDefault(m => m.MealId == mealId) == null)
-            {
-                user.FavouriteMeals.Add(new UserMeal { MealId = mealId });
-                _context.SaveChanges();
-            }            
+            user.LikeMeal(mealId);
+            applicationUserRepository.UpdateUserGraph(user);
             
             return OperationResult.Success();
         }
 
         public List<long> GetUserFavouriteMeals(string userId)
         {
-            var user = _context.Users.Find(userId);
+            var user = applicationUserRepository.GetUser(userId);
 
-            if(user != null)
+
+            if (user != null)
             {
-                var userFavouriteMeals = user.FavouriteMeals.Select(m => m.MealId).ToList();
-                if (userFavouriteMeals != null)
-                {
-                    return userFavouriteMeals;
-                }
+                return applicationUserRepository.GetUserFavouriteMeals(userId);
             }
 
             return new List<long>();
@@ -90,13 +85,10 @@ namespace ApplicationUserDomain.Service
 
         public OperationResult RemoveFavouriteMeal(long mealId, string userId)
         {
-            var favouriteMeal = _context
-                .Users
-                .Find(userId)
-                .FavouriteMeals.Find(m => m.MealId == mealId);
+            var user = _context.Users.Find(userId);
+            user.UnlikeMeal(mealId);
+            applicationUserRepository.UpdateUserGraph(user);
 
-            _context.UserMeals.Remove(favouriteMeal);
-            _context.SaveChanges();
             return OperationResult.Success();
         }
     }

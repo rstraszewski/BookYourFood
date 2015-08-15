@@ -1,6 +1,7 @@
 using System;
 using System.Web;
 using ApplicationUserDomain.Infrastructure;
+using ApplicationUserDomain.Model.Repository;
 using BookYourFood.Models;
 //using Database;
 using Identity.Model;
@@ -16,7 +17,7 @@ namespace BookYourFood.App_Start
     /// <summary>
     /// Specifies the Unity configuration for the main container.
     /// </summary>
-    public class UnityConfig
+   /* public class UnityConfig
     {
         #region Unity Container
         private static Lazy<IUnityContainer> container = new Lazy<IUnityContainer>(() =>
@@ -49,6 +50,7 @@ namespace BookYourFood.App_Start
             container.RegisterTypes(
                 AllClasses.FromLoadedAssemblies(),
                 WithMappings.FromMatchingInterface);
+            //container.RegisterType<IApplicationUserRepository, ApplicationUserRepository>();
             //container.RegisterType<ByfDbContext>(new PerRequestLifetimeManager());
             container.RegisterType<ApplicationUserDomainDbContext>();
             container.RegisterType<ReservationDomainDbContext>();
@@ -57,12 +59,12 @@ namespace BookYourFood.App_Start
             container.RegisterType<IAuthenticationManager>(
                     new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
             /*container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
-                    new InjectionConstructor(typeof(ByfDbContext)));*/
+                    new InjectionConstructor(typeof(ByfDbContext)));#1#
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
                     new InjectionConstructor(typeof(ApplicationUserDomainDbContext)));
 
             //container.RegisterType<IReservationService, ReservationService>();
             //container.RegisterType<IQuestionnaireSevice, QuestionnaireSevice>();
         }
-    }
+    }*/
 }

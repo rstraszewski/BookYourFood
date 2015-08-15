@@ -18,7 +18,7 @@
             <ul class="list-group">
                 @foreach (var answer in q.Answers)
                 {
-                    <li class="list-group-item">@Html.RadioButton("answerIds[" + i + "]", answer.Id, Model.Answers.Any(a => a.AnswerId == answer.Id)) @answer.Value</li>
+                    <li class="list-group-item">@Html.RadioButton("answerIds[" + i + "]", answer.Id, Model.Answers.Any(a => a == answer.Id)) @answer.Value</li>
                 }
             </ul>
         </div>

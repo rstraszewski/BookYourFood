@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Reservaton.Service</RootNamespace>
-    <AssemblyName>Reservaton.Service</AssemblyName>
+    <AssemblyName>BookYourFood.Reservaton.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

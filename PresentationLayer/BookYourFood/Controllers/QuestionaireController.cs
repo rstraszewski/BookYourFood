@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using ApplicationUserBC.Interfaces.DTOs;
+using ApplicationUserBC.Service;
 using ApplicationUserDomain.Service;
 using Identity.Model;
 using Microsoft.AspNet.Identity;
@@ -13,7 +15,7 @@ namespace BookYourFood.Controllers
     public class QuestionaireViewModel
     {
         public List<Question> Questions { get; set; }
-        public List<UserAnswer> Answers { get; set; }
+        public List<long> Answers { get; set; }
     }
 
     [Authorize]
@@ -37,7 +39,8 @@ namespace BookYourFood.Controllers
             this.FlashMessage(MessageResult.Create(
                 "You need to complete questionaire, so we can predict your desires!", MessageType.Info));
             var questions = questionnaireSevice.GetQuestions();
-            var userAnswers = userManager.FindById(User.Identity.GetUserId()).UserAnswers.ToList();
+            //var userAnswers = userManager.FindById(User.Identity.GetUserId()).UserAnswers.ToList();
+            var userAnswers = applicationUserService.GetUserAnswers(User.Identity.GetUserId());
             var model = new QuestionaireViewModel() {Answers = userAnswers, Questions = questions};
             return View(model);
         }

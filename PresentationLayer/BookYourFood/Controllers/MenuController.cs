@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using ApplicationUserBC.Service;
 using ApplicationUserDomain.Service;
 using AutoMapper;
 using BookYourFood.Models;
@@ -78,7 +79,7 @@ namespace BookYourFood.Controllers
         {
             //var userPreference = new List<long> {1, 1, 2, 2, 2, 2, 4, 3, 6, 6, 4}; Test data
             ViewBag.Id = id;
-            var userAnswers = applicationUserService.GetUserPreferences(User.Identity.GetUserId());
+            var userAnswers = applicationUserService.GetUserAnswers(User.Identity.GetUserId());
 
             if (userAnswers == null || userAnswers.Count == 0)
             {
