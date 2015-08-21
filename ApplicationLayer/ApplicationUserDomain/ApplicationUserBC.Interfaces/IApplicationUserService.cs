@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using ApplicationUserBC.Interfaces.DTOs;
 using Utility;
 
-namespace ApplicationUserBC.Service
+namespace ApplicationUserBC.Interfaces
 {
     public interface IApplicationUserService
     {

@@ -62,6 +62,34 @@
       <HintPath>..\..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Security.3.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Security.Cookies.3.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Security.OAuth.3.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -81,9 +109,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ApplicationUserDomain.Infrastructure\ApplicationUserDomain.Infrastructure.csproj">
+    <ProjectReference Include="..\..\..\ApplicationUserDomain.Infrastructure\ApplicationUserBC.Infrastructure.csproj">
       <Project>{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}</Project>
-      <Name>ApplicationUserDomain.Infrastructure</Name>
+      <Name>ApplicationUserBC.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Common.Infrastructure\Common.Infrastructure.csproj">
       <Project>{A0272637-A005-4523-9298-40C0506DE301}</Project>
@@ -97,17 +125,17 @@
       <Project>{C86CD015-F610-49E3-9936-BC308363E4A2}</Project>
       <Name>Common.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ApplicationUser.Model\ApplicationUserDomain.Model.csproj">
+    <ProjectReference Include="..\ApplicationUser.Model\ApplicationUserBC.Model.csproj">
       <Project>{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}</Project>
-      <Name>ApplicationUserDomain.Model</Name>
+      <Name>ApplicationUserBC.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\ApplicationUserBC.Interfaces\ApplicationUserBC.Interfaces.csproj">
       <Project>{073B0005-7A5B-4651-B62A-6D1046A5874D}</Project>
       <Name>ApplicationUserBC.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ApplicationUserDomain.Service\ApplicationUserDomain.Service.csproj">
+    <ProjectReference Include="..\ApplicationUserDomain.Service\ApplicationUserBC.Service.csproj">
       <Project>{2F4DA88C-9071-4B07-A77D-B44ED3260480}</Project>
-      <Name>ApplicationUserDomain.Service</Name>
+      <Name>ApplicationUserBC.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

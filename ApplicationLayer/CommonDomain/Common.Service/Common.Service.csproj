@@ -56,9 +56,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ApplicationUserDomain.Infrastructure\ApplicationUserDomain.Infrastructure.csproj">
+    <ProjectReference Include="..\..\..\ApplicationUserDomain.Infrastructure\ApplicationUserBC.Infrastructure.csproj">
       <Project>{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}</Project>
-      <Name>ApplicationUserDomain.Infrastructure</Name>
+      <Name>ApplicationUserBC.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common.Model\Common.Model.csproj">
       <Project>{0B7F82F8-EF67-4277-93FE-36756F8D53A7}</Project>

@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using ApplicationUserBC.Interfaces.DTOs;
-using ApplicationUserBC.Service;
-using ApplicationUserDomain.Service;
-using Identity.Model;
+using ApplicationUserBC.Interfaces;
 using Microsoft.AspNet.Identity;
 using ReservationDomain.Model;
 using Reservaton.Service;
@@ -24,13 +21,11 @@ namespace BookYourFood.Controllers
         private readonly IQuestionnaireSevice questionnaireSevice;
         private readonly IApplicationUserService applicationUserService;
 
-        private readonly ApplicationUserManager userManager;
         public QuestionaireController(IQuestionnaireSevice questionnaireSevice, 
-            IApplicationUserService applicationUserService, ApplicationUserManager userManager)
+            IApplicationUserService applicationUserService)
         {
             this.questionnaireSevice = questionnaireSevice;
             this.applicationUserService = applicationUserService;
-            this.userManager = userManager;
         }
 
         // GET: Questionaire
@@ -39,26 +34,25 @@ namespace BookYourFood.Controllers
             this.FlashMessage(MessageResult.Create(
                 "You need to complete questionaire, so we can predict your desires!", MessageType.Info));
             var questions = questionnaireSevice.GetQuestions();
-            //var userAnswers = userManager.FindById(User.Identity.GetUserId()).UserAnswers.ToList();
             var userAnswers = applicationUserService.GetUserAnswers(User.Identity.GetUserId());
             var model = new QuestionaireViewModel() {Answers = userAnswers, Questions = questions};
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Index(List<long> answerIds, List<long> numbers)
+        public ActionResult Index(List<long> answerIds)
         {
             var questions = questionnaireSevice.GetQuestions();
+            var model = new QuestionaireViewModel() { Answers = answerIds, Questions = questions };
             var numberOfQuestions = questionnaireSevice.GetNumberOfQuestions();
 
             if (answerIds == null || answerIds.Count < numberOfQuestions)
             {
                 this.FlashMessage(MessageResult.Create("You didn't answer all questions!", MessageType.Error));
-                return View(questions);
+                return View(model);
             }
 
-            var user = userManager.FindByName(User.Identity.Name);
-            var result = applicationUserService.AddUserAnswers(answerIds, user.Id);
+            var result = applicationUserService.AddUserAnswers(answerIds, User.Identity.GetUserId());
             
             if(result.IsSuccessful)
             {
@@ -67,7 +61,7 @@ namespace BookYourFood.Controllers
             }
 
             this.FlashMessage(MessageResult.Create(result.Errors.Last(), MessageType.Error));
-            return View(questions);
+            return View(model);
         }
     }
 }

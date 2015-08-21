@@ -2,23 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using ApplicationUserBC.Interfaces;
 using ApplicationUserBC.Interfaces.DTOs;
-using ApplicationUserBC.Service;
-using ApplicationUserDomain.Infrastructure;
 using ApplicationUserDomain.Model.Repository;
 using AutoMapper;
-using Common.Service;
-//using Database;
 using Identity.Model;
 using Utility;
 
 namespace ApplicationUserDomain.Service
 {
-    public class ApplicationUserService : ApplicationService<ApplicationUserDomainDbContext>, IApplicationUserService
+    public class ApplicationUserService : IApplicationUserService
     {
         private readonly IApplicationUserRepository applicationUserRepository;
-        public ApplicationUserService(ApplicationUserDomainDbContext context, IApplicationUserRepository applicationUserRepository)
-            : base(context)
+        public ApplicationUserService(IApplicationUserRepository applicationUserRepository)
         {
             this.applicationUserRepository = applicationUserRepository;
         }
@@ -85,7 +81,7 @@ namespace ApplicationUserDomain.Service
 
         public OperationResult RemoveFavouriteMeal(long mealId, string userId)
         {
-            var user = _context.Users.Find(userId);
+            var user = applicationUserRepository.GetUser(userId);
             user.UnlikeMeal(mealId);
             applicationUserRepository.UpdateUserGraph(user);
 

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BookYourFood.Models;
+using Identity.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using BookYourFood.Models;
-using Identity.Model;
 
 namespace BookYourFood.Controllers
 {
@@ -17,10 +14,10 @@ namespace BookYourFood.Controllers
     public class AccountController : Controller
     {
         private readonly ApplicationSignInManager signInManager;
-        private readonly ApplicationUserManager userManager;
+        private readonly ApplicationUserBC.Configuration.Startup.ApplicationUserManager userManager;
         private readonly IAuthenticationManager authenticationManager;
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IAuthenticationManager authenticationManager)
+        public AccountController(ApplicationUserBC.Configuration.Startup.ApplicationUserManager userManager, ApplicationSignInManager signInManager, IAuthenticationManager authenticationManager)
         {
             this.userManager = userManager;
             this.authenticationManager = authenticationManager;
@@ -160,7 +157,7 @@ namespace BookYourFood.Controllers
             return View(model);
         }
 
-        //
+        /*//
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
@@ -171,7 +168,7 @@ namespace BookYourFood.Controllers
             }
             var result = await userManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        }
+        }*/
 
         //
         // GET: /Account/ForgotPassword

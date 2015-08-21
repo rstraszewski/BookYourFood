@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Reservaton.Service;
-using ReservationDomain.Model;
-using Kendo.Mvc.UI;
+﻿using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using ReservationDomain.Model;
+using Reservaton.Service;
 
 namespace BookYourFood.Controllers
 {

@@ -214,7 +214,6 @@
     <Compile Include="App_Start\NotificationActionFilterAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WindsorActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DrinkController.cs" />
@@ -934,9 +933,9 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\ApplicationUserDomain.Model.csproj">
+    <ProjectReference Include="..\..\ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\ApplicationUserBC.Model.csproj">
       <Project>{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}</Project>
-      <Name>ApplicationUserDomain.Model</Name>
+      <Name>ApplicationUserBC.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ApplicationLayer\ApplicationUserDomain\ApplicationUserBC.Configuratio\ApplicationUserBC.Configuration.csproj">
       <Project>{89c1fa2b-20c4-41de-80c7-f12643e0e866}</Project>
@@ -945,10 +944,6 @@
     <ProjectReference Include="..\..\ApplicationLayer\ApplicationUserDomain\ApplicationUserBC.Interfaces\ApplicationUserBC.Interfaces.csproj">
       <Project>{073B0005-7A5B-4651-B62A-6D1046A5874D}</Project>
       <Name>ApplicationUserBC.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ApplicationLayer\ApplicationUserDomain\ApplicationUserDomain.Service\ApplicationUserDomain.Service.csproj">
-      <Project>{2F4DA88C-9071-4B07-A77D-B44ED3260480}</Project>
-      <Name>ApplicationUserDomain.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ApplicationLayer\CommonDomain\Common.Model\Common.Model.csproj">
       <Project>{0B7F82F8-EF67-4277-93FE-36756F8D53A7}</Project>
@@ -961,10 +956,6 @@
     <ProjectReference Include="..\..\ApplicationLayer\ReservationDomain\ReservationDomain.Model\ReservationDomain.Model.csproj">
       <Project>{EA5028CB-D8B1-4057-9262-013DA796179C}</Project>
       <Name>ReservationDomain.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ApplicationUserDomain.Infrastructure\ApplicationUserDomain.Infrastructure.csproj">
-      <Project>{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}</Project>
-      <Name>ApplicationUserDomain.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Common.Infrastructure\Common.Infrastructure.csproj">
       <Project>{A0272637-A005-4523-9298-40C0506DE301}</Project>

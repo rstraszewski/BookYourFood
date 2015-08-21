@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using ApplicationUserBC.Service;
-using ApplicationUserDomain.Service;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
+using ApplicationUserBC.Interfaces;
 using BookYourFood.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using Utility;
 
 namespace BookYourFood.Controllers
@@ -17,9 +14,9 @@ namespace BookYourFood.Controllers
     public class ManageController : Controller
     {
         private readonly ApplicationSignInManager signInManager;
-        private readonly ApplicationUserManager userManager;
+        private readonly ApplicationUserBC.Configuration.Startup.ApplicationUserManager userManager;
         private readonly IApplicationUserService applicationUserService;
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IApplicationUserService applicationUserService)
+        public ManageController(ApplicationUserBC.Configuration.Startup.ApplicationUserManager userManager, ApplicationSignInManager signInManager, IApplicationUserService applicationUserService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;

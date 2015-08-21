@@ -58,9 +58,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\ApplicationUserDomain.Model.csproj">
+    <ProjectReference Include="..\..\ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\ApplicationUserBC.Model.csproj">
       <Project>{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}</Project>
-      <Name>ApplicationUserDomain.Model</Name>
+      <Name>ApplicationUserBC.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ApplicationLayer\CommonDomain\Common.Model\Common.Model.csproj">
       <Project>{0B7F82F8-EF67-4277-93FE-36756F8D53A7}</Project>

@@ -54,6 +54,7 @@
     <Compile Include="RatedMeal.cs" />
     <Compile Include="Reservation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReservationOwner.cs" />
     <Compile Include="Table.cs" />
   </ItemGroup>
   <ItemGroup>

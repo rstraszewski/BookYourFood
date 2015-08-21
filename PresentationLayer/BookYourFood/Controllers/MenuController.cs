@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using ApplicationUserBC.Service;
-using ApplicationUserDomain.Service;
+using ApplicationUserBC.Interfaces;
 using AutoMapper;
 using BookYourFood.Models;
 using Microsoft.AspNet.Identity;

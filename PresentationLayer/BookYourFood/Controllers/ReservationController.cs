@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using BookYourFood.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
-using ReservationDomain.Model;
 using Reservaton.Service;
 using Utility;
 using UtilityMvc;
@@ -19,12 +15,11 @@ namespace BookYourFood.Controllers
 {
     public class ReservationController : Controller
     {
-        private IReservationService reservationService;
-        private ApplicationUserManager userManager;
-        public ReservationController(IReservationService reservationService, ApplicationUserManager userManager)
+        private readonly IReservationService reservationService;
+
+        public ReservationController(IReservationService reservationService)
         {
             this.reservationService = reservationService;
-            this.userManager = userManager;
         }
 
 
@@ -83,10 +78,8 @@ namespace BookYourFood.Controllers
             var model = Mapper.Map<ReservationSummaryViewModel>(reservation);
             if (User.Identity.IsAuthenticated)
             {
-                var user = userManager.FindByName(User.Identity.Name);
-                model.Name = user.Name;
-                model.PhoneNumber = user.PhoneNumber;
-                model.Surname = user.Surname;
+                model.PhoneNumber = reservation.Owner.PhoneNumber;
+                model.FullName = reservation.Owner.FullName;
             }
             return View(model);
         }
@@ -116,7 +109,7 @@ namespace BookYourFood.Controllers
             string userId = null;
             if (User.Identity.IsAuthenticated)
             {
-                userId = userManager.FindByName(User.Identity.Name).Id;
+                userId = User.Identity.GetUserId();
             }
             var result = reservationService.Finalize(id, phone, surname, userId);
             this.FlashMessage(result.ToMessageResult());

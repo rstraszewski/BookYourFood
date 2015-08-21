@@ -56,10 +56,10 @@ namespace Reservaton.Service
             return OperationResult.Success();
         }
 
-        public OperationResult Finalize(long reservationId, string surname)
+        public OperationResult Finalize(long reservationId, string surname, string phoneNumber)
         {
             var reservation = _context.Reservations.Find(reservationId);
-            reservation.AssignPerson(surname);
+            reservation.AssignOwner(surname, phoneNumber);
             reservation.FinalizeReservation();
 
             _context.SaveChanges();
@@ -95,9 +95,7 @@ namespace Reservaton.Service
         public OperationResult Finalize(long reservationId, string phoneNumber, string surname, string userId)
         {
             var reservation = _context.Reservations.Find(reservationId);
-            reservation.AssignPerson(surname);
-            reservation.UserId = userId;
-            reservation.UserPhoneNumber = phoneNumber;
+            reservation.AssignUser(userId, surname, phoneNumber);
             reservation.FinalizeReservation();
 
             _context.SaveChanges();
@@ -118,7 +116,7 @@ namespace Reservaton.Service
                 Duration = r.Duration,
                 ReservationTime = r.ReservationTime,
                 TableNumber = r.Table.TableNumber,
-                UserSurname = r.UserSurname,
+                UserSurname = r.Owner.FullName,
                 UserPhoneNumber = r.UserPhoneNumber
             });
         }

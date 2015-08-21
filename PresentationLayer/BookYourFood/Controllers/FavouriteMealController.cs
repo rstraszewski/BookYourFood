@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using ApplicationUserBC.Service;
-using Utility;
-using Microsoft.AspNet.Identity;
-using BookYourFood.Models;
-using ApplicationUserDomain.Service;
-using ReservationDomain.Model;
-using ReservationDomain.Service;
-using Reservaton.Service;
+using ApplicationUserBC.Interfaces;
 using AutoMapper;
+using BookYourFood.Models;
+using Microsoft.AspNet.Identity;
+using Reservaton.Service;
 
 namespace BookYourFood.Controllers
 {

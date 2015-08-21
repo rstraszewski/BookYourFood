@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using ApplicationUserDomain.Infrastructure;
+using AutoMapper;
 using BookYourFood.Controllers;
 using BookYourFood.Models;
-//using Database;
 using ReservationDomain.Infrastructure;
 using ReservationDomain.Model;
+//using Database;
 
 namespace BookYourFood
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
@@ -26,10 +24,7 @@ namespace BookYourFood
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalFilters.Filters.Add(new NotificationActionFilterAttribute());
             //BundleTable.EnableOptimizations = true;
-            using (var byfDbContext = new ApplicationUserDomainDbContext())
-            {
-                byfDbContext.Database.Initialize(true);
-            }
+            
             using (var byfDbContext = new ReservationDomainDbContext())
             {
                 byfDbContext.Database.Initialize(true);
@@ -45,20 +40,20 @@ namespace BookYourFood
 
         protected void RegisterMappings()
         {
-            AutoMapper.Mapper.CreateMap<Table, TableViewModel>();
-            AutoMapper.Mapper.CreateMap<TableViewModel, Table>();
-            AutoMapper.Mapper.CreateMap<Reservation, ReservationSummaryViewModel>()
+            Mapper.CreateMap<Table, TableViewModel>();
+            Mapper.CreateMap<TableViewModel, Table>();
+            Mapper.CreateMap<Reservation, ReservationSummaryViewModel>()
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.CalculateCost(false)));
-            AutoMapper.Mapper.CreateMap<MealForReservation, MealForSummary>()
+            Mapper.CreateMap<MealForReservation, MealForSummary>()
                 .ForMember(dest => dest.Name, opt=>opt.MapFrom(src => src.Meal.Name))
                 .ForMember(dest => dest.NumberOfMeals, opt => opt.MapFrom(src => src.NumberOfMeals))
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Meal.Price));
-            AutoMapper.Mapper.CreateMap<DrinkForReservation, DrinkForSummary>()
+            Mapper.CreateMap<DrinkForReservation, DrinkForSummary>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Drink.Name))
                 .ForMember(dest => dest.NumberOfDrinks, opt => opt.MapFrom(src => src.NumberOfDrinks))
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Drink.Price));
-            AutoMapper.Mapper.CreateMap<CustomMealViewModel, Meal>();
-            AutoMapper.Mapper.CreateMap<Meal, MealViewModel>()
+            Mapper.CreateMap<CustomMealViewModel, Meal>();
+            Mapper.CreateMap<Meal, MealViewModel>()
                 .AfterMap((src, dest) =>
                 {
                     if(src.Image != null)

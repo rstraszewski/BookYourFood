@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "DatabaseLayer\D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationLayer", "ApplicationLayer", "{4514D3EE-39D4-4A08-9D73-C5F18F7CCC18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserDomain.Model", "ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\ApplicationUserDomain.Model.csproj", "{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserBC.Model", "ApplicationLayer\ApplicationUserDomain\ApplicationUser.Model\ApplicationUserBC.Model.csproj", "{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationUser Bounded Context", "ApplicationUser Bounded Context", "{51803CCD-D6D2-45DF-A0FF-B36951B73A8B}"
 EndProject
@@ -35,9 +35,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilites", "Utilites", "{7D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityMvc", "Utilities\UtilityMvc\UtilityMvc.csproj", "{5C700888-D53C-404F-9522-F0C1DDFCB321}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserDomain.Service", "ApplicationLayer\ApplicationUserDomain\ApplicationUserDomain.Service\ApplicationUserDomain.Service.csproj", "{2F4DA88C-9071-4B07-A77D-B44ED3260480}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserBC.Service", "ApplicationLayer\ApplicationUserDomain\ApplicationUserDomain.Service\ApplicationUserBC.Service.csproj", "{2F4DA88C-9071-4B07-A77D-B44ED3260480}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserDomain.Infrastructure", "ApplicationUserDomain.Infrastructure\ApplicationUserDomain.Infrastructure.csproj", "{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUserBC.Infrastructure", "ApplicationUserDomain.Infrastructure\ApplicationUserBC.Infrastructure.csproj", "{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationDomain.Infrastructure", "ReservationDomain.Infrastructure\ReservationDomain.Infrastructure.csproj", "{7DC5A61F-DC8A-4F2E-B2FD-89740CB146DF}"
 EndProject

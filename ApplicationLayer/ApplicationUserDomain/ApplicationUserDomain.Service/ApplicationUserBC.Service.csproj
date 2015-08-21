@@ -69,14 +69,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ApplicationUserDomain.Infrastructure\ApplicationUserDomain.Infrastructure.csproj">
-      <Project>{8C3CC7ED-BEAD-4E85-B643-3AEC9E3C3EB9}</Project>
-      <Name>ApplicationUserDomain.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Common.Infrastructure\Common.Infrastructure.csproj">
-      <Project>{A0272637-A005-4523-9298-40C0506DE301}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\DatabaseLayer\Database\Database.csproj">
       <Project>{6A71A44F-E6F6-476C-BC34-221B59872AF0}</Project>
       <Name>Database</Name>
@@ -93,9 +85,9 @@
       <Project>{C86CD015-F610-49E3-9936-BC308363E4A2}</Project>
       <Name>Common.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ApplicationUser.Model\ApplicationUserDomain.Model.csproj">
+    <ProjectReference Include="..\ApplicationUser.Model\ApplicationUserBC.Model.csproj">
       <Project>{62ADBFCD-DF74-46BE-A95E-3AF97A0A6705}</Project>
-      <Name>ApplicationUserDomain.Model</Name>
+      <Name>ApplicationUserBC.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\ApplicationUserBC.Interfaces\ApplicationUserBC.Interfaces.csproj">
       <Project>{073B0005-7A5B-4651-B62A-6D1046A5874D}</Project>

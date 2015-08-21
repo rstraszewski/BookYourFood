@@ -18,12 +18,11 @@ namespace ReservationDomain.Model
         public DateTime ReservationTime { get; set; }
         public int Duration { get; set; }
         public virtual Table Table { get; set; }
-        public string UserId { get; set; }
-        public string UserSurname { get; set; }
         public bool IsFinalized { get; set; }
         public virtual List<MealForReservation> Meals { get; set; }
         public virtual List<DrinkForReservation> Drinks { get; set; }
         public string UserPhoneNumber { get; set; }
+        public ReservationOwner Owner { get; set; }
 
         //Needed by EntityFramework
         protected Reservation() { }
@@ -34,7 +33,12 @@ namespace ReservationDomain.Model
             Table = table;
         }
 
-        public void AssignMeal(MealForReservation meal)
+        public static Reservation PrepareReservation(DateTime reservationTime, int duration, Table table)
+        {
+            return new Reservation(reservationTime, duration, table);
+        }
+
+        public void OrderMeal(MealForReservation meal)
         {
             Meals.Add(meal);
         }
@@ -44,9 +48,14 @@ namespace ReservationDomain.Model
             Meals.AddRange(meals);
         }
 
-        public void AssignPerson(string surname)
+        public void AssignOwner(string name, string phoneNumber)
         {
-            UserSurname = surname;
+            Owner = ReservationOwner.CreateTemporaryOwner(name, phoneNumber);
+        }
+
+        public void AssignUser(string userId, string name, string phoneNumber)
+        {
+            Owner = ReservationOwner.CreateOwner(userId, name, phoneNumber);
         }
 
         public void FinalizeReservation()

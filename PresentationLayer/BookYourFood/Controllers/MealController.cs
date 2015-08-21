@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using BookYourFood.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using ReservationDomain.Model;
 using Reservaton.Service;
 using Utility;
-using BookYourFood.Models;
 
 namespace BookYourFood.Controllers
 {
@@ -45,7 +45,7 @@ namespace BookYourFood.Controllers
         [AllowAnonymous]
         public ActionResult GetMeals([DataSourceRequest] DataSourceRequest request)
         {
-            var meals = AutoMapper.Mapper.Map<List<MealViewModel>>(mealService.GetMeals());
+            var meals = Mapper.Map<List<MealViewModel>>(mealService.GetMeals());
             return Json(meals.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
