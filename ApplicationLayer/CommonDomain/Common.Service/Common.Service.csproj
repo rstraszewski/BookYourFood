@@ -64,10 +64,6 @@
       <Project>{0B7F82F8-EF67-4277-93FE-36756F8D53A7}</Project>
       <Name>Common.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\DatabaseLayer\Database\Database.csproj">
-      <Project>{6A71A44F-E6F6-476C-BC34-221B59872AF0}</Project>
-      <Name>Database</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ReservationDomain\ReservationDomain.Model\ReservationDomain.Model.csproj">
       <Project>{EA5028CB-D8B1-4057-9262-013DA796179C}</Project>
       <Name>ReservationDomain.Model</Name>
