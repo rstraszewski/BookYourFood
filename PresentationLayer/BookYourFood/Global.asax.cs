@@ -25,10 +25,10 @@ namespace BookYourFood
             GlobalFilters.Filters.Add(new NotificationActionFilterAttribute());
             //BundleTable.EnableOptimizations = true;
             
-            using (var byfDbContext = new ReservationDomainDbContext())
+           /* using (var byfDbContext = new ReservationDomainDbContext())
             {
                 byfDbContext.Database.Initialize(true);
-            }
+            }*/
             RegisterMappings();
         }
 

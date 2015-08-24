@@ -1,10 +1,12 @@
-﻿@model Identity.Model.ApplicationUser
+﻿@model ApplicationUserBC.Interfaces.DTOs.UserDto
 @{
     ViewBag.Title = "Hello";
 }
 @if (Model != null)
 {
-@Html.ActionLink("Hello " + Model.Name + " " + Model.Surname + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-
+//@Html.ActionLink("Hello " + Model.Name + " " + Model.Surname + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    <text>
+        Hello @Model.Name + " " + @Model.Surname
+    </text>
 }
 

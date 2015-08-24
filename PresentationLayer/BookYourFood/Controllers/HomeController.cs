@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Web.Mvc;
+using ApplicationUserBC.Interfaces;
 using Microsoft.AspNet.Identity;
 //using Database;
 
@@ -8,10 +9,10 @@ namespace BookYourFood.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        private readonly ApplicationUserBC.Configuration.Startup.ApplicationUserManager userManager;
-        public HomeController(ApplicationUserBC.Configuration.Startup.ApplicationUserManager userManager)
+        private readonly IApplicationUserService applicationUserService;
+        public HomeController(IApplicationUserService applicationUserService)
         {
-            this.userManager = userManager;
+            this.applicationUserService = applicationUserService;
         }
 
         public ActionResult Index()
@@ -39,7 +40,7 @@ namespace BookYourFood.Controllers
 
         public ActionResult Hello()
         {
-            var user = userManager.FindById(User.Identity.GetUserId());
+            var user = applicationUserService.GetUserById(User.Identity.GetUserId());
             return PartialView(user);
         }
 

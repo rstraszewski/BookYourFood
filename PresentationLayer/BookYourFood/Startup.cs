@@ -9,7 +9,7 @@ namespace BookYourFood
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            DataProtectionProvider = ApplicationUserBC.Configuration.Startup.ConfigureAuth(app);
         }
     }
 }

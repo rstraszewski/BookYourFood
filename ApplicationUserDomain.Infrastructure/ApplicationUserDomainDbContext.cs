@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,15 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ApplicationUserDomain.Infrastructure
 {
+    class DbContextConfiguration : DbConfiguration
+    {
+        public DbContextConfiguration()
+        {
+           this.SetProviderServices(SqlProviderServices.ProviderInvariantName, SqlProviderServices.Instance);
+        }
+    }
+
+    [DbConfigurationType(typeof(DbContextConfiguration))]
     public class ApplicationUserDomainDbContext : IdentityDbContext<ApplicationUser>, IDbContext
     {
         public ApplicationUserDomainDbContext()

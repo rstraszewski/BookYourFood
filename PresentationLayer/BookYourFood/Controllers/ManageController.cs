@@ -10,16 +10,12 @@ using Utility;
 
 namespace BookYourFood.Controllers
 {
-    [Authorize]
+    /*[Authorize]
     public class ManageController : Controller
     {
-        private readonly ApplicationSignInManager signInManager;
-        private readonly ApplicationUserBC.Configuration.Startup.ApplicationUserManager userManager;
         private readonly IApplicationUserService applicationUserService;
-        public ManageController(ApplicationUserBC.Configuration.Startup.ApplicationUserManager userManager, ApplicationSignInManager signInManager, IApplicationUserService applicationUserService)
+        public ManageController(IApplicationUserService applicationUserService)
         {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
             this.applicationUserService = applicationUserService;
         }
 
@@ -117,7 +113,7 @@ namespace BookYourFood.Controllers
                     Body = "Your security code is: " + code
                 };
                 await _userManager.SmsService.SendAsync(message);
-            }*/
+            }#1#
             var token = userManager.GenerateChangePhoneNumberToken(User.Identity.GetUserId(), model.Number);
             var result = userManager.ChangePhoneNumber(User.Identity.GetUserId(), model.Number, token);
             //return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
@@ -373,5 +369,5 @@ namespace BookYourFood.Controllers
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-    }
+    }*/
 }

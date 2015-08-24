@@ -39,9 +39,7 @@ namespace BookYourFood.App_Start
                     .LifestylePerWebRequest()
                     .Named("ReservationDomainDbContextDefault")
                     .IsDefault(),
-                Component.For<ApplicationSignInManager>()
-                    .Named("ApplicationSignInManagerDefault")
-                    .IsDefault().LifestyleTransient(),
+                
                 
                 Component.For<IAuthenticationManager>()
                     .UsingFactoryMethod(() => HttpContext.Current.GetOwinContext().Authentication)
